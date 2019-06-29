@@ -1,12 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
+import Main from "./components/Main/Main";
 
-function App() {
-  return (
-    <video id='videoPlayer' controls>
-      <source src='http://localhost:5000/video' type='video/mp4' />
-    </video>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <Main />
+      </div>
+    );
+  }
 }
-
-export default App;

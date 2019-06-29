@@ -1,14 +1,22 @@
 const express = require("express");
 const fs = require("fs");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-app.get("/video", (req, res) => {
-  const path = "./contentStorage/videos/gow.mp4";
+app.use(bodyParser.json());
+app.use(cors());
+
+app.get("/content", (req, res) => {
+  res.send(JSON.stringify([{ type: "video", name: "gow" }]));
+});
+
+app.get(`/video/:id`, (req, res) => {
+  const path = `./contentStorage/videos/${req.params.id}.mp4`;
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
-
   if (range) {
     const parts = range.replace(/bytes=/, "").split("-");
     const start = parseInt(parts[0], 10);
