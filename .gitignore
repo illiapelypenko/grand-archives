@@ -23,8 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # my
-# /contentStorage
-# /videos
-# /photos
-# /texts
-# /photos
+server/contentStorage
+/videos
+/photos
+/texts
+/photos
