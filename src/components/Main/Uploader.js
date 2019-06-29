@@ -1,30 +1,42 @@
 import React, { Component } from "react";
+import serverURL from "../../serverURL";
 
 export default class Uploader extends Component {
-  handleChange = e => {
+  state = {
+    files: []
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
     const data = new FormData();
+    const { files } = this.state;
 
-    e.target.files.forEach(file => {
-      data.append(file.name, file);
-    });
+    for (let i = 0; i < files.length; i++) {
+      data.append(files[i].name, files[i]);
+    }
 
-    fetch("http://localhost:5000/upload", {
+    fetch(`${serverURL}/upload`, {
       method: "POST",
       body: data
     });
   };
 
+  handleChange = e => {
+    this.setState({ files: e.target.files });
+  };
+
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <input
           type='file'
           name='file'
-          onChange={this.handleChange}
-          accept='audio/*|video/*|image/*'
+          accept='.txt,.doc,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
           multiple
+          onChange={this.handleChange}
         />
-      </div>
+        <input type='submit' value='upload' />
+      </form>
     );
   }
 }

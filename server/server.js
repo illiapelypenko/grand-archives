@@ -2,11 +2,13 @@ const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const app = express();
 const PORT = 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(fileUpload());
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
@@ -59,4 +61,14 @@ app.get(`/video/:id`, (req, res) => {
     res.writeHead(200, head);
     fs.createReadStream(path).pipe(res);
   }
+});
+
+app.post("/upload", (req, res) => {
+  const files = Object.values(req.files);
+
+  files.forEach(file => {
+    file.mv(`./contentStorage/videos/${file.name}`);
+  });
+
+  res.send();
 });

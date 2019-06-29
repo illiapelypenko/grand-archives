@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Item from "./Item";
+import serverURL from "../../serverURL";
 
 export default class Content extends Component {
   state = {
@@ -7,7 +8,7 @@ export default class Content extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:5000/content")
+    fetch(`${serverURL}/content`)
       .then(res => res.json())
       .then(content => this.setState({ content }));
   }
@@ -15,7 +16,7 @@ export default class Content extends Component {
   render() {
     const { content } = this.state;
 
-    const data = content.map(item => <Item item={item} />);
+    const data = content.map((item, index) => <Item item={item} key={index} />);
 
     return <div>{data}</div>;
   }

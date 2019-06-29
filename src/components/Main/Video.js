@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import serverURL from "../../serverURL";
 
 export default class Video extends Component {
   render() {
@@ -6,7 +7,7 @@ export default class Video extends Component {
       <div>
         <video controls>
           <source
-            src={`http://localhost:5000/video/${this.props.name}`}
+            src={`${serverURL}/video/${this.props.name}`}
             type='video/mp4'
           />
         </video>
