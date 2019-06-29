@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import Text from "./Text";
-import Photo from "./Photo";
-import Video from "./Video";
-import Audio from "./Audio";
+import Item from "./Item";
 
 export default class Content extends Component {
   state = {
@@ -18,21 +15,8 @@ export default class Content extends Component {
   render() {
     const { content } = this.state;
 
-    const data = content.map(item => {
-      switch (item.type) {
-        case "text":
-          return <Text name={item.name} />;
-        case "photo":
-          return <Photo name={item.name} />;
-        case "video":
-          return <Video name={item.name} />;
-        case "audio":
-          return <Audio name={item.name} />;
-        default:
-          return null;
-      }
-    });
+    const data = content.map(item => <Item item={item} />);
 
-    return <div>{data[0]}</div>;
+    return <div>{data}</div>;
   }
 }

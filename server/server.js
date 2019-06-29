@@ -8,12 +8,30 @@ const PORT = 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
+
 app.get("/content", (req, res) => {
-  res.send(JSON.stringify([{ type: "video", name: "gow" }]));
+  const newestVideos = fs
+    .readdirSync("./contentStorage/videos/")
+    .filter(file => file !== ".DS_Store")
+    .sort(
+      (file1, file2) =>
+        fs.statSync(`./contentStorage/videos/${file2}`).birthtimeMs -
+        fs.statSync(`./contentStorage/videos/${file1}`).birthtimeMs
+    ); // sorted names by creation date
+
+  const content = newestVideos.map(vid => ({
+    type: "video",
+    name: vid
+  }));
+
+  res.send(JSON.stringify(content));
 });
 
 app.get(`/video/:id`, (req, res) => {
-  const path = `./contentStorage/videos/${req.params.id}.mp4`;
+  const path = `./contentStorage/videos/${req.params.id}`;
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
@@ -41,8 +59,4 @@ app.get(`/video/:id`, (req, res) => {
     res.writeHead(200, head);
     fs.createReadStream(path).pipe(res);
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
 });
