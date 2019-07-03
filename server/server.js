@@ -5,6 +5,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const app = express();
 const PORT = 5000;
+const contentURL = "./server/contentStorage";
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -15,25 +16,40 @@ app.listen(PORT, () => {
 });
 
 app.get("/content", (req, res) => {
-  const newestVideos = fs
-    .readdirSync("./contentStorage/videos/")
-    .filter(file => file !== ".DS_Store")
+  let content = [];
+
+  content = content
+    .concat(fs.readdirSync(`${contentURL}/videos/`))
+    .map(video => ({
+      type: "video",
+      name: video
+    }))
+    .filter(file => file.name !== ".DS_Store")
     .sort(
       (file1, file2) =>
-        fs.statSync(`./contentStorage/videos/${file2}`).birthtimeMs -
-        fs.statSync(`./contentStorage/videos/${file1}`).birthtimeMs
-    ); // sorted names by creation date
-
-  const content = newestVideos.map(vid => ({
-    type: "video",
-    name: vid
-  }));
+        fs.statSync(`${contentURL}/videos/${file2.name}`).birthtimeMs -
+        fs.statSync(`${contentURL}/videos/${file1.name}`).birthtimeMs
+    );
+  content = content.filter(file => file.name !== ".DS_Store");
 
   res.send(JSON.stringify(content));
 });
 
+app.get("/videos", (req, res) => {
+  const videos = fs
+    .readdirSync(`${contentURL}/videos/`)
+    .filter(file => file !== ".DS_Store")
+    .sort(
+      (file1, file2) =>
+        fs.statSync(`${contentURL}/videos/${file2}`).birthtimeMs -
+        fs.statSync(`${contentURL}/videos/${file1}`).birthtimeMs
+    );
+
+  res.send(JSON.stringify(videos));
+});
+
 app.get(`/video/:id`, (req, res) => {
-  const path = `./contentStorage/videos/${req.params.id}`;
+  const path = `${contentURL}/videos/${req.params.id}`;
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
@@ -67,7 +83,42 @@ app.post("/upload", (req, res) => {
   const files = Object.values(req.files);
 
   files.forEach(file => {
-    file.mv(`./contentStorage/videos/${file.name}`);
+    let extension = file.name
+      .split("")
+      .splice(file.name.lastIndexOf("."))
+      .join("");
+    switch (extension) {
+      case ".mp4":
+        file.mv(`${contentURL}/videos/${file.name}`).catch(err => {
+          console.log(err);
+          res.send();
+        });
+        break;
+      case ".mp3":
+        file.mv(`${contentURL}/audios/${file.name}`).catch(err => {
+          console.log(err);
+          res.send();
+        });
+        break;
+      case ".png":
+      case ".jpg":
+      case ".gif":
+      case ".svg":
+        file.mv(`${contentURL}/pictures/${file.name}`).catch(err => {
+          console.log(err);
+          res.send();
+        });
+        break;
+      case ".txt":
+      case ".doc":
+      case ".pdf":
+      case ".docx":
+        file.mv(`${contentURL}/texts/${file.name}`).catch(err => {
+          console.log(err);
+          res.send();
+        });
+        break;
+    }
   });
 
   res.send();

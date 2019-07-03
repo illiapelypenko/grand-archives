@@ -31,7 +31,7 @@ export default class Uploader extends Component {
         <input
           type='file'
           name='file'
-          accept='.txt,.doc,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
+          accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
           multiple
           onChange={this.handleChange}
         />
