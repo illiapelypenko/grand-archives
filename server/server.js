@@ -5,7 +5,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const app = express();
 const PORT = 5000;
-const contentURL = "./server/contentStorage";
+const contentURL = `${__dirname}/contentStorage`;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,26 +13,6 @@ app.use(fileUpload());
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
-});
-
-app.get("/content", (req, res) => {
-  let content = [];
-
-  content = content
-    .concat(fs.readdirSync(`${contentURL}/videos/`))
-    .map(video => ({
-      type: "video",
-      name: video
-    }))
-    .filter(file => file.name !== ".DS_Store")
-    .sort(
-      (file1, file2) =>
-        fs.statSync(`${contentURL}/videos/${file2.name}`).birthtimeMs -
-        fs.statSync(`${contentURL}/videos/${file1.name}`).birthtimeMs
-    );
-  content = content.filter(file => file.name !== ".DS_Store");
-
-  res.send(JSON.stringify(content));
 });
 
 app.get("/videos", (req, res) => {
@@ -46,6 +26,53 @@ app.get("/videos", (req, res) => {
     );
 
   res.send(JSON.stringify(videos));
+});
+
+app.get("/audios", (req, res) => {
+  const audios = fs
+    .readdirSync(`${contentURL}/audios/`)
+    .filter(file => file !== ".DS_Store")
+    .sort(
+      (file1, file2) =>
+        fs.statSync(`${contentURL}/audios/${file2}`).birthtimeMs -
+        fs.statSync(`${contentURL}/audios/${file1}`).birthtimeMs
+    );
+
+  res.send(JSON.stringify(audios));
+});
+
+app.get("/pictures", (req, res) => {
+  const pictures = fs
+    .readdirSync(`${contentURL}/pictures/`)
+    .filter(file => file !== ".DS_Store")
+    .sort(
+      (file1, file2) =>
+        fs.statSync(`${contentURL}/pictures/${file2}`).birthtimeMs -
+        fs.statSync(`${contentURL}/pictures/${file1}`).birthtimeMs
+    );
+
+  res.send(JSON.stringify(pictures));
+});
+
+app.get("/texts", (req, res) => {
+  const texts = fs
+    .readdirSync(`${contentURL}/texts/`)
+    .filter(file => file !== ".DS_Store")
+    .sort(
+      (file1, file2) =>
+        fs.statSync(`${contentURL}/texts/${file2}`).birthtimeMs -
+        fs.statSync(`${contentURL}/texts/${file1}`).birthtimeMs
+    );
+
+  res.send(JSON.stringify(texts));
+});
+
+app.get("/picture/:id", (req, res) => {
+  res.sendFile(`${__dirname}/contentStorage/pictures/${req.params.id}`);
+});
+
+app.get("/text/:id", (req, res) => {
+  res.sendFile(`${__dirname}/contentStorage/texts/${req.params.id}`);
 });
 
 app.get(`/video/:id`, (req, res) => {
@@ -72,6 +99,37 @@ app.get(`/video/:id`, (req, res) => {
     const head = {
       "Content-Length": fileSize,
       "Content-Type": "video/mp4"
+    };
+
+    res.writeHead(200, head);
+    fs.createReadStream(path).pipe(res);
+  }
+});
+
+app.get(`/audio/:id`, (req, res) => {
+  const path = `${contentURL}/audios/${req.params.id}`;
+  const stat = fs.statSync(path);
+  const fileSize = stat.size;
+  const range = req.headers.range;
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-");
+    const start = parseInt(parts[0], 10);
+    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+    const chunksize = end - start + 1;
+    const file = fs.createReadStream(path, { start, end });
+    const head = {
+      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+      "Accept-Ranges": "bytes",
+      "Content-Length": chunksize,
+      "Content-Type": "audio/mpeg"
+    };
+
+    res.writeHead(206, head); // returns a reference to the ServerResponse so that calls can be chained, 206 -> Partial Content
+    file.pipe(res); // to transfer streams flow from source to destination
+  } else {
+    const head = {
+      "Content-Length": fileSize,
+      "Content-Type": "audio/mpeg"
     };
 
     res.writeHead(200, head);

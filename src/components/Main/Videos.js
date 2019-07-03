@@ -4,7 +4,7 @@ import Video from "./Video";
 
 export default class Videos extends Component {
   state = {
-    videos: [] // [{type: photo, name: 'apple'}]
+    videos: []
   };
 
   componentDidMount() {
