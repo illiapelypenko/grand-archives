@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import serverURL from "../../serverURL";
+import serverURL from "../../../serverURL";
 
 export default class Text extends Component {
   render() {
@@ -7,8 +7,10 @@ export default class Text extends Component {
       <div>
         <a
           href={`
-            ${serverURL}/text/${this.props.name}`}
+            ${serverURL}/api/content/text/${this.props.name}`}
           download
+          target='_blank'
+          rel='noopener noreferrer'
         >
           DOWNLOAD
         </a>

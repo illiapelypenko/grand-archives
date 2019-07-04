@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import serverURL from "../../serverURL";
+import serverURL from "../../../serverURL";
 
 export default class Audio extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class Audio extends Component {
       <div>
         <audio controls>
           <source
-            src={`${serverURL}/audio/${this.props.name}`}
+            src={`${serverURL}/api/content/audio/${this.props.name}`}
             type='audio/mpeg'
           />
         </audio>

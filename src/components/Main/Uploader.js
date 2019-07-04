@@ -15,10 +15,10 @@ export default class Uploader extends Component {
       data.append(files[i].name, files[i]);
     }
 
-    fetch(`${serverURL}/upload`, {
+    fetch(`${serverURL}/api/content/upload`, {
       method: "POST",
       body: data
-    });
+    }).then(() => this.props.onUpload());
   };
 
   handleChange = e => {

@@ -1,19 +1,34 @@
 import React, { Component } from "react";
 import Uploader from "./Uploader";
-import Content from "./Content";
+import Content from "./Content/Content";
+import serverURL from "../../serverURL";
 
 export default class Main extends Component {
   state = {
-    displaySettings: {}
+    content: ""
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  handleUpload = () => {
+    this.fetchData();
+  };
+
+  fetchData = () => {
+    fetch(`${serverURL}/api/content/all`)
+      .then(res => res.json())
+      .then(data => this.setState({ content: data }));
   };
 
   render() {
-    const { displaySettings } = this.state;
+    const { content } = this.state;
 
     return (
       <div>
-        <Uploader />
-        <Content displaySettings={displaySettings} />
+        <Uploader onUpload={this.handleUpload} />
+        <Content content={content} />
       </div>
     );
   }
