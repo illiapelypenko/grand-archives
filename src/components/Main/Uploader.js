@@ -3,7 +3,8 @@ import serverURL from "../../serverURL";
 
 export default class Uploader extends Component {
   state = {
-    files: []
+    files: [],
+    key: 0
   };
 
   handleSubmit = e => {
@@ -19,6 +20,9 @@ export default class Uploader extends Component {
       method: "POST",
       body: data
     }).then(() => this.props.onUpload());
+    this.setState(state => ({
+      key: state.key + 1
+    }));
   };
 
   handleChange = e => {
@@ -34,6 +38,7 @@ export default class Uploader extends Component {
           accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
           multiple
           onChange={this.handleChange}
+          key={this.state.key}
         />
         <input type='submit' value='upload' />
       </form>
