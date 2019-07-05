@@ -5,9 +5,9 @@ export default class Menu extends Component {
   render() {
     return (
       <div>
-        <Link to='/audios'>Audios</Link>
         <Link to='/videos'>Videos</Link>
         <Link to='/pictures'>Pictures</Link>
+        <Link to='/audios'>Audios</Link>
         <Link to='/texts'>Texts</Link>
       </div>
     );

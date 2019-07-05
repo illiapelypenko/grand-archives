@@ -19,6 +19,7 @@ router.get("/all", (req, res) => {
             fs.statSync(`${contentURL}/${dir}/${file2}`).birthtimeMs -
             fs.statSync(`${contentURL}/${dir}/${file1}`).birthtimeMs
         )
+        .slice(0, 9)
     };
   });
   res.send(JSON.stringify(data));

@@ -4,7 +4,8 @@ import serverURL from "../../serverURL";
 export default class Uploader extends Component {
   state = {
     files: [],
-    key: 0
+    key: 0,
+    showForm: false
   };
 
   handleSubmit = e => {
@@ -29,19 +30,30 @@ export default class Uploader extends Component {
     this.setState({ files: e.target.files });
   };
 
+  handleUploaderClick = e => {
+    this.setState(state => ({
+      showForm: !state.showForm
+    }));
+  };
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type='file'
-          name='file'
-          accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
-          multiple
-          onChange={this.handleChange}
-          key={this.state.key}
-        />
-        <input type='submit' value='upload' />
-      </form>
+      <div className='uploader'>
+        {this.state.showForm ? (
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type='file'
+              name='file'
+              accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
+              multiple
+              onChange={this.handleChange}
+              key={this.state.key} // to reset files
+            />
+            <input type='submit' value='upload' />
+          </form>
+        ) : null}
+        <div className='showBtn' onClick={this.handleUploaderClick} />
+      </div>
     );
   }
 }

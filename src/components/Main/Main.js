@@ -12,7 +12,7 @@ export default class Main extends Component {
     this.fetchData();
   }
 
-  handleUpload = () => {
+  updateData = () => {
     this.fetchData();
   };
 
@@ -27,7 +27,7 @@ export default class Main extends Component {
 
     return (
       <div>
-        <Uploader onUpload={this.handleUpload} />
+        <Uploader onUpload={this.updateData} />
         <Content content={content} />
       </div>
     );
