@@ -4,7 +4,7 @@ import serverURL from "../../../serverURL";
 export default class Text extends Component {
   render() {
     return (
-      <div>
+      <div className='content__text'>
         <a
           href={`
             ${serverURL}/api/content/text/${this.props.name}`}

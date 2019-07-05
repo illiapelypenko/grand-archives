@@ -1,0 +1,21 @@
+.content {
+  &__videos {
+    .content__video {
+      video {
+        width: 300px;
+      }
+    }
+  }
+  &__pictures {
+    width: max-content;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(3, auto);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+
+    img {
+      width: 300px;
+    }
+  }
+}

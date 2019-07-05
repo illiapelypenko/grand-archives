@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import "./Header.scss";
 import Slider from "./Slider";
 import Navbar from "./Navbar";
 
 export default class Header extends Component {
   render() {
     return (
-      <div>
+      <div className='header'>
         <Slider />
         <Navbar />
       </div>

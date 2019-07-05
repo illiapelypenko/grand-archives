@@ -4,7 +4,7 @@ import serverURL from "../../../serverURL";
 export default class Audio extends Component {
   render() {
     return (
-      <div>
+      <div className='content__audio'>
         <audio controls>
           <source
             src={`${serverURL}/api/content/audio/${this.props.name}`}

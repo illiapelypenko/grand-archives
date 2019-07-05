@@ -1,0 +1,34 @@
+.header {
+  &__slider {
+    position: relative;
+
+    .header__slides {
+      img {
+        width: 100%;
+        height: 100vh;
+      }
+    }
+
+    .header__slide-indicators {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      .header__slide-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+
+        &--active {
+          background: greenyellow;
+        }
+
+        &--disabled {
+          background: gray;
+        }
+      }
+    }
+  }
+}

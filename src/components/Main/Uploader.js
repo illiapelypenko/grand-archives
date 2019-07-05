@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import serverURL from "../../serverURL";
+import "./Uploader.scss";
 
 export default class Uploader extends Component {
   state = {
@@ -52,7 +53,7 @@ export default class Uploader extends Component {
             <input type='submit' value='upload' />
           </form>
         ) : null}
-        <div className='showBtn' onClick={this.handleUploaderClick} />
+        <div className='uploader__showBtn' onClick={this.handleUploaderClick} />
       </div>
     );
   }

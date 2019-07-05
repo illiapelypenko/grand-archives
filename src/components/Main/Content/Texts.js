@@ -4,7 +4,7 @@ import Text from "./Text";
 export default class Texts extends Component {
   render() {
     return (
-      <div>
+      <div className='content__texts'>
         {this.props.texts.map((text, index) => (
           <Text name={text} key={index} />
         ))}
