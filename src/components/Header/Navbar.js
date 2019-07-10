@@ -8,7 +8,7 @@ export default class Navbar extends Component {
     return (
       <div className='header__navbar'>
         <Logo />
-        <Menu />
+        <Menu isAuth={this.props.isAuth} />
       </div>
     );
   }

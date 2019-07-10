@@ -23,7 +23,7 @@ export default class Uploader extends Component {
       body: data
     })
       .then(() => this.props.onUpload())
-      .catch(e => console.log("e"));
+      .catch(e => console.log(e));
     this.setState(state => ({
       key: state.key + 1
     }));

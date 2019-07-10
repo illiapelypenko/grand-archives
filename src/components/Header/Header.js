@@ -8,7 +8,7 @@ export default class Header extends Component {
     return (
       <div className='header'>
         <Slider />
-        <Navbar />
+        <Navbar isAuth={this.props.isAuth} />
       </div>
     );
   }

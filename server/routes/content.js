@@ -9,21 +9,30 @@ router.get("/all", (req, res) => {
   try {
     const content = fs
       .readdirSync(`${contentURL}`)
-      .filter(file => file !== ".DS_Store");
-    const data = content.map(dir => {
-      return {
-        type: dir,
-        content: fs
-          .readdirSync(`${contentURL}/${dir}/`)
-          .filter(file => file !== ".DS_Store")
-          .sort(
-            (file1, file2) =>
-              fs.statSync(`${contentURL}/${dir}/${file2}`).birthtimeMs -
-              fs.statSync(`${contentURL}/${dir}/${file1}`).birthtimeMs
-          )
-          .slice(0, 9)
-      };
-    });
+      .filter(file => file !== ".DS_Store"); //get folders' names
+
+    let data = [];
+    for (dir of content) {
+      const files = fs
+        .readdirSync(`${contentURL}/${dir}/`)
+        .filter(file => file !== ".DS_Store");
+      for (file of files) {
+        data.push({
+          type: dir.slice(0, -1), //removes 's' from dir's name
+          content: file
+        });
+      }
+    }
+    data = data
+      .sort(
+        (file1, file2) =>
+          fs.statSync(`${contentURL}/${file2.type}s/${file2.content}`)
+            .birthtimeMs -
+          fs.statSync(`${contentURL}/${file1.type}s/${file1.content}`)
+            .birthtimeMs
+      )
+      .slice(0, 9);
+
     res.send(JSON.stringify(data));
   } catch (e) {
     res.status(500).send("server error");
