@@ -47,6 +47,7 @@ export default class Slider extends Component {
             }
             return (
               <div
+                key={index}
                 className={`header__slide-indicator header__slide-indicator--${state}`}
               />
             );

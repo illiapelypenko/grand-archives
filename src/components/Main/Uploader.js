@@ -21,7 +21,9 @@ export default class Uploader extends Component {
     fetch(`${serverURL}/api/content/upload`, {
       method: "POST",
       body: data
-    }).then(() => this.props.onUpload());
+    })
+      .then(() => this.props.onUpload())
+      .catch(e => console.log("e"));
     this.setState(state => ({
       key: state.key + 1
     }));
