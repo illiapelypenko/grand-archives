@@ -3,6 +3,7 @@ const fs = require("fs");
 const router = express.Router();
 const contentURL = `${__dirname}/../contentStorage`;
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 router.get("/all", (req, res) => {
   const content = fs
@@ -25,8 +26,19 @@ router.get("/all", (req, res) => {
   res.send(JSON.stringify(data));
 });
 
-router.get("/picture/:id", (req, res) => {
-  res.sendFile(`${path.resolve(`${contentURL}/pictures/${req.params.id}`)}`); // resolve -> fixes? ../
+router.get("/picture/:id", async (req, res) => {
+  try {
+    if (await jwt.verify(req.body.token, "PrivateKey")) {
+      res.sendFile(
+        `${path.resolve(`${contentURL}/pictures/${req.params.id}`)}`
+      ); // resolve -> fixes? ../
+    } else {
+      res.status(400).send("invalid token");
+    }
+  } catch (e) {
+    res.status(500).send("Server error");
+    console.log(e);
+  }
 });
 
 router.get("/text/:id", (req, res) => {

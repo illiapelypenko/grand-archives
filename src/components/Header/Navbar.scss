@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 1;
   top: 0px;
-  background: rgb(72, 62, 158);
+  background: #442931;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -11,19 +11,25 @@
   .header__logo {
     font-weight: bolder;
     font-size: 40px;
-    color: aliceblue;
     padding: 15px 30px;
+    color: #fcae62;
+    font-weight: bold;
   }
 
   .header__menu {
-    color: aliceblue;
+    font-size: 20px;
+    color: #fcae62;
+    font-weight: bold;
     display: flex;
     &-item {
       display: block;
       padding: 15px 30px;
 
       &:hover {
-        background: coral;
+        background: #442931;
+        color: #fcae62;
+        color: #442931;
+        background: #fcae62;
       }
     }
   }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export default class Menu extends Component {
   render() {
+    const { isLogedIn } = this.props;
     return (
       <div className='header__menu'>
         <Link className='header__menu-item' to='/videos'>
@@ -16,6 +17,9 @@ export default class Menu extends Component {
         </Link>
         <Link className='header__menu-item' to='/texts'>
           Texts
+        </Link>
+        <Link className='header__menu-item' to='/login'>
+          {isLogedIn ? "Log out" : "Log in"}
         </Link>
       </div>
     );

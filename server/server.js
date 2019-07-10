@@ -3,16 +3,28 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const mongoose = require("mongoose");
 const app = express();
 const PORT = 5000;
 // const contentURL = `${__dirname}/contentStorage`;
 const content = require("./routes/content");
+const users = require("./routes/users");
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(fileUpload());
 
 app.use("/api/content", content);
+app.use("/api/users", users);
+
+// mongoose.set('useCreateIndex', true);
+mongoose
+  .connect("mongodb://localhost:27017/grand-archives", {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
+  .then(() => console.log("Now connected to MongoDB!"))
+  .catch(err => console.error("Something went wrong", err));
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
