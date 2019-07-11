@@ -5,10 +5,11 @@ import Navbar from "./Navbar";
 
 export default class Header extends Component {
   render() {
+    const { isAuth, slider } = this.props;
     return (
       <div className='header'>
-        <Slider />
-        <Navbar isAuth={this.props.isAuth} />
+        <Slider slider={slider} />
+        <Navbar isAuth={isAuth} />
       </div>
     );
   }

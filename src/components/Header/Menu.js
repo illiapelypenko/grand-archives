@@ -6,21 +6,25 @@ export default class Menu extends Component {
     const { isAuth } = this.props;
     return (
       <div className='header__menu'>
-        <Link className='header__menu-item' to='/videos'>
+        <Link className='header__menu-item' to='/content/videos'>
           Videos
         </Link>
-        <Link className='header__menu-item' to='/pictures'>
+        <Link className='header__menu-item' to='/content/pictures'>
           Pictures
         </Link>
-        <Link className='header__menu-item' to='/audios'>
+        <Link className='header__menu-item' to='/content/audios'>
           Audios
         </Link>
-        <Link className='header__menu-item' to='/texts'>
+        <Link className='header__menu-item' to='/content/texts'>
           Texts
         </Link>
-        <Link className='header__menu-item' to='/login'>
-          {isAuth ? "Log out" : "Log in"}
-        </Link>
+        {isAuth ? (
+          <div>Log out</div>
+        ) : (
+          <Link className='header__menu-item' to='/auth/login'>
+            Log in
+          </Link>
+        )}
       </div>
     );
   }

@@ -32,27 +32,32 @@ export default class Slider extends Component {
 
   render() {
     const { slides, currentSlide } = this.state;
+    const { slider } = this.props;
     return (
-      <div className='header__slider' onClick={this.handleClick}>
-        <div className='header__slides'>
-          <img src={slides[currentSlide].img} alt='slide' />
-        </div>
-        <div className='header__slide-indicator header__slide-indicators'>
-          {slides.map((slide, index) => {
-            let state;
-            if (index === currentSlide) {
-              state = "active";
-            } else {
-              state = "disabled";
-            }
-            return (
-              <div
-                key={index}
-                className={`header__slide-indicator header__slide-indicator--${state}`}
-              />
-            );
-          })}
-        </div>
+      <div className='header__slider'>
+        {slider ? (
+          <>
+            <div className='header__slides' onClick={this.handleClick}>
+              <img src={slides[currentSlide].img} alt='slide' />
+            </div>
+            <div className='header__slide-indicator header__slide-indicators'>
+              {slides.map((slide, index) => {
+                let state;
+                if (index === currentSlide) {
+                  state = "active";
+                } else {
+                  state = "disabled";
+                }
+                return (
+                  <div
+                    key={index}
+                    className={`header__slide-indicator header__slide-indicator--${state}`}
+                  />
+                );
+              })}
+            </div>
+          </>
+        ) : null}
       </div>
     );
   }

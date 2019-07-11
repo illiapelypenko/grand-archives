@@ -10,28 +10,36 @@ export default class Content extends Component {
   render() {
     const { content } = this.props;
     const videos = content
-      ? content.find(item => item.type === "videos").content
+      ? content.filter(item => item.type === "video").map(item => item.content)
       : [];
     const pictures = content
-      ? content.find(item => item.type === "pictures").content
+      ? content
+          .filter(item => item.type === "picture")
+          .map(item => item.content)
       : [];
     const audios = content
-      ? content.find(item => item.type === "audios").content
+      ? content.filter(item => item.type === "audio").map(item => item.content)
       : [];
     const texts = content
-      ? content.find(item => item.type === "texts").content
+      ? content.filter(item => item.type === "text").map(item => item.content)
       : [];
 
     return (
       <div className='content'>
         <Switch>
-          <Route path='/videos' render={() => <Videos videos={videos} />} />
           <Route
-            path='/pictures'
+            path='/content/videos'
+            render={() => <Videos videos={videos} />}
+          />
+          <Route
+            path='/content/pictures'
             render={() => <Pictures pictures={pictures} />}
           />
-          <Route path='/audios' render={() => <Audios audios={audios} />} />
-          <Route path='/texts' render={() => <Texts texts={texts} />} />
+          <Route
+            path='/content/audios'
+            render={() => <Audios audios={audios} />}
+          />
+          <Route path='/content/texts' render={() => <Texts texts={texts} />} />
         </Switch>
       </div>
     );
