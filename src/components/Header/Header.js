@@ -9,7 +9,7 @@ export default class Header extends Component {
     return (
       <div className='header'>
         <Slider slider={slider} />
-        <Navbar isAuth={isAuth} />
+        <Navbar isAuth={isAuth} logout={this.props.logout} />
       </div>
     );
   }

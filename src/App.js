@@ -15,21 +15,24 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    if (!this.state.isAuth) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        this.setState({
-          isAuth: true
-        });
-      }
+    if (localStorage.getItem("token")) {
+      this.setState({
+        isAuth: true
+      });
     }
     this.fetchContent();
   }
 
-  componentDidUpdate() {}
-
   login = () => {
-    this.setState({ isAuth: true });
+    this.setState({
+      isAuth: true
+    });
+  };
+
+  logout = () => {
+    this.setState({
+      isAuth: false
+    });
   };
 
   updateData = () => {
@@ -46,7 +49,7 @@ export default class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <Header isAuth={isAuth} slider={slider} />
+          <Header isAuth={isAuth} slider={slider} logout={this.logout} />
           <Switch>
             <Route
               path='/content'

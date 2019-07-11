@@ -13,10 +13,7 @@ export default class Auth extends Component {
             path='/auth/login'
             render={() => <Login login={this.props.login} />}
           />
-          <Route
-            path='/auth/register'
-            render={() => <Register login={this.props.login} />}
-          />
+          <Route path='/auth/register' render={() => <Register />} />
         </Switch>
       </div>
     );
