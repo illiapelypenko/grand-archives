@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import FormPart from "./FormPart";
 import { withRouter } from "react-router-dom";
 
-class Login extends Component {
+class Registration extends Component {
   state = {
     values: {
-      email: "brad@brad.brad",
-      password: "bradbrad"
+      name: "tom",
+      email: "tom@tom.tom",
+      password: "tomtom"
     }
   };
 
@@ -23,7 +24,7 @@ class Login extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
+      const res = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
         body: JSON.stringify(this.state.values),
         headers: {
@@ -43,9 +44,17 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password } = this.state.values;
+    const { name, email, password } = this.state.values;
     return (
       <form onSubmit={this.handleSubmit} className='auth__form'>
+        <FormPart
+          label='Name:'
+          type='name'
+          name='name'
+          id='name'
+          value={name}
+          onChange={this.handleChange}
+        />
         <FormPart
           label='Email:'
           type='email'
@@ -62,10 +71,10 @@ class Login extends Component {
           value={password}
           onChange={this.handleChange}
         />
-        <input type='submit' value='Login' id='submit' name='submit' />
+        <input type='submit' value='Register' id='submit' name='submit' />
       </form>
     );
   }
 }
 
-export default withRouter(Login);
+export default withRouter(Registration);

@@ -4,6 +4,7 @@
 
     .header__slides {
       img {
+        display: block;
         width: 100%;
         height: 100vh;
       }
@@ -22,11 +23,11 @@
         border-radius: 5px;
 
         &--active {
-          background: #fcae62;
+          background: #d70026;
         }
 
         &--disabled {
-          background: #442931;
+          background: #000b29;
         }
       }
     }

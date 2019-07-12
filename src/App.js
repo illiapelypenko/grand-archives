@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import serverURL from "./serverURL";
 import Auth from "./components/Auth/Auth";
+// import Colors from "./Colors";
 
 export default class App extends Component {
   state = {
@@ -63,6 +64,7 @@ export default class App extends Component {
             />
             <Route path='/auth' render={() => <Auth login={this.login} />} />
           </Switch>
+          {/* <Colors /> */}
           {/* <Footer /> */}
         </div>
       </Router>

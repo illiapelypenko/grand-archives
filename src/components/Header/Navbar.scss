@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 1;
   top: 0px;
-  background: #442931;
+  background: #000b29;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -12,13 +12,13 @@
     font-weight: bolder;
     font-size: 40px;
     padding: 15px 30px;
-    color: #fcae62;
+    color: #f8f5f2;
     font-weight: bold;
   }
 
   .header__menu {
     font-size: 20px;
-    color: #fcae62;
+    color: #f8f5f2;
     font-weight: bold;
     display: flex;
     &-item {
@@ -26,10 +26,8 @@
       padding: 15px 30px;
 
       &:hover {
-        background: #442931;
-        color: #fcae62;
-        color: #442931;
-        background: #fcae62;
+        background: #d70026;
+        color: #f8f5f2;
       }
     }
   }

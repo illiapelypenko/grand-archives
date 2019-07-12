@@ -5,7 +5,7 @@ export default class Logo extends Component {
   render() {
     return (
       <div className='header__logo'>
-        <Link to='/'>GRAND ARCHIVE</Link>
+        <Link to='/'>Grand Archive</Link>
       </div>
     );
   }
