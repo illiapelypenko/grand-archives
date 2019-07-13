@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormPart from "./FormPart";
 import { withRouter } from "react-router-dom";
+import serverURL from "../../serverURL";
 
 class Login extends Component {
   state = {
@@ -23,7 +24,7 @@ class Login extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
+      const res = await fetch(`${serverURL}/api/users/login`, {
         method: "POST",
         body: JSON.stringify(this.state.values),
         headers: {
@@ -36,7 +37,7 @@ class Login extends Component {
       const token = await res.text();
       localStorage.setItem("token", token);
       this.props.login();
-      this.props.history.push("/");
+      this.props.history.push("/content/pictures");
     } catch (e) {
       console.log(e);
     }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import videoSlide from "../../images/videoSlide.jpg";
 import pictureSlide from "../../images/pictureSlide.jpg";
+import "./Slider.scss";
 
 export default class Slider extends Component {
   state = {

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Header.scss";
 import Slider from "./Slider";
 import Navbar from "./Navbar";
 

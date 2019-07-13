@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormPart from "./FormPart";
 import { withRouter } from "react-router-dom";
+import serverURL from "../../serverURL";
 
 class Registration extends Component {
   state = {
@@ -24,7 +25,7 @@ class Registration extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/users/register", {
+      const res = await fetch(`${serverURL}/api/users/register`, {
         method: "POST",
         body: JSON.stringify(this.state.values),
         headers: {
@@ -37,7 +38,7 @@ class Registration extends Component {
       const token = await res.text();
       localStorage.setItem("token", token);
       this.props.login();
-      this.props.history.push("/");
+      this.props.history.push("/content/pictures");
     } catch (e) {
       console.log(e);
     }
