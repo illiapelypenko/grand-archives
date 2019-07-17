@@ -19,6 +19,7 @@ export default class Uploader extends Component {
     for (let i = 0; i < files.length; i++) {
       data.append(files[i].name, files[i]);
     }
+    data.append("token", localStorage.getItem("token"));
 
     fetch(`${serverURL}/api/content/upload`, {
       method: "POST",

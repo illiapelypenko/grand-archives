@@ -131,15 +131,16 @@ router.get(`/audio/:id`, (req, res) => {
 });
 
 router.post("/upload", async (req, res) => {
+  const files = Object.values(req.files);
+  let isVerified;
   try {
-    const isVerified = await jwt.verify(req.body.token, "PrivateKey");
+    isVerified = await jwt.verify(req.body.token, "PrivateKey");
   } catch (e) {
     res.status(500).send("invalid token");
     console.log(e);
   }
   try {
     if (isVerified) {
-      const files = Object.values(req.files);
       files.forEach(file => {
         let extension = file.name
           .split("")

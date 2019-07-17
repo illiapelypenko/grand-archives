@@ -16,8 +16,22 @@
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 
-    img {
-      width: 300px;
+    .content__picture {
+      width: 320px;
+      height: 189px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px rgba($color: #000b29, $alpha: 0.5) solid;
+      background: rgba($color: #000b29, $alpha: 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        // border-radius: 10px;
+      }
     }
   }
 }

@@ -4,12 +4,17 @@ import serverURL from "../../../serverURL";
 export default class Picture extends Component {
   render() {
     return (
-      <div className='content__picture'>
+      <a
+        className='content__picture'
+        target='_blank'
+        href={`${serverURL}/api/content/picture/${this.props.name}`}
+        title='fullscreen view'
+      >
         <img
           src={`${serverURL}/api/content/picture/${this.props.name}`}
           alt='pic'
         />
-      </div>
+      </a>
     );
   }
 }
