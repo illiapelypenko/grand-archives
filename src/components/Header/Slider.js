@@ -3,13 +3,10 @@ import videoSlide from "../../images/videoSlide.jpg";
 import pictureSlide from "../../images/pictureSlide.jpg";
 import audioSlide from "../../images/audioSlide.jpg";
 import textSlide from "../../images/textSlide.jpg";
-import Eye from "../../images/eye-solid.js";
-import EyeSlashed from "../../images/eye-slash-solid.js";
 import "./Slider.scss";
 
 export default class Slider extends Component {
   state = {
-    show: true,
     slides: [
       {
         img: videoSlide,
@@ -47,43 +44,34 @@ export default class Slider extends Component {
   };
 
   render() {
-    const { slides, currentSlide, show } = this.state;
+    const { slides, currentSlide } = this.state;
     return (
       <div className='slider'>
-        {show ? (
-          <>
-            <div className='slider__slides' onClick={this.handleClick}>
+        <div className='slider__slides' onClick={this.handleClick}>
+          <div
+            className='slider__slide'
+            style={{
+              backgroundImage: `url(${slides[currentSlide].img})`
+            }}
+          >
+            <p className='slider__slide-text'>{slides[currentSlide].text}</p>
+          </div>
+        </div>
+        <div className='slider__indicators'>
+          {slides.map((slide, index) => {
+            let state;
+            if (index === currentSlide) {
+              state = "active";
+            } else {
+              state = "disabled";
+            }
+            return (
               <div
-                className='slider__slide'
-                style={{
-                  backgroundImage: `url(${slides[currentSlide].img})`
-                }}
-              >
-                <p className='slider__slide-text'>
-                  {slides[currentSlide].text}
-                </p>
-              </div>
-            </div>
-            <div className='slider__indicators'>
-              {slides.map((slide, index) => {
-                let state;
-                if (index === currentSlide) {
-                  state = "active";
-                } else {
-                  state = "disabled";
-                }
-                return (
-                  <div
-                    key={index}
-                    className={`slider__indicator slider__indicator--${state}`}
-                  />
-                );
-              })}
-            </div>
-          </>
-        ) : null}
-        <div className='slider__state-btn'>
-          {show ? <Eye /> : <EyeSlashed />}
+                key={index}
+                className={`slider__indicator slider__indicator--${state}`}
+              />
+            );
+          })}
         </div>
       </div>
     );

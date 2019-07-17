@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Navbar.scss";
 import Logo from "./Logo";
 import Menu from "./Menu";
 
