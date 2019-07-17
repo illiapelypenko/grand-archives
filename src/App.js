@@ -49,7 +49,7 @@ export default class App extends Component {
     const { content, isAuth, slider } = this.state;
     return (
       <Router>
-        <div className='App'>
+        <div className='app'>
           <Header isAuth={isAuth} slider={slider} logout={this.logout} />
           <Switch>
             <Route

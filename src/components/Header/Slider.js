@@ -1,20 +1,35 @@
 import React, { Component } from "react";
 import videoSlide from "../../images/videoSlide.jpg";
 import pictureSlide from "../../images/pictureSlide.jpg";
+import audioSlide from "../../images/audioSlide.jpg";
+import textSlide from "../../images/textSlide.jpg";
+import Eye from "../../images/eye-solid.js";
+import EyeSlashed from "../../images/eye-slash-solid.js";
 import "./Slider.scss";
 
 export default class Slider extends Component {
   state = {
+    show: true,
     slides: [
       {
         img: videoSlide,
         text: "Videos",
-        description: "this is video slide"
+        description: "this is a video slide"
       },
       {
         img: pictureSlide,
         text: "Pictures",
-        description: "this is picture slide"
+        description: "this is a picture slide"
+      },
+      {
+        img: audioSlide,
+        text: "Audios",
+        description: "this is a audios slide"
+      },
+      {
+        img: textSlide,
+        text: "Texts",
+        description: "this is a text slide"
       }
     ],
     currentSlide: 0
@@ -32,16 +47,24 @@ export default class Slider extends Component {
   };
 
   render() {
-    const { slides, currentSlide } = this.state;
-    const { slider } = this.props;
+    const { slides, currentSlide, show } = this.state;
     return (
-      <div className='header__slider'>
-        {slider ? (
+      <div className='slider'>
+        {show ? (
           <>
-            <div className='header__slides' onClick={this.handleClick}>
-              <img src={slides[currentSlide].img} alt='slide' />
+            <div className='slider__slides' onClick={this.handleClick}>
+              <div
+                className='slider__slide'
+                style={{
+                  backgroundImage: `url(${slides[currentSlide].img})`
+                }}
+              >
+                <p className='slider__slide-text'>
+                  {slides[currentSlide].text}
+                </p>
+              </div>
             </div>
-            <div className='header__slide-indicator header__slide-indicators'>
+            <div className='slider__indicators'>
               {slides.map((slide, index) => {
                 let state;
                 if (index === currentSlide) {
@@ -52,13 +75,16 @@ export default class Slider extends Component {
                 return (
                   <div
                     key={index}
-                    className={`header__slide-indicator header__slide-indicator--${state}`}
+                    className={`slider__indicator slider__indicator--${state}`}
                   />
                 );
               })}
             </div>
           </>
         ) : null}
+        <div className='slider__state-btn'>
+          {show ? <Eye /> : <EyeSlashed />}
+        </div>
       </div>
     );
   }

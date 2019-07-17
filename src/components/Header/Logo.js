@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class Logo extends Component {
   render() {
     return (
-      <div className='header__logo'>
+      <div className='navbar__logo'>
         <Link to='/'>Grand Archive</Link>
       </div>
     );
