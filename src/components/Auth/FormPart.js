@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class FormPart extends Component {
   render() {
-    const { label, type, name, id, value, onChange } = this.props;
+    const { label, type, name, id, value, onChange, placeholder } = this.props;
     return (
       <div className='form-part'>
         <label htmlFor={id}>{label}</label>
@@ -12,6 +12,7 @@ export default class FormPart extends Component {
           id={id}
           value={value}
           onChange={onChange}
+          placeholder={placeholder}
         />
       </div>
     );

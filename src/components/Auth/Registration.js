@@ -6,9 +6,9 @@ import serverURL from "../../serverURL";
 class Registration extends Component {
   state = {
     values: {
-      name: "tom",
-      email: "tom@tom.tom",
-      password: "tomtom"
+      name: "",
+      email: "",
+      password: ""
     }
   };
 
@@ -47,30 +47,33 @@ class Registration extends Component {
   render() {
     const { name, email, password } = this.state.values;
     return (
-      <form onSubmit={this.handleSubmit} className='auth__form'>
+      <form onSubmit={this.handleSubmit} className={`auth__form`}>
         <FormPart
-          label='Name:'
+          label=''
           type='name'
           name='name'
           id='name'
           value={name}
           onChange={this.handleChange}
+          placeholder='Enter Name'
         />
         <FormPart
-          label='Email:'
+          label=''
           type='email'
           name='email'
           id='email'
           value={email}
           onChange={this.handleChange}
+          placeholder='Enter Email'
         />
         <FormPart
-          label='Password:'
+          label=''
           type='password'
           name='password'
           id='password'
           value={password}
           onChange={this.handleChange}
+          placeholder='Enter Password'
         />
         <input type='submit' value='Register' id='submit' name='submit' />
       </form>

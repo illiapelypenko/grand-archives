@@ -6,8 +6,12 @@ import serverURL from "../../serverURL";
 class Login extends Component {
   state = {
     values: {
-      email: "brad@brad.brad",
-      password: "bradbrad"
+      email: "",
+      password: ""
+    },
+    errors: {
+      email: "",
+      password: ""
     }
   };
 
@@ -48,20 +52,22 @@ class Login extends Component {
     return (
       <form onSubmit={this.handleSubmit} className='auth__form'>
         <FormPart
-          label='Email:'
+          label=''
           type='email'
           name='email'
           id='email'
           value={email}
           onChange={this.handleChange}
+          placeholder='Enter Email'
         />
         <FormPart
-          label='Password:'
+          label=''
           type='password'
           name='password'
           id='password'
           value={password}
           onChange={this.handleChange}
+          placeholder='Enter Password'
         />
         <input type='submit' value='Login' id='submit' name='submit' />
       </form>
