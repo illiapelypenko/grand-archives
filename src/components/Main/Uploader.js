@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import serverURL from "../../serverURL";
 import "./Uploader.scss";
+import UploaderPic from "../../images/uploadPic";
+import ArrowPic from "../../images/arrowRightPic";
 
 export default class Uploader extends Component {
   state = {
@@ -55,7 +57,9 @@ export default class Uploader extends Component {
             <input type='submit' value='upload' />
           </form>
         ) : null}
-        <div className='uploader__showBtn' onClick={this.handleUploaderClick} />
+        <div className='uploader__showBtn' onClick={this.handleUploaderClick}>
+          {this.state.showForm ? <ArrowPic /> : <UploaderPic />}
+        </div>
       </div>
     );
   }

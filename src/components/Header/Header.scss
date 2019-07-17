@@ -20,11 +20,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 30px;
 
     .navbar__logo {
       font-weight: bolder;
       font-size: 40px;
-      padding: 15px 30px;
       color: #f8f5f2;
       font-weight: bold;
     }
@@ -34,10 +34,49 @@
       color: #f8f5f2;
       font-weight: bold;
       display: flex;
+
+      .navbar__user-item {
+        position: relative;
+        cursor: pointer;
+
+        .navbar__user-icon {
+          background: #d70026;
+          width: 50px;
+          height: 50px;
+          border-radius: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 28px;
+          font-family: "Fredericka the Great", cursive;
+        }
+
+        .navbar__user-menu-item {
+          position: absolute;
+          right: 0;
+          background: #d70026;
+          padding: 10px 10px;
+          border-radius: 10px;
+
+          .navbar__menu-item {
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+
+            &:hover {
+              background: #000b29;
+              color: #f8f5f2;
+            }
+          }
+        }
+      }
+
       &-item {
         display: block;
         padding: 15px 30px;
         width: max-content;
+
         &:hover {
           background: #d70026;
           color: #f8f5f2;
