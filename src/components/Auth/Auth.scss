@@ -31,12 +31,19 @@
         flex-direction: column;
         align-items: center;
 
-        .form-part {
+        .auth__form-part {
           margin: 10px 0px;
 
           input {
             padding: 5px 10px;
             font-size: 18px;
+          }
+
+          .auth__error-msg {
+            color: #d70026;
+            font-style: italic;
+            font-size: 10px;
+            text-transform: capitalize;
           }
         }
 

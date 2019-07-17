@@ -45,6 +45,7 @@ export default class App extends Component {
       .then(res => res.json())
       .then(data => this.setState({ content: data }));
   };
+
   render() {
     const { content, isAuth, slider } = this.state;
     return (

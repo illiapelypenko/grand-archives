@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
     let { name, email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-      res.status(400).send("That user already exisits!");
+      res.status(400).json({ error: "email" });
     }
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
     const token = jwt.sign({ _id: doc._id }, "PrivateKey");
     res.send(token);
   } catch (e) {
-    res.status(500).send("Server error");
+    res.status(500).json({ error: "SERVER ERROR" });
     console.log(e);
   }
 });
@@ -32,16 +32,16 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).send("Incorrect email");
+      return res.status(400).json({ error: "email" });
     }
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(400).send("Incorrect password.");
+      return res.status(400).json({ error: "password" });
     }
     const token = jwt.sign({ _id: user._id }, "PrivateKey");
     res.send(token);
   } catch (e) {
-    res.status(500).send("Server error");
+    res.status(500).json({ error: "SERVER ERROR" });
     console.log(e);
   }
 });

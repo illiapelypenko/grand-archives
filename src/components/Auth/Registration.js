@@ -9,6 +9,11 @@ class Registration extends Component {
       name: "",
       email: "",
       password: ""
+    },
+    errors: {
+      name: "",
+      email: "",
+      password: ""
     }
   };
 
@@ -24,6 +29,27 @@ class Registration extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+
+    for (let key in this.state.values) {
+      let error = "";
+      if (!this.state.values[key]) {
+        error = `can't be empty`;
+      } else {
+        error = ``;
+      }
+
+      this.setState(state => ({
+        errors: {
+          ...state.errors,
+          [key]: error
+        }
+      }));
+    }
+
+    for (let key in this.state.values) {
+      if (!this.state.values[key]) return null;
+    }
+
     try {
       const res = await fetch(`${serverURL}/api/users/register`, {
         method: "POST",
@@ -33,7 +59,17 @@ class Registration extends Component {
         }
       });
       if (!res.ok) {
-        throw Error(await res.text());
+        const data = await res.json();
+        const error = data.error;
+        if (res.status === 400) {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              [error]: `invalid ${error}`
+            }
+          });
+        }
+        throw Error(`${error} not valid`);
       }
       const token = await res.text();
       localStorage.setItem("token", token);
@@ -46,6 +82,11 @@ class Registration extends Component {
 
   render() {
     const { name, email, password } = this.state.values;
+    const {
+      name: nameError,
+      email: emailError,
+      password: passwordError
+    } = this.state.errors;
     return (
       <form onSubmit={this.handleSubmit} className={`auth__form`}>
         <FormPart
@@ -56,6 +97,7 @@ class Registration extends Component {
           value={name}
           onChange={this.handleChange}
           placeholder='Enter Name'
+          error={nameError}
         />
         <FormPart
           label=''
@@ -65,6 +107,7 @@ class Registration extends Component {
           value={email}
           onChange={this.handleChange}
           placeholder='Enter Email'
+          error={emailError}
         />
         <FormPart
           label=''
@@ -74,6 +117,7 @@ class Registration extends Component {
           value={password}
           onChange={this.handleChange}
           placeholder='Enter Password'
+          error={passwordError}
         />
         <input type='submit' value='Register' id='submit' name='submit' />
       </form>

@@ -32,6 +32,7 @@ class Header extends Component {
         showSlider: false
       };
     }
+    return null;
   }
 
   render() {

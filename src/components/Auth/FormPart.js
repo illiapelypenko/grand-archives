@@ -2,9 +2,18 @@ import React, { Component } from "react";
 
 export default class FormPart extends Component {
   render() {
-    const { label, type, name, id, value, onChange, placeholder } = this.props;
+    const {
+      label,
+      type,
+      name,
+      id,
+      value,
+      onChange,
+      placeholder,
+      error
+    } = this.props;
     return (
-      <div className='form-part'>
+      <div className='auth__form-part'>
         <label htmlFor={id}>{label}</label>
         <input
           type={type}
@@ -14,6 +23,7 @@ export default class FormPart extends Component {
           onChange={onChange}
           placeholder={placeholder}
         />
+        <p className='auth__error-msg'>{error}</p>
       </div>
     );
   }
