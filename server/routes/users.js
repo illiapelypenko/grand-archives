@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
     });
     const doc = await newUser.save();
     const token = jwt.sign({ _id: doc._id }, "PrivateKey");
-    res.send(token);
+    res.json({ token, name: doc.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });
     console.log(e);
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "password" });
     }
     const token = jwt.sign({ _id: user._id }, "PrivateKey");
-    res.send(token);
+    res.json({ token, name: user.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });
     console.log(e);

@@ -32,7 +32,7 @@ class Auth extends Component {
               }`}
               to='/auth/registration'
             >
-              Registration
+              Register
             </Link>
           </div>
           <Switch>

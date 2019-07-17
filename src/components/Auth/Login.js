@@ -56,9 +56,9 @@ class Login extends Component {
           "Content-Type": "application/json"
         }
       });
+      const data = await res.json();
+      const { token, error, name } = data;
       if (!res.ok) {
-        const data = await res.json();
-        const error = data.error;
         if (res.status === 400) {
           this.setState({
             errors: {
@@ -69,9 +69,8 @@ class Login extends Component {
         }
         throw Error(`${error} not valid`);
       }
-      const token = await res.text();
       localStorage.setItem("token", token);
-      this.props.login();
+      this.props.login(name);
       this.props.history.push("/content/pictures");
     } catch (e) {
       console.log(e);

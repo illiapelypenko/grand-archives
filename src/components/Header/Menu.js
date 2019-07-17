@@ -8,6 +8,10 @@ export default class Menu extends Component {
 
   logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    this.setState(state => ({
+      showLogout: !state.showLogout
+    }));
     this.props.logout();
   };
 
@@ -18,7 +22,7 @@ export default class Menu extends Component {
   };
 
   render() {
-    const { isAuth } = this.props;
+    const { isAuth, name } = this.props;
     return (
       <div className='navbar__menu'>
         <Link className='navbar__menu-item' to='/content/videos'>
@@ -36,11 +40,13 @@ export default class Menu extends Component {
         {isAuth ? (
           <div className='navbar__user-item'>
             <div className='navbar__user-icon' onClick={this.handleShowLogout}>
-              {"T"[0]}
+              {name[0]}
             </div>
             {this.state.showLogout ? (
-              <div className='navbar__user-menu-item' onClick={this.logout}>
-                <div className='navbar__menu-item'>Log out</div>
+              <div className='navbar__user-menu-item'>
+                <div className='navbar__menu-item' onClick={this.logout}>
+                  Log out
+                </div>
               </div>
             ) : null}
           </div>

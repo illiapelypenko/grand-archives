@@ -12,21 +12,25 @@ export default class App extends Component {
   state = {
     content: "",
     isAuth: false,
-    slider: true
+    slider: true,
+    name: ""
   };
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
       this.setState({
-        isAuth: true
+        isAuth: true,
+        name: localStorage.getItem("name")
       });
     }
     this.fetchContent();
   }
 
-  login = () => {
+  login = name => {
+    localStorage.setItem("name", name);
     this.setState({
-      isAuth: true
+      isAuth: true,
+      name
     });
   };
 
@@ -47,11 +51,16 @@ export default class App extends Component {
   };
 
   render() {
-    const { content, isAuth, slider } = this.state;
+    const { content, isAuth, slider, name } = this.state;
     return (
       <Router>
         <div className='app'>
-          <Header isAuth={isAuth} slider={slider} logout={this.logout} />
+          <Header
+            isAuth={isAuth}
+            slider={slider}
+            logout={this.logout}
+            name={name}
+          />
           <Switch>
             <Route
               path='/content'
