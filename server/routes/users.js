@@ -3,13 +3,18 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { secretKey } = require("../config");
 
 router.post("/register", async (req, res) => {
   try {
     let { name, email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (user) {
-      res.status(400).json({ error: "email" });
+    const userEmail = await User.findOne({ email });
+    const userName = await User.findOne({ name });
+    if (userEmail) {
+      return res.status(400).json({ error: "email" });
+    }
+    if (userName) {
+      return res.status(400).json({ error: "name" });
     }
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
@@ -19,7 +24,7 @@ router.post("/register", async (req, res) => {
       password
     });
     const doc = await newUser.save();
-    const token = jwt.sign({ _id: doc._id }, "PrivateKey");
+    const token = jwt.sign({ _id: doc._id }, secretKey);
     res.json({ token, name: doc.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });
@@ -38,7 +43,7 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({ error: "password" });
     }
-    const token = jwt.sign({ _id: user._id }, "PrivateKey");
+    const token = jwt.sign({ _id: user._id }, secretKey);
     res.json({ token, name: user.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });

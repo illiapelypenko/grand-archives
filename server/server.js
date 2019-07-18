@@ -5,7 +5,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const app = express();
-const PORT = 5000;
+const { port, mongodb } = require("./config");
 // const contentURL = `${__dirname}/contentStorage`;
 const content = require("./routes/content");
 const users = require("./routes/users");
@@ -19,15 +19,15 @@ app.use("/api/users", users);
 
 // mongoose.set('useCreateIndex', true);
 mongoose
-  .connect("mongodb://localhost:27017/grand-archives", {
+  .connect(mongodb, {
     useNewUrlParser: true,
     useCreateIndex: true
   })
   .then(() => console.log("Now connected to MongoDB!"))
   .catch(err => console.error("Something went wrong", err));
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 // app.get("/videos", (req, res) => {

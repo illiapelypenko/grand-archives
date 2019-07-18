@@ -71,7 +71,7 @@ class Registration extends Component {
             }
           });
         }
-        throw Error(`${error} not valid`);
+        throw Error(`${error} already exists`);
       }
       localStorage.setItem("token", token);
       this.props.login(name);

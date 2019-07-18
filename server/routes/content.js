@@ -4,6 +4,7 @@ const router = express.Router();
 const contentURL = `${__dirname}/../contentStorage`;
 const path = require("path");
 const jwt = require("jsonwebtoken");
+const { secretKey } = require("../config");
 
 router.get("/all", (req, res) => {
   try {
@@ -134,7 +135,7 @@ router.post("/upload", async (req, res) => {
   const files = Object.values(req.files);
   let isVerified;
   try {
-    isVerified = await jwt.verify(req.body.token, "PrivateKey");
+    isVerified = await jwt.verify(req.body.token, secretKey);
   } catch (e) {
     res.status(500).send("invalid token");
     console.log(e);
