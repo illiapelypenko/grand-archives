@@ -11,7 +11,7 @@ export default class Uploader extends Component {
     showForm: false
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const data = new FormData();
     const { files } = this.state;
@@ -20,13 +20,18 @@ export default class Uploader extends Component {
       data.append(files[i].name, files[i]);
     }
     data.append("token", localStorage.getItem("token"));
+    data.append("uploaderName", localStorage.getItem("name"));
 
-    fetch(`${serverURL}/api/content/upload`, {
-      method: "POST",
-      body: data
-    })
-      .then(() => this.props.onUpload())
-      .catch(e => console.log(e));
+    try {
+      const res = await fetch(`${serverURL}/api/content/upload`, {
+        method: "POST",
+        body: data
+      });
+      this.props.onUpload();
+    } catch (e) {
+      console.error(e);
+    }
+
     this.setState(state => ({
       key: state.key + 1
     }));

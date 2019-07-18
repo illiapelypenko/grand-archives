@@ -5,6 +5,7 @@ const contentURL = `${__dirname}/../contentStorage`;
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
+const ContentItem = require("../models/ContentItem");
 
 router.get("/all", (req, res) => {
   try {
@@ -132,7 +133,6 @@ router.get(`/audio/:id`, (req, res) => {
 });
 
 router.post("/upload", async (req, res) => {
-  const files = Object.values(req.files);
   let isVerified;
   try {
     isVerified = await jwt.verify(req.body.token, secretKey);
@@ -140,46 +140,64 @@ router.post("/upload", async (req, res) => {
     res.status(500).send("invalid token");
     console.log(e);
   }
+
   try {
     if (isVerified) {
-      files.forEach(file => {
+      const files = Object.values(req.files);
+      let names = [];
+      files.forEach(async file => {
+        let type = "";
+
         let extension = file.name
           .split("")
           .splice(file.name.lastIndexOf("."))
           .join("");
         switch (extension) {
           case ".mp4":
-            file.mv(`${contentURL}/videos/${file.name}`).catch(err => {
-              console.log(err);
-              res.send();
-            });
+            type = "video";
             break;
           case ".mp3":
-            file.mv(`${contentURL}/audios/${file.name}`).catch(err => {
-              console.log(err);
-              res.send();
-            });
+            type = "audio";
             break;
           case ".png":
           case ".jpg":
           case ".gif":
           case ".svg":
-            file.mv(`${contentURL}/pictures/${file.name}`).catch(err => {
-              console.log(err);
-              res.send();
-            });
+            type = "picture";
             break;
           case ".txt":
           case ".doc":
           case ".pdf":
           case ".docx":
-            file.mv(`${contentURL}/texts/${file.name}`).catch(err => {
-              console.log(err);
-              res.send();
-            });
+            type = "text";
             break;
+          default:
+            throw new Error("undefined content type");
         }
+
+        const path = `${contentURL}/${type}s/${file.name}`;
+        await file.mv(path);
+        const name = file.name;
+        const uploaderName = req.body.uploaderName;
+        const birthtimeMs = fs.statSync(path).birthtimeMs;
+
+        let newContentItem;
+        try {
+          newContentItem = new ContentItem({
+            path,
+            name,
+            type,
+            birthtimeMs,
+            uploaderName,
+            rating: 0
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
+        await newContentItem.save();
       });
+
       res.status(200).send();
     }
   } catch (e) {

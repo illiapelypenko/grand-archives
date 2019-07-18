@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ContentItem = mongoose.Schema({
+const ContentItemSchema = mongoose.Schema({
   path: {
     type: String,
     required: true
@@ -22,8 +22,8 @@ const ContentItem = mongoose.Schema({
     required: true
   },
   rating: {
-    type: String
+    type: Number
   }
 });
 
-module.exports = mongoose.model("contentItem", ContentItem);
+module.exports = mongoose.model("contentItem", ContentItemSchema);
