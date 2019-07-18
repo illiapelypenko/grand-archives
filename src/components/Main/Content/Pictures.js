@@ -4,7 +4,7 @@ import Picture from "./Picture";
 export default class Pictures extends Component {
   render() {
     return (
-      <div className='content__pictures'>
+      <div className='content__container'>
         {this.props.pictures.map((picture, index) => (
           <Picture name={picture} key={index} />
         ))}

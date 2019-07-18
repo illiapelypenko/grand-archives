@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import serverURL from "../../../serverURL";
+import FileDownloadPic from "../../../images/fileDownloadPic";
 
 export default class Text extends Component {
   render() {
     return (
-      <div className='content__text'>
+      <div className='content__text content__item'>
         <a
           href={`
             ${serverURL}/api/content/text/${this.props.name}`}
           download
-          target='_blank'
           rel='noopener noreferrer'
         >
-          DOWNLOAD
+          <FileDownloadPic />
         </a>
       </div>
     );

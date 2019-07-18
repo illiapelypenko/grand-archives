@@ -1,14 +1,7 @@
 .content {
   margin-top: 100px;
 
-  &__videos {
-    .content__video {
-      video {
-        width: 300px;
-      }
-    }
-  }
-  &__pictures {
+  &__container {
     width: max-content;
     display: grid;
     grid-template-rows: repeat(3, auto);
@@ -16,13 +9,13 @@
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 
-    .content__picture {
+    .content__item {
       width: 320px;
       height: 189px;
       padding: 10px;
       border-radius: 10px;
-      border: 1px rgba($color: #000b29, $alpha: 0.5) solid;
-      background: rgba($color: #000b29, $alpha: 0.5);
+      border: 1px rgba($color: grey, $alpha: 0.25) solid;
+      background: rgba($color: grey, $alpha: 0.25);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,7 +23,16 @@
       img {
         max-height: 100%;
         max-width: 100%;
-        // border-radius: 10px;
+      }
+
+      video {
+        max-height: 100%;
+        max-width: 100%;
+      }
+
+      .content__pic {
+        width: 50px;
+        height: 50px;
       }
     }
   }

@@ -7,35 +7,51 @@ const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
 const ContentItem = require("../models/ContentItem");
 
-router.get("/all", (req, res) => {
+// router.get("/all", (req, res) => {
+//   try {
+//     const content = fs
+//       .readdirSync(`${contentURL}`)
+//       .filter(file => file !== ".DS_Store"); //get folders' names
+
+//     let data = [];
+//     for (dir of content) {
+//       const files = fs
+//         .readdirSync(`${contentURL}/${dir}/`)
+//         .filter(file => file !== ".DS_Store");
+//       for (file of files) {
+//         data.push({
+//           type: dir.slice(0, -1), //removes 's' from dir's name
+//           content: file
+//         });
+//       }
+//     }
+//     data = data
+//       .sort(
+//         (file1, file2) =>
+//           fs.statSync(`${contentURL}/${file2.type}s/${file2.content}`)
+//             .birthtimeMs -
+//           fs.statSync(`${contentURL}/${file1.type}s/${file1.content}`)
+//             .birthtimeMs
+//       )
+//       .slice(0, 9);
+
+//     res.send(JSON.stringify(data));
+//   } catch (e) {
+//     res.status(500).send("server error");
+//     console.log(e);
+//   }
+// });
+
+router.get("/all", async (req, res) => {
   try {
-    const content = fs
-      .readdirSync(`${contentURL}`)
-      .filter(file => file !== ".DS_Store"); //get folders' names
-
-    let data = [];
-    for (dir of content) {
-      const files = fs
-        .readdirSync(`${contentURL}/${dir}/`)
-        .filter(file => file !== ".DS_Store");
-      for (file of files) {
-        data.push({
-          type: dir.slice(0, -1), //removes 's' from dir's name
-          content: file
-        });
-      }
-    }
-    data = data
-      .sort(
-        (file1, file2) =>
-          fs.statSync(`${contentURL}/${file2.type}s/${file2.content}`)
-            .birthtimeMs -
-          fs.statSync(`${contentURL}/${file1.type}s/${file1.content}`)
-            .birthtimeMs
-      )
-      .slice(0, 9);
-
-    res.send(JSON.stringify(data));
+    let contentItems = await ContentItem.find(); // oldest
+    contentItems = contentItems.reverse(); // newest
+    contentItems = contentItems.slice(0, 9); // only 9 per page
+    contentItems = contentItems.map(item => ({
+      name: item.name,
+      type: item.type
+    }));
+    res.json(contentItems);
   } catch (e) {
     res.status(500).send("server error");
     console.log(e);
@@ -176,7 +192,7 @@ router.post("/upload", async (req, res) => {
         }
 
         const path = `${contentURL}/${type}s/${file.name}`;
-        await file.mv(path);
+        await file.mv(path); // wait while file saving
         const name = file.name;
         const uploaderName = req.body.uploaderName;
         const birthtimeMs = fs.statSync(path).birthtimeMs;
