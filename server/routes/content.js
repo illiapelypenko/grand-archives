@@ -46,7 +46,7 @@ router.get("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
     contentItems = contentItems.reverse(); // newest
-    contentItems = contentItems.slice(0, 9); // only 9 per page
+    // contentItems = contentItems.slice(0, 9); // only 9 per page
     contentItems = contentItems.map(item => ({
       name: item.name,
       type: item.type
