@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Slider from "./Slider";
-import Navbar from "./Navbar";
+import Slider from "./Slider/Slider";
+import Navbar from "./Navbar/Navbar";
 import "./Header.scss";
 import Eye from "./Eye";
 import { withRouter } from "react-router-dom";

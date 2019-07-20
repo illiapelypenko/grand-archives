@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Signout from "../../../images/signout";
+import Search from "./Search";
 
 export default class Menu extends Component {
   state = {
@@ -25,18 +27,17 @@ export default class Menu extends Component {
     const { isAuth, name } = this.props;
     return (
       <div className='navbar__menu'>
-        <Link className='navbar__menu-item' to='/content/videos'>
-          Videos
+        <Search />
+        <div className='navbar__menu-item-divider' />
+        <Link className='navbar__menu-item' to='/content/all'>
+          Content
         </Link>
-        <Link className='navbar__menu-item' to='/content/pictures'>
-          Pictures
+        <div className='navbar__menu-item-divider' />
+        <Link className='navbar__menu-item' to='/contacts'>
+          Contacts
         </Link>
-        <Link className='navbar__menu-item' to='/content/audios'>
-          Audios
-        </Link>
-        <Link className='navbar__menu-item' to='/content/texts'>
-          Texts
-        </Link>
+        <div className='navbar__menu-item-divider' />
+
         {isAuth ? (
           <div className='navbar__user-item'>
             <div className='navbar__user-icon' onClick={this.handleShowLogout}>
@@ -44,8 +45,8 @@ export default class Menu extends Component {
             </div>
             {this.state.showLogout ? (
               <div className='navbar__user-menu-item'>
-                <div className='navbar__menu-item' onClick={this.logout}>
-                  Log out
+                <div className='navbar__logout-icon' onClick={this.logout}>
+                  <Signout />
                 </div>
               </div>
             ) : null}

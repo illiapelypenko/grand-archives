@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import videoSlide from "../../images/videoSlide.jpg";
-import pictureSlide from "../../images/pictureSlide.jpg";
-import audioSlide from "../../images/audioSlide.jpg";
-import textSlide from "../../images/textSlide.jpg";
+import videoSlide from "../../../images/videoSlide.jpg";
+import pictureSlide from "../../../images/pictureSlide.jpg";
+import audioSlide from "../../../images/audioSlide.jpg";
+import textSlide from "../../../images/textSlide.jpg";
 import "./Slider.scss";
 
 export default class Slider extends Component {

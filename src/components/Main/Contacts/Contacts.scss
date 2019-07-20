@@ -1,0 +1,31 @@
+.contacts {
+  display: grid;
+  grid-template-columns: auto max-content;
+  color: #f8f5f2;
+  height: 93vh;
+  padding-top: 100px;
+
+  .contacts__info {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+
+    .contacts__info-item {
+      margin: 15px;
+
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .contacts__map {
+    align-self: center;
+    margin: 0px 25px;
+
+    iframe {
+      height: 600px;
+      width: 900px;
+    }
+  }
+}

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import serverURL from "./serverURL";
 import Auth from "./components/Auth/Auth";
-// import Colors from "./Colors";
+import Contacts from "./components/Main/Contacts/Contacts";
 
 export default class App extends Component {
   state = {
@@ -73,9 +73,9 @@ export default class App extends Component {
               )}
             />
             <Route path='/auth' render={() => <Auth login={this.login} />} />
+            <Route path='/contacts' render={() => <Contacts />} />
           </Switch>
-          {/* <Colors /> */}
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     );

@@ -1,14 +1,8 @@
 .header {
   &__slider-state-btn {
-    width: 30px;
-    height: 30px;
     position: absolute;
     top: 90px;
-    right: 20px;
-
-    path {
-      fill: lightgray;
-    }
+    right: 25px;
   }
 
   &__navbar {
@@ -20,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 15px 15px;
 
     .navbar__logo {
       font-weight: bolder;
@@ -34,6 +28,40 @@
       color: #f8f5f2;
       font-weight: bold;
       display: flex;
+      align-items: center;
+
+      .menu__search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px 30px;
+        position: relative;
+
+        input {
+          padding: 5px 10px;
+          font-size: 18px;
+          border: none;
+          border-radius: 15px;
+        }
+
+        .menu__search-btn {
+          position: absolute;
+          right: 8px;
+          z-index: 3;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          &:hover {
+            path {
+              fill: #000b29;
+            }
+          }
+
+          path {
+            fill: lightgray;
+          }
+        }
+      }
 
       .navbar__user-item {
         position: relative;
@@ -41,8 +69,6 @@
 
         .navbar__user-icon {
           background: #d70026;
-          margin: 0px 10px;
-
           width: 50px;
           height: 50px;
           border-radius: 25px;
@@ -52,32 +78,49 @@
           font-size: 28px;
           font-family: "Fredericka the Great", cursive;
           text-transform: capitalize;
+          margin-left: 30px;
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer */
+          -webkit-user-select: none; /* Chrome, Safari, and Opera */
+          -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
         }
 
         .navbar__user-menu-item {
           position: absolute;
           right: 0;
-          background: #d70026;
-          padding: 10px 10px;
-          border-radius: 10px;
+          bottom: -65px;
 
-          .navbar__menu-item {
-            cursor: pointer;
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
+          .navbar__logout-icon {
+            background: #d70026;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
 
-            &:hover {
-              background: #000b29;
-              color: #f8f5f2;
+          svg {
+            width: 25px;
+            height: 25px;
+
+            path {
+              fill: #f8f5f2;
             }
           }
         }
       }
 
+      &-item-divider {
+        width: 1px;
+        height: 30px;
+        background: #f8f5f2;
+      }
+
       &-item {
         display: block;
-        padding: 15px 30px;
+        padding: 10px 20px;
+        margin: 5px 10px;
         width: max-content;
 
         &:hover {

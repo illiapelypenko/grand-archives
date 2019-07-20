@@ -1,5 +1,5 @@
 .content {
-  margin-top: 100px;
+  padding: 100px 50px;
 
   &__container {
     display: grid;
@@ -8,8 +8,6 @@
     grid-column-gap: 30px;
     grid-row-gap: 30px;
     justify-content: end;
-    margin-right: 50px;
-    margin-bottom: 50px;
 
     .content__item {
       width: 320px;

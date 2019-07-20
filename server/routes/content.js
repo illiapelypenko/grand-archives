@@ -160,7 +160,6 @@ router.post("/upload", async (req, res) => {
   try {
     if (isVerified) {
       const files = Object.values(req.files);
-      let names = [];
       files.forEach(async file => {
         let type = "";
 
@@ -187,8 +186,6 @@ router.post("/upload", async (req, res) => {
           case ".docx":
             type = "text";
             break;
-          default:
-            throw new Error("undefined content type");
         }
 
         const path = `${contentURL}/${type}s/${file.name}`;
