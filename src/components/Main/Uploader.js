@@ -28,6 +28,9 @@ export default class Uploader extends Component {
         body: data
       });
       this.props.onUpload();
+      if (!res.ok) {
+        throw Error(`server error`);
+      }
     } catch (e) {
       console.error(e);
     }

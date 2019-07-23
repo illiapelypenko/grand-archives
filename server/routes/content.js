@@ -186,6 +186,9 @@ router.post("/upload", async (req, res) => {
           case ".docx":
             type = "text";
             break;
+          default:
+            type = "other";
+            break;
         }
 
         const path = `${contentURL}/${type}s/${file.name}`;

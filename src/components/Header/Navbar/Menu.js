@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Signout from "../../../images/signout";
 import Search from "./Search";
 
@@ -29,13 +29,13 @@ export default class Menu extends Component {
       <div className='navbar__menu'>
         <Search />
         <div className='navbar__menu-item-divider' />
-        <Link className='navbar__menu-item' to='/content/all'>
+        <NavLink className='navbar__menu-item' exact to='/'>
           Content
-        </Link>
+        </NavLink>
         <div className='navbar__menu-item-divider' />
-        <Link className='navbar__menu-item' to='/contacts'>
+        <NavLink className='navbar__menu-item' exact to='/contacts'>
           Contacts
-        </Link>
+        </NavLink>
         <div className='navbar__menu-item-divider' />
 
         {isAuth ? (
@@ -52,9 +52,14 @@ export default class Menu extends Component {
             ) : null}
           </div>
         ) : (
-          <Link className='navbar__menu-item' to='/auth/login'>
+          <NavLink
+            activeClassName='active'
+            className='navbar__menu-item'
+            exact
+            to='/auth'
+          >
             Log in
-          </Link>
+          </NavLink>
         )}
       </div>
     );

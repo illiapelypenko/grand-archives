@@ -41,6 +41,7 @@ export default class App extends Component {
   };
 
   updateData = () => {
+    console.log("updated");
     this.fetchContent();
   };
 
@@ -63,7 +64,8 @@ export default class App extends Component {
           />
           <Switch>
             <Route
-              path='/content'
+              exact
+              path='/'
               render={() => (
                 <Main
                   onUpload={this.updateData}

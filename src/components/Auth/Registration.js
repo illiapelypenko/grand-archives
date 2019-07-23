@@ -75,7 +75,7 @@ class Registration extends Component {
       }
       localStorage.setItem("token", token);
       this.props.login(name);
-      this.props.history.push("/content/pictures");
+      this.props.history.push("/");
     } catch (e) {
       console.log(e);
     }

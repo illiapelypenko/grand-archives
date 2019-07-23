@@ -20,6 +20,8 @@ export default class MixedContent extends Component {
                   return <Audio name={item.name} key={index} />;
                 case "text":
                   return <Text name={item.name} key={index} />;
+                default:
+                  return null;
               }
             })
           : null}

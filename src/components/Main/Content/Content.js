@@ -26,23 +26,14 @@ export default class Content extends Component {
     return (
       <div className='content'>
         <Switch>
+          <Route path='/' render={() => <MixedContent content={content} />} />
+          <Route path='/videos' render={() => <Videos videos={videos} />} />
           <Route
-            path='/content/all'
-            render={() => <MixedContent content={content} />}
-          />
-          <Route
-            path='/content/videos'
-            render={() => <Videos videos={videos} />}
-          />
-          <Route
-            path='/content/pictures'
+            path='/pictures'
             render={() => <Pictures pictures={pictures} />}
           />
-          <Route
-            path='/content/audios'
-            render={() => <Audios audios={audios} />}
-          />
-          <Route path='/content/texts' render={() => <Texts texts={texts} />} />
+          <Route path='/audios' render={() => <Audios audios={audios} />} />
+          <Route path='/texts' render={() => <Texts texts={texts} />} />
         </Switch>
       </div>
     );

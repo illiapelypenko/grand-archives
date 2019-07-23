@@ -5,7 +5,7 @@ export default class Logo extends Component {
   render() {
     return (
       <div className='navbar__logo'>
-        <Link to='/content/all'>Grand Archive</Link>
+        <Link to='/'>Grand Archive</Link>
       </div>
     );
   }
