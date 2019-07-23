@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Uploader from "./Uploader";
+import Uploader from "./Uploader/Uploader";
 import Content from "./Content/Content";
 import Pages from "./Pages";
 import "./Main.scss";

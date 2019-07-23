@@ -1,9 +1,53 @@
+@import "../../vars";
+
 .footer {
   height: 7vh;
-  background: #000b29;
-  color: #f8f5f2;
-  display: flex;
-  justify-content: center;
+  background: $blue;
+  color: $white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  grid-template-areas: ". p s";
   font-size: 12px;
+  width: 100%;
+
+  p {
+    justify-self: center;
+    grid-area: p;
+  }
+
+  .socials {
+    @extend %unchooseable;
+
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    grid-area: s;
+    margin: 0px 15px;
+
+    p {
+      font-size: 16px;
+    }
+
+    a.socials__item {
+      display: block;
+      margin-left: 10px;
+      margin-bottom: -5px;
+
+      svg {
+        width: 25px;
+        height: 25px;
+
+        &:hover {
+          path {
+            fill: $red;
+          }
+        }
+
+        path {
+          fill: $white;
+        }
+      }
+    }
+  }
 }

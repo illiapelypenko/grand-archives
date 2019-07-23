@@ -1,7 +1,9 @@
+@import "../../../vars";
+
 .contacts {
   display: grid;
   grid-template-columns: auto max-content;
-  color: #f8f5f2;
+  color: $white;
   height: 93vh;
   padding-top: 100px;
 
@@ -13,8 +15,13 @@
     .contacts__info-item {
       margin: 15px;
 
+      a,
       p {
         line-height: 1.5;
+      }
+
+      a:hover {
+        color: $red;
       }
     }
   }

@@ -1,3 +1,5 @@
+@import "../../../vars";
+
 .slider {
   position: relative;
   cursor: pointer;
@@ -17,9 +19,9 @@
       .slider__slide-text {
         font-size: 100px;
         font-weight: bold;
-        color: #f8f5f2;
-        text-shadow: 0 0 2px #000b29, 0 0 2px #000b29, 0 0 2px #000b29,
-          0 0 2px #000b29, 0 0 2px #000b29, 0 0 2px #000b29, 0 0 2px #000b29;
+        color: $white;
+        text-shadow: 0 0 2px $blue, 0 0 2px $blue, 0 0 2px $blue, 0 0 2px $blue,
+          0 0 2px $blue, 0 0 2px $blue, 0 0 2px $blue;
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer */
         -webkit-user-select: none; /* Chrome, Safari, and Opera */
@@ -42,11 +44,11 @@
       margin: 0px 5px;
 
       &--active {
-        background: #d70026;
+        background: $red;
       }
 
       &--disabled {
-        background: #f8f5f2;
+        background: $white;
       }
     }
   }

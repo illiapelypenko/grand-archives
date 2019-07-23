@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import serverURL from "../../../serverURL";
-import FileDownloadPic from "../../../images/fileDownloadPic";
+import FileDownloadPic from "./FileDownloadPic";
 
 export default class Text extends Component {
   state = {

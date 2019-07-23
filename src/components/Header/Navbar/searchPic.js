@@ -4,7 +4,7 @@ export default function SearchPic(props) {
   return (
     <svg
       viewBox='0 0 512 512'
-      className='menu__search-btn'
+      className='navbar__search-btn'
       onClick={props.onSubmit}
     >
       <path

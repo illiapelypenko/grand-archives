@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import serverURL from "../../serverURL";
+import serverURL from "../../../serverURL";
 import "./Uploader.scss";
-import UploaderPic from "../../images/uploadPic";
-import ArrowPic from "../../images/arrowRightPic";
+import UploaderPic from "./UploadPic";
+import ArrowPic from "./ArrowRightPic";
 
 export default class Uploader extends Component {
   state = {

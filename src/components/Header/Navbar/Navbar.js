@@ -7,7 +7,7 @@ export default class Navbar extends Component {
     const { isAuth, logout, name } = this.props;
 
     return (
-      <div className='header__navbar'>
+      <div className='navbar'>
         <Logo />
         <Menu isAuth={isAuth} logout={logout} name={name} />
       </div>

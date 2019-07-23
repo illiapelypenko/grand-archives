@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "./Slider/Slider";
 import Navbar from "./Navbar/Navbar";
 import "./Header.scss";
-import Eye from "./Eye";
+import Eye from "./Eye/Eye";
 import { withRouter } from "react-router-dom";
 
 class Header extends Component {

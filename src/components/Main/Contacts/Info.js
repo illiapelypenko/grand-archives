@@ -9,11 +9,17 @@ export default function Info() {
       </div>
       <div className='contacts__info-item'>
         <h3>Phone: </h3>
-        <p>0955311510</p>
+        <a href='tel:+380955311510'>0955311510</a>
       </div>
       <div className='contacts__info-item'>
         <h3>Email: </h3>
-        <p>pelypenkoillya@gmail.com</p>
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href='mailto:pelypenkoillya@gmail.com'
+        >
+          pelypenkoillya@gmail.com
+        </a>
       </div>
     </div>
   );

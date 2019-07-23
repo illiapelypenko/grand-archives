@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import Signout from "../../../images/signout";
+import Signout from "./SignoutPic";
 import Search from "./Search";
 
 export default class Menu extends Component {

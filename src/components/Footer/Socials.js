@@ -1,30 +1,33 @@
 import React from "react";
+import TwitterIcon from "./TwitterIcon";
+import FacebookIcon from "./FacebookIcon";
+import TelegramIcon from "./TelegramIcon";
 
 export default function Socials() {
+  const url = encodeURI("https://wet-kangaroo-58.localtunnel.me");
   return (
-    <div>
-      {/* <a
-        target='__blank'
-        href={`https://twitter.com/share?url=${encodeURI(
-          "http://localhost:3000/content"
-        )}`}
-      >
-        Tweet
-      </a> */}
+    <div className='socials'>
+      <p>Share us on:</p>
       <a
+        className='socials__item'
         target='__blank'
-        href={`https://twitter.com/intent/tweet?url=${encodeURI(
-          "https://average-firefox-61.localtunnel.me"
-        )}`}
+        href={`https://twitter.com/intent/tweet?url=${url}`}
       >
-        Share on Twitter
+        <TwitterIcon />
       </a>
       <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURI(
-          "https://average-firefox-61.localtunnel.me"
-        )}`}
+        className='socials__item'
+        target='__blank'
+        href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       >
-        Share on Facebook
+        <FacebookIcon />
+      </a>
+      <a
+        className='socials__item'
+        target='__blank'
+        href={`https://telegram.me/share/url?url=${url}&text=${"Grand Archives"}`}
+      >
+        <TelegramIcon />
       </a>
     </div>
   );

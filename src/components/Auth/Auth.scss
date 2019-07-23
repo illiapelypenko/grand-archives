@@ -1,13 +1,15 @@
+@import "../../vars";
+
 .auth {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #000b29;
+  background: $blue;
 
   .auth__container {
-    background: #fff;
+    background: $white;
 
     .auth__nav {
       font-size: 20px;
@@ -21,7 +23,7 @@
       }
 
       .active {
-        border-bottom: 1px solid #d70026;
+        border-bottom: 1px solid $red;
       }
     }
 
@@ -40,7 +42,7 @@
           }
 
           .auth__error-msg {
-            color: #d70026;
+            color: $red;
             font-style: italic;
             font-size: 10px;
             text-transform: capitalize;
@@ -49,8 +51,8 @@
 
         #submit {
           border: none;
-          background: #d70026;
-          color: #f8f5f2;
+          background: $red;
+          color: $white;
           padding: 5px 10px;
           margin: 10px 0px 20px 0px;
           font-size: 20px;

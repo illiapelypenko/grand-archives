@@ -1,3 +1,5 @@
+@import "./vars";
+
 * {
   margin: 0px;
   padding: 0px;
@@ -7,14 +9,10 @@
   font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  // -moz-user-select: none; /* Firefox */
-  // -ms-user-select: none; /* Internet Explorer */
-  // -webkit-user-select: none; /* Chrome, Safari, and Opera */
-  // -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
 
 body {
-  background: #000b29;
+  background: $blue;
 }
 
 input {
@@ -31,11 +29,5 @@ a:visited {
 }
 
 .small-pic {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-
-  path {
-    fill: lightgray;
-  }
+  @extend %secondary-icon;
 }
