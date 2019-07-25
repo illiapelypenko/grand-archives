@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import serverURL from "../../../../serverURL";
+import ItemInfo from "../ItemInfo";
 
 export default class Audio extends Component {
   state = {
@@ -14,7 +15,7 @@ export default class Audio extends Component {
     this.setState({ isHovered: false });
   };
   render() {
-    const { name, uploaderName } = this.props;
+    const { name } = this.props;
     return (
       <div
         className='content__audio content__item'
@@ -28,12 +29,7 @@ export default class Audio extends Component {
           />
         </audio>
         <p className='content__item-name'>{name}</p>
-        {this.state.isHovered ? (
-          <>
-            <div className='content__item--hovered--up'>{name}</div>
-            <div className='content__item--hovered--down'>{`By: ${uploaderName}`}</div>
-          </>
-        ) : null}
+        {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
       </div>
     );
   }

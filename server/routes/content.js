@@ -162,9 +162,8 @@ router.post("/upload", async (req, res) => {
   try {
     if (isVerified) {
       const files = Object.values(req.files);
-      files.forEach(async file => {
+      for (let file of files) {
         let type = "";
-
         let extension = file.name
           .split("")
           .splice(file.name.lastIndexOf("."))
@@ -197,24 +196,19 @@ router.post("/upload", async (req, res) => {
         await file.mv(path); // wait while saving a file
         const name = file.name;
         const uploaderName = req.body.uploaderName;
-        const birthtimeMs = fs.statSync(path).birthtimeMs;
+        const birthtimeMs = await fs.statSync(path).birthtimeMs;
 
-        let newContentItem;
-        try {
-          newContentItem = new ContentItem({
-            path,
-            name,
-            type,
-            birthtimeMs,
-            uploaderName,
-            rating: 0
-          });
-        } catch (e) {
-          console.log(e);
-        }
+        let newContentItem = new ContentItem({
+          path,
+          name,
+          type,
+          birthtimeMs,
+          uploaderName,
+          rating: 0
+        });
 
         await newContentItem.save();
-      });
+      }
 
       res.status(200).send();
     }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import serverURL from "../../../../serverURL";
 import FileDownloadPic from "./FileDownloadPic";
+import ItemInfo from "../ItemInfo";
 
 export default class Text extends Component {
   state = {
@@ -31,12 +32,7 @@ export default class Text extends Component {
           <FileDownloadPic />
           <p className='content__item-name'>{name}</p>
         </a>
-        {this.state.isHovered ? (
-          <>
-            <div className='content__item--hovered--up'>{name}</div>
-            <div className='content__item--hovered--down'>{`By: ${uploaderName}`}</div>
-          </>
-        ) : null}
+        {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import "./Content.scss";
 import Videos from "./Videos/Videos";
 import Pictures from "./Pictures/Pictures";
@@ -7,35 +7,42 @@ import Audios from "./Audios/Audios";
 import Texts from "./Texts/Texts";
 import MixedContent from "./MixedContent";
 
-export default class Content extends Component {
+class Content extends Component {
   render() {
-    const { content } = this.props;
-    const videos = content
-      ? content.filter(item => item.type === "video").map(item => item.name)
-      : [];
-    const pictures = content
-      ? content.filter(item => item.type === "picture").map(item => item.name)
-      : [];
-    const audios = content
-      ? content.filter(item => item.type === "audio").map(item => item.name)
-      : [];
-    const texts = content
-      ? content.filter(item => item.type === "text").map(item => item.name)
-      : [];
+    const { content, match } = this.props;
+    const videos = content.filter(item => item.type === "video");
+    const pictures = content.filter(item => item.type === "picture");
+    const audios = content.filter(item => item.type === "audio");
+    const texts = content.filter(item => item.type === "text");
 
     return (
       <div className='content'>
         <Switch>
-          <Route path='/' render={() => <MixedContent content={content} />} />
-          <Route path='/videos' render={() => <Videos videos={videos} />} />
           <Route
-            path='/pictures'
-            render={() => <Pictures pictures={pictures} />}
+            exact
+            path={`${match.path}`}
+            render={() => <MixedContent content={content} />}
           />
-          <Route path='/audios' render={() => <Audios audios={audios} />} />
-          <Route path='/texts' render={() => <Texts texts={texts} />} />
+          <Route
+            path={`${match.path}/pictures`}
+            render={() => <MixedContent content={pictures} />}
+          />
+          <Route
+            path={`${match.path}/videos`}
+            render={() => <MixedContent content={videos} />}
+          />
+          <Route
+            path={`${match.path}/audios`}
+            render={() => <MixedContent content={audios} />}
+          />
+          <Route
+            path={`${match.path}/texts`}
+            render={() => <MixedContent content={texts} />}
+          />
         </Switch>
       </div>
     );
   }
 }
+
+export default withRouter(Content);

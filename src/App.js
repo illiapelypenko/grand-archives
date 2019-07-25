@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import "./App.scss";
 import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
@@ -10,7 +15,7 @@ import Contacts from "./components/Main/Contacts/Contacts";
 
 export default class App extends Component {
   state = {
-    content: "",
+    content: [],
     isAuth: false,
     slider: true,
     name: ""
@@ -41,14 +46,16 @@ export default class App extends Component {
   };
 
   updateData = () => {
-    console.log("updated");
     this.fetchContent();
   };
 
   fetchContent = () => {
     fetch(`${serverURL}/api/content/all`)
       .then(res => res.json())
-      .then(data => this.setState({ content: data }));
+      .then(data => {
+        console.log(data);
+        this.setState({ content: data });
+      });
   };
 
   render() {
@@ -63,9 +70,9 @@ export default class App extends Component {
             name={name}
           />
           <Switch>
+            <Route exact path='/' render={() => <Redirect to='/content' />} />
             <Route
-              exact
-              path='/'
+              path='/content'
               render={() => (
                 <Main
                   onUpload={this.updateData}
