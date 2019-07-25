@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import serverURL from "../../../serverURL";
+import serverURL from "../../../../serverURL";
 
 export default class Picture extends Component {
   state = {
@@ -15,7 +15,7 @@ export default class Picture extends Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { name, uploaderName, rating } = this.props;
     return (
       <a
         className='content__picture content__item'
@@ -26,7 +26,13 @@ export default class Picture extends Component {
       >
         <img src={`${serverURL}/api/content/picture/${name}`} alt='pic' />
         {this.state.isHovered ? (
-          <div className='content__item--hovered'>{name}</div>
+          <>
+            <div className='content__item--hovered--up'>{name}</div>
+            <div className='content__item--hovered--down'>
+              <p>{`By: ${uploaderName}`}</p>
+              <div className='content__item-rating'>{rating}</div>
+            </div>
+          </>
         ) : null}
       </a>
     );

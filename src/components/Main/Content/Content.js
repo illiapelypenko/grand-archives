@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./Content.scss";
-import Videos from "./Videos";
-import Pictures from "./Pictures";
-import Audios from "./Audios";
-import Texts from "./Texts";
+import Videos from "./Videos/Videos";
+import Pictures from "./Pictures/Pictures";
+import Audios from "./Audios/Audios";
+import Texts from "./Texts/Texts";
 import MixedContent from "./MixedContent";
 
 export default class Content extends Component {

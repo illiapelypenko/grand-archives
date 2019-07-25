@@ -22,7 +22,8 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      ratedContent: []
     });
     const doc = await newUser.save();
     const token = jwt.sign({ _id: doc._id }, secretKey);

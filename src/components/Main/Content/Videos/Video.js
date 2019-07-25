@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import serverURL from "../../../serverURL";
+import serverURL from "../../../../serverURL";
 
 export default class Video extends Component {
   state = {
@@ -15,7 +15,7 @@ export default class Video extends Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { name, uploaderName } = this.props;
 
     return (
       <div
@@ -30,7 +30,10 @@ export default class Video extends Component {
           />
         </video>
         {this.state.isHovered ? (
-          <div className='content__item--hovered'>{name}</div>
+          <>
+            <div className='content__item--hovered--up'>{name}</div>
+            <div className='content__item--hovered--down'>{`By: ${uploaderName}`}</div>
+          </>
         ) : null}
       </div>
     );

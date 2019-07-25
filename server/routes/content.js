@@ -49,7 +49,9 @@ router.get("/all", async (req, res) => {
     // contentItems = contentItems.slice(0, 9); // only 9 per page
     contentItems = contentItems.map(item => ({
       name: item.name,
-      type: item.type
+      type: item.type,
+      uploaderName: item.uploaderName,
+      rating: item.rating
     }));
     res.json(contentItems);
   } catch (e) {
@@ -192,7 +194,7 @@ router.post("/upload", async (req, res) => {
         }
 
         const path = `${contentURL}/${type}s/${file.name}`;
-        await file.mv(path); // wait while file saving
+        await file.mv(path); // wait while saving a file
         const name = file.name;
         const uploaderName = req.body.uploaderName;
         const birthtimeMs = fs.statSync(path).birthtimeMs;
