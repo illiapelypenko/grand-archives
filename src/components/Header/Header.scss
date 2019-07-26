@@ -119,3 +119,13 @@
     }
   }
 }
+
+@media (max-width: 928px) {
+  .header {
+    .navbar {
+      .navbar__logo {
+        // font-size: 30px;
+      }
+    }
+  }
+}

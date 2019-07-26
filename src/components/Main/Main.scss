@@ -1,3 +1,44 @@
+@import "../../vars";
+
 .main {
+  padding-top: 100px;
   background: #fff;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-template-rows: max-content auto;
+  grid-template-areas: "f c" "p p";
+  min-height: 93vh;
+
+  .pages {
+    grid-area: p;
+    display: flex;
+    align-self: center;
+    margin: 10px 0px;
+    justify-self: center;
+
+    .page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 30px;
+      border: 1px grey solid;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background: $blue;
+        color: $white;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .main {
+    .pages {
+      margin: 40px 0px;
+    }
+  }
 }

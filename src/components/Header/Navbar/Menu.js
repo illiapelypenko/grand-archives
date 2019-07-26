@@ -29,7 +29,7 @@ export default class Menu extends Component {
       <div className='navbar__menu'>
         <Search />
         <div className='navbar__menu-item-divider' />
-        <NavLink className='navbar__menu-item' exact to='/'>
+        <NavLink className='navbar__menu-item' exact to='/content'>
           Content
         </NavLink>
         <div className='navbar__menu-item-divider' />

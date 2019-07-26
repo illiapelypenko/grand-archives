@@ -20,6 +20,15 @@ $grey: lightgray;
   }
 }
 
+%btn {
+  border: none;
+  background: $red;
+  color: $white;
+  padding: 5px 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 %main-icon {
   @extend %unchooseable;
   background: $red;

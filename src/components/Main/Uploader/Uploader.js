@@ -36,7 +36,8 @@ export default class Uploader extends Component {
     }
 
     this.setState(state => ({
-      key: state.key + 1
+      key: state.key + 1,
+      showForm: false
     }));
   };
 

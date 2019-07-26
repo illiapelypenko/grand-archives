@@ -53,7 +53,6 @@ export default class App extends Component {
     fetch(`${serverURL}/api/content/all`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ content: data });
       });
   };
@@ -70,11 +69,11 @@ export default class App extends Component {
             name={name}
           />
           <Switch>
-            <Route exact path='/' render={() => <Redirect to='/content' />} />
             <Route
               path='/content'
-              render={() => (
+              render={route => (
                 <Main
+                  route={route}
                   onUpload={this.updateData}
                   content={content}
                   isAuth={isAuth}
@@ -83,6 +82,7 @@ export default class App extends Component {
             />
             <Route path='/auth' render={() => <Auth login={this.login} />} />
             <Route path='/contacts' render={() => <Contacts />} />
+            <Redirect to='/content' />
           </Switch>
           <Footer />
         </div>

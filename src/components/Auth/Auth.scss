@@ -20,6 +20,11 @@
 
       .auth__nav-item {
         padding: 10px 20px;
+
+        &:hover {
+          background: $red;
+          color: $white;
+        }
       }
 
       .active {
@@ -50,13 +55,8 @@
         }
 
         #submit {
-          border: none;
-          background: $red;
-          color: $white;
-          padding: 5px 10px;
+          @extend %btn;
           margin: 10px 0px 20px 0px;
-          font-size: 20px;
-          cursor: pointer;
         }
       }
     }
