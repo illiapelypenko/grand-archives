@@ -12,7 +12,9 @@ export default class Main extends Component {
       pictures: true,
       audios: true,
       texts: true
-    }
+    },
+    pages: null,
+    currentPage: 0
   };
 
   setFiltration = filters => {
