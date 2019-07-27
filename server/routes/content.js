@@ -45,14 +45,47 @@ const ContentItem = require("../models/ContentItem");
 router.get("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
-    contentItems = contentItems.reverse(); // newest
-    contentItems = contentItems; // only 9 per page
     contentItems = contentItems.map(item => ({
       name: item.name,
       type: item.type,
       uploaderName: item.uploaderName,
       rating: item.rating
     }));
+
+    let { videos, pictures, audios, texts, sortedBy, search, page } = req.query;
+
+    page = +page;
+    videos = videos === "true" ? true : false;
+    pictures = pictures === "true" ? true : false;
+    audios = audios === "true" ? true : false;
+    texts = texts === "true" ? true : false;
+
+    if (!videos) {
+      contentItems = contentItems.filter(item => item.type !== "video");
+    }
+    if (!pictures) {
+      contentItems = contentItems.filter(item => item.type !== "picture");
+    }
+    if (!audios) {
+      contentItems = contentItems.filter(item => item.type !== "audio");
+    }
+    if (!texts) {
+      contentItems = contentItems.filter(item => item.type !== "text");
+    }
+
+    switch (sortedBy) {
+      case "old":
+        // contentItems = contentItems;
+        break;
+      case "new":
+        contentItems = contentItems.reverse();
+        break;
+    }
+
+    contentItems = contentItems.filter(item => item.name.indexOf(search) > -1);
+
+    contentItems = contentItems.slice(page * 9, page * 9 + 9);
+
     res.json(contentItems);
   } catch (e) {
     res.status(500).send("server error");

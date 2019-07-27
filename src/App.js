@@ -19,7 +19,18 @@ export default class App extends Component {
     isAuth: false,
     slider: true,
     name: "",
-    menuOpened: false
+    menuOpened: false,
+    contentProps: {
+      page: 0,
+      sortedBy: "new",
+      filters: {
+        videos: true,
+        pictures: true,
+        audios: true,
+        texts: true
+      },
+      search: ""
+    }
   };
 
   componentDidMount() {
@@ -55,7 +66,14 @@ export default class App extends Component {
   };
 
   fetchContent = () => {
-    fetch(`${serverURL}/api/content/all`)
+    const { sortedBy, search, page } = this.state.contentProps;
+    const { videos, pictures, audios, texts } = this.state.contentProps.filters;
+
+    fetch(
+      encodeURI(
+        `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${page}`
+      )
+    )
       .then(res => res.json())
       .then(data => {
         this.setState({ content: data });
