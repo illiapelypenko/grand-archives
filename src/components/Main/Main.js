@@ -21,7 +21,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <div className='main'>
+      <div className={`main ${this.props.menuOpened ? "pdtop" : null}`}>
         {this.props.isAuth ? <Uploader onUpload={this.props.onUpload} /> : null}
         <Content content={this.props.content} filters={this.state.filters} />
         {this.props.route.match.path === "/content" &&

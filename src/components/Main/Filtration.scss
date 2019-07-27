@@ -12,6 +12,39 @@
   height: max-content;
   border-radius: 0px 10px 10px 0px;
 
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 10px 10px;
+
+    input {
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 15px;
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 8px;
+      z-index: 3;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      &:hover {
+        path {
+          fill: $blue;
+        }
+      }
+
+      path {
+        fill: $grey;
+      }
+    }
+  }
+
   .filtration__item {
     cursor: pointer;
     display: flex;
@@ -31,7 +64,30 @@
   #submit {
     @extend %btn;
     margin-top: 5px;
+    margin-left: 10px;
     font-size: 14px;
     padding: 5px;
+  }
+}
+
+@media (max-width: 900px) {
+  .filtration {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    border-radius: 10px 10px 10px 10px;
+    justify-self: center;
+    margin-bottom: 20px;
+
+    .filtration__item {
+      margin: 0px 10px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .filtration {
+    flex-direction: column;
   }
 }

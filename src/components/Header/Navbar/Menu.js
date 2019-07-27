@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Signout from "./SignoutPic";
-import Search from "./Search";
 
 export default class Menu extends Component {
   state = {
@@ -24,11 +23,11 @@ export default class Menu extends Component {
   };
 
   render() {
-    const { isAuth, name } = this.props;
+    const { isAuth, name, width } = this.props;
     return (
       <div className='navbar__menu'>
-        <Search />
-        <div className='navbar__menu-item-divider' />
+        {/* <Search />
+        <div className='navbar__menu-item-divider' /> */}
         <NavLink className='navbar__menu-item' exact to='/content'>
           Content
         </NavLink>

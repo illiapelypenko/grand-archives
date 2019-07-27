@@ -2,15 +2,14 @@
 
 .content {
   grid-area: c;
-  padding-right: 80px;
 
   &__container {
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-template-columns: repeat(3, auto);
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
-    justify-content: end;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    justify-content: center;
 
     .content__item {
       width: 320px;
@@ -107,15 +106,23 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
   .content {
-    grid-area: c;
-    padding-right: 80px;
-
     &__container {
       grid-template-columns: repeat(2, auto);
-      grid-column-gap: 40px;
-      grid-row-gap: 40px;
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .content {
+    &__container {
+      grid-template-columns: repeat(1, auto);
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
       justify-content: center;
     }
   }

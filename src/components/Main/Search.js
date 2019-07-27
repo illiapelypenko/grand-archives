@@ -15,7 +15,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <form className='navbar__search'>
+      <form className='search'>
         <input
           type='text'
           onChange={this.handleChange}

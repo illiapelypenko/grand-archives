@@ -18,7 +18,8 @@ export default class App extends Component {
     content: [],
     isAuth: false,
     slider: true,
-    name: ""
+    name: "",
+    menuOpened: false
   };
 
   componentDidMount() {
@@ -30,6 +31,10 @@ export default class App extends Component {
     }
     this.fetchContent();
   }
+
+  switchMenu = () => {
+    this.setState(state => ({ menuOpened: !state.menuOpened }));
+  };
 
   login = name => {
     localStorage.setItem("name", name);
@@ -58,7 +63,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { content, isAuth, slider, name } = this.state;
+    const { content, isAuth, slider, name, menuOpened } = this.state;
     return (
       <Router>
         <div className='app'>
@@ -67,6 +72,8 @@ export default class App extends Component {
             slider={slider}
             logout={this.logout}
             name={name}
+            switchMenu={this.switchMenu}
+            menuOpened={menuOpened}
           />
           <Switch>
             <Route
@@ -77,6 +84,7 @@ export default class App extends Component {
                   onUpload={this.updateData}
                   content={content}
                   isAuth={isAuth}
+                  menuOpened={menuOpened}
                 />
               )}
             />

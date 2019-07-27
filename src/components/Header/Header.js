@@ -36,13 +36,19 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuth, slider, name } = this.props;
+    const { isAuth, slider, name, menuOpened } = this.props;
     const { showSlider } = this.state;
     return (
       <div className='header'>
         {showSlider ? <Slider slider={slider} /> : null}
-        <Navbar isAuth={isAuth} logout={this.props.logout} name={name} />
+        <Navbar
+          isAuth={isAuth}
+          logout={this.props.logout}
+          name={name}
+          switchMenu={this.props.switchMenu}
+        />
         <Eye
+          menuOpened={menuOpened}
           showSlider={showSlider}
           onClick={this.hadleShowSliderStatusChange}
         />

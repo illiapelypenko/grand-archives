@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormPart from "../Auth/FormPart";
 import "./Filtration.scss";
+import Search from "./Search";
 
 export default class Filtration extends Component {
   state = {
@@ -63,6 +64,7 @@ export default class Filtration extends Component {
           />
           <label htmlFor='texts'>Texts</label>
         </div>
+        <Search />
         <input type='submit' value='Submit' id='submit' />
       </form>
     );

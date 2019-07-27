@@ -10,6 +10,7 @@
   grid-template-areas: ". p s";
   font-size: 12px;
   width: 100%;
+  min-height: 7vh;
 
   p {
     justify-self: center;
@@ -49,5 +50,31 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 700px) {
+  .footer {
+    grid-template-columns: repeat(2, 1fr);
+    height: max-content;
+    grid-template-areas: "p s";
+    padding: 20px;
+
+    p {
+      justify-self: center;
+    }
+
+    .socials {
+      justify-self: center;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .footer {
+    grid-template-areas: "s" "p";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
   }
 }
