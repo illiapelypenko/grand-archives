@@ -59,6 +59,7 @@ export default class App extends Component {
     }));
   };
 
+  // fetch after
   setFiltration = async searchWord => {
     await this.setState(state => ({
       contentProps: {
@@ -66,25 +67,29 @@ export default class App extends Component {
         search: searchWord
       }
     }));
-    this.updateData();
+    this.setPage(this.state.contentProps.page);
   };
 
   switchMenu = () => {
     this.setState(state => ({ menuOpened: !state.menuOpened }));
   };
 
-  login = name => {
+  // fetch after
+  login = async name => {
     localStorage.setItem("name", name);
-    this.setState({
+    await this.setState({
       isAuth: true,
       name
     });
+    this.setPage(this.state.contentProps.page);
   };
 
-  logout = () => {
-    this.setState({
+  // fetch after
+  logout = async () => {
+    await this.setState({
       isAuth: false
     });
+    this.setPage(this.state.contentProps.page);
   };
 
   updateData = () => {
@@ -92,19 +97,39 @@ export default class App extends Component {
   };
 
   fetchContent = async () => {
-    const { sortedBy, search, page } = this.state.contentProps;
-    const { videos, pictures, audios, texts } = this.state.contentProps.filters;
+    let { sortedBy, search, page } = this.state.contentProps;
+    let { videos, pictures, audios, texts } = this.state.contentProps.filters;
 
-    const res = await fetch(
+    let res = await fetch(
       encodeURI(
         `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${page}`
       )
     );
-    const data = await res.json();
-    const pagesAmount = Math.ceil(data.contentLength / 9);
-    this.setState({ content: data.contentItems, pagesAmount });
+    let data = await res.json();
+    let pagesAmount = Math.ceil(data.contentLength / 9);
+    let number;
+    if (pagesAmount < +page) {
+      number = 0;
+      res = await fetch(
+        encodeURI(
+          `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${number}`
+        )
+      );
+      data = await res.json();
+    } else {
+      number = +page;
+    }
+    this.setState(state => ({
+      content: data.contentItems,
+      pagesAmount,
+      contentProps: {
+        ...state.contentProps,
+        page: number
+      }
+    }));
   };
 
+  // fetch after
   setPage = async number => {
     await this.setState(state => ({
       contentProps: {
