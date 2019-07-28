@@ -20,12 +20,13 @@ export default class App extends Component {
     slider: true,
     name: "",
     menuOpened: false,
+    pagesAmount: 0,
     contentProps: {
       page: 0,
       sortedBy: "new",
       filters: {
         videos: true,
-        pictures: false,
+        pictures: true,
         audios: true,
         texts: true
       },
@@ -35,10 +36,10 @@ export default class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.setState({
+      this.setState(state => ({
         isAuth: true,
         name: localStorage.getItem("name")
-      });
+      }));
     }
     this.fetchContent();
   }
@@ -90,23 +91,39 @@ export default class App extends Component {
     this.fetchContent();
   };
 
-  fetchContent = () => {
+  fetchContent = async () => {
     const { sortedBy, search, page } = this.state.contentProps;
     const { videos, pictures, audios, texts } = this.state.contentProps.filters;
 
-    fetch(
+    const res = await fetch(
       encodeURI(
         `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${page}`
       )
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ content: data });
-      });
+    );
+    const data = await res.json();
+    const pagesAmount = Math.ceil(data.contentLength / 9);
+    this.setState({ content: data.contentItems, pagesAmount });
+  };
+
+  setPage = async number => {
+    await this.setState(state => ({
+      contentProps: {
+        ...state.contentProps,
+        page: number
+      }
+    }));
+    this.updateData();
   };
 
   render() {
-    const { content, isAuth, slider, name, menuOpened } = this.state;
+    const {
+      content,
+      isAuth,
+      slider,
+      name,
+      menuOpened,
+      pagesAmount
+    } = this.state;
     return (
       <Router>
         <div className='app'>
@@ -131,6 +148,8 @@ export default class App extends Component {
                   setFiltration={this.setFiltration}
                   filters={this.state.contentProps.filters}
                   onChangeFilters={this.handleChangeFilters}
+                  pagesAmount={pagesAmount}
+                  setPage={this.setPage}
                 />
               )}
             />

@@ -14,7 +14,9 @@ export default class Main extends Component {
       content,
       setFiltration,
       filters,
-      onChangeFilters
+      onChangeFilters,
+      pagesAmount,
+      setPage
     } = this.props;
 
     return (
@@ -26,7 +28,7 @@ export default class Main extends Component {
           filters={filters}
           onChangeFilters={onChangeFilters}
         />
-        <Pages />
+        <Pages pagesAmount={pagesAmount} setPage={setPage} />
       </div>
     );
   }

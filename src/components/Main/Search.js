@@ -13,7 +13,7 @@ export default class Search extends Component {
           type='text'
           onChange={this.handleChange}
           value={this.props.word}
-          placeholder='by uploader'
+          placeholder='enter name'
         />
         {/* <SearchPic onSubmit={this.handleSubmit} /> */}
       </form>

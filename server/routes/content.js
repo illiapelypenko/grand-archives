@@ -45,6 +45,7 @@ const ContentItem = require("../models/ContentItem");
 router.get("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
+    const contentLength = contentItems.length;
     contentItems = contentItems.map(item => ({
       name: item.name,
       type: item.type,
@@ -86,7 +87,7 @@ router.get("/all", async (req, res) => {
 
     contentItems = contentItems.slice(page * 9, page * 9 + 9);
 
-    res.json(contentItems);
+    res.json({ contentItems, contentLength });
   } catch (e) {
     res.status(500).send("server error");
     console.log(e);

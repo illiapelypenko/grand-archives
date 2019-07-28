@@ -33,6 +33,11 @@
         color: $white;
       }
     }
+
+    .page.current-page {
+      background: $blue;
+      color: $white;
+    }
   }
 }
 
