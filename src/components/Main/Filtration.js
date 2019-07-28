@@ -5,23 +5,26 @@ import Search from "./Search";
 
 export default class Filtration extends Component {
   state = {
-    videos: true,
-    pictures: true,
-    audios: true,
-    texts: true
+    searchWord: ""
   };
 
   handleChange = e => {
-    const { name } = e.target;
-    this.setState(state => ({ [name]: !state[name] }));
+    this.props.onChangeFilters(e);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setFiltration(this.state);
+    this.props.setFiltration(this.state.searchWord);
+  };
+
+  handleWordChange = e => {
+    const { value } = e.target;
+    this.setState({ searchWord: value });
   };
 
   render() {
+    const { videos, pictures, audios, texts } = this.props.filters;
+
     return (
       <form className='filtration' onSubmit={this.handleSubmit}>
         <div className='filtration__item'>
@@ -30,7 +33,7 @@ export default class Filtration extends Component {
             name='videos'
             id='videos'
             onChange={this.handleChange}
-            checked={this.state.videos}
+            checked={videos}
           />
           <label htmlFor='videos'>Videos</label>
         </div>
@@ -40,7 +43,7 @@ export default class Filtration extends Component {
             name='pictures'
             id='pictures'
             onChange={this.handleChange}
-            checked={this.state.pictures}
+            checked={pictures}
           />
           <label htmlFor='pictures'>Pictures</label>
         </div>
@@ -50,7 +53,7 @@ export default class Filtration extends Component {
             name='audios'
             id='audios'
             onChange={this.handleChange}
-            checked={this.state.audios}
+            checked={audios}
           />
           <label htmlFor='audios'>Audios</label>
         </div>
@@ -60,11 +63,14 @@ export default class Filtration extends Component {
             name='texts'
             id='texts'
             onChange={this.handleChange}
-            checked={this.state.texts}
+            checked={texts}
           />
           <label htmlFor='texts'>Texts</label>
         </div>
-        <Search />
+        <Search
+          onWordChange={this.handleWordChange}
+          word={this.state.searchWord}
+        />
         <input type='submit' value='Submit' id='submit' />
       </form>
     );

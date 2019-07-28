@@ -2,16 +2,9 @@ import React, { Component } from "react";
 import SearchPic from "./searchPic";
 
 export default class Search extends Component {
-  state = {
-    value: ""
-  };
-
   handleChange = e => {
-    const value = e.target.value;
-    this.setState({ value });
+    this.props.onWordChange(e);
   };
-
-  handleSubmit = () => {};
 
   render() {
     return (
@@ -19,10 +12,10 @@ export default class Search extends Component {
         <input
           type='text'
           onChange={this.handleChange}
-          value={this.state.value}
+          value={this.props.word}
           placeholder='by uploader'
         />
-        <SearchPic onSubmit={this.handleSubmit} />
+        {/* <SearchPic onSubmit={this.handleSubmit} /> */}
       </form>
     );
   }

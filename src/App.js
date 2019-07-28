@@ -25,7 +25,7 @@ export default class App extends Component {
       sortedBy: "new",
       filters: {
         videos: true,
-        pictures: true,
+        pictures: false,
         audios: true,
         texts: true
       },
@@ -42,6 +42,31 @@ export default class App extends Component {
     }
     this.fetchContent();
   }
+
+  handleChangeFilters = e => {
+    const { name } = e.target;
+    console.log(name);
+
+    this.setState(state => ({
+      contentProps: {
+        ...state.contentProps,
+        filters: {
+          ...state.contentProps.filters,
+          [name]: !state.contentProps.filters[name]
+        }
+      }
+    }));
+  };
+
+  setFiltration = async searchWord => {
+    await this.setState(state => ({
+      contentProps: {
+        ...state.contentProps,
+        search: searchWord
+      }
+    }));
+    this.updateData();
+  };
 
   switchMenu = () => {
     this.setState(state => ({ menuOpened: !state.menuOpened }));
@@ -103,6 +128,9 @@ export default class App extends Component {
                   content={content}
                   isAuth={isAuth}
                   menuOpened={menuOpened}
+                  setFiltration={this.setFiltration}
+                  filters={this.state.contentProps.filters}
+                  onChangeFilters={this.handleChangeFilters}
                 />
               )}
             />

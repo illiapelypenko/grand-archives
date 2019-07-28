@@ -6,30 +6,26 @@ import "./Main.scss";
 import Filtration from "./Filtration";
 
 export default class Main extends Component {
-  state = {
-    filters: {
-      videos: true,
-      pictures: true,
-      audios: true,
-      texts: true
-    },
-    pages: null,
-    currentPage: 0
-  };
-
-  setFiltration = filters => {
-    this.setState({ filters });
-  };
-
   render() {
+    const {
+      menuOpened,
+      isAuth,
+      onUpload,
+      content,
+      setFiltration,
+      filters,
+      onChangeFilters
+    } = this.props;
+
     return (
-      <div className={`main ${this.props.menuOpened ? "pdtop" : null}`}>
-        {this.props.isAuth ? <Uploader onUpload={this.props.onUpload} /> : null}
-        <Content content={this.props.content} filters={this.state.filters} />
-        {this.props.route.match.path === "/content" &&
-        this.props.route.match.isExact ? (
-          <Filtration setFiltration={this.setFiltration} />
-        ) : null}
+      <div className={`main ${menuOpened ? "pdtop" : null}`}>
+        {isAuth ? <Uploader onUpload={onUpload} /> : null}
+        <Content content={content} />
+        <Filtration
+          setFiltration={setFiltration}
+          filters={filters}
+          onChangeFilters={onChangeFilters}
+        />
         <Pages />
       </div>
     );

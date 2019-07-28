@@ -8,36 +8,6 @@ export default class MixedContent extends Component {
   render() {
     let { content } = this.props;
 
-    if (this.props.filters) {
-      const { videos, pictures, audios, texts } = this.props.filters;
-      content = content
-        .filter(item => {
-          if (!videos) {
-            return item.type !== "video";
-          }
-          return true;
-        })
-        .filter(item => {
-          if (!pictures) {
-            return item.type !== "picture";
-          }
-          return true;
-        })
-        .filter(item => {
-          if (!audios) {
-            return item.type !== "audio";
-          }
-          return true;
-        })
-        .filter(item => {
-          if (!texts) {
-            return item.type !== "text";
-          }
-          return true;
-        })
-        .slice(0, 9);
-    }
-
     return (
       <div className='content__container'>
         {content
