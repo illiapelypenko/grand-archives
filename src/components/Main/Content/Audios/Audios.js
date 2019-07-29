@@ -6,7 +6,7 @@ export default class Audios extends Component {
     return (
       <div className='content__container'>
         {this.props.audios.map((audio, index) => (
-          <Audio name={audio} key={index} />
+          <Audio name={audio} key={index + Math.round(Math.random() * 1000)} />
         ))}
       </div>
     );

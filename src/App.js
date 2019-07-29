@@ -23,7 +23,7 @@ export default class App extends Component {
     pagesAmount: 0,
     contentProps: {
       page: 0,
-      sortedBy: "new",
+      sortby: "new",
       filters: {
         videos: true,
         pictures: true,
@@ -60,11 +60,12 @@ export default class App extends Component {
   };
 
   // fetch after
-  setFiltration = async searchWord => {
+  setFiltration = async (searchWord, sortby) => {
     await this.setState(state => ({
       contentProps: {
         ...state.contentProps,
-        search: searchWord
+        search: searchWord,
+        sortby: sortby
       }
     }));
     this.setPage(this.state.contentProps.page);
@@ -97,12 +98,12 @@ export default class App extends Component {
   };
 
   fetchContent = async () => {
-    let { sortedBy, search, page } = this.state.contentProps;
+    let { sortby, search, page } = this.state.contentProps;
     let { videos, pictures, audios, texts } = this.state.contentProps.filters;
 
     let res = await fetch(
       encodeURI(
-        `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${page}`
+        `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortby=${sortby}&search=${search}&page=${page}`
       )
     );
     let data = await res.json();
@@ -112,7 +113,7 @@ export default class App extends Component {
       number = 0;
       res = await fetch(
         encodeURI(
-          `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortedBy=${sortedBy}&search=${search}&page=${number}`
+          `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortby=${sortby}&search=${search}&page=${number}`
         )
       );
       data = await res.json();

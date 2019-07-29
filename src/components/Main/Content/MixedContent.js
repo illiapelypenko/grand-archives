@@ -19,7 +19,7 @@ export default class MixedContent extends Component {
                       name={item.name}
                       uploaderName={item.uploaderName}
                       rating={item.rating}
-                      key={index}
+                      key={item.id}
                     />
                   );
                 case "video":
@@ -28,7 +28,7 @@ export default class MixedContent extends Component {
                       name={item.name}
                       uploaderName={item.uploaderName}
                       rating={item.rating}
-                      key={index}
+                      key={item.id}
                     />
                   );
                 case "audio":
@@ -37,7 +37,7 @@ export default class MixedContent extends Component {
                       name={item.name}
                       uploaderName={item.uploaderName}
                       rating={item.rating}
-                      key={index}
+                      key={item.id}
                     />
                   );
                 case "text":
@@ -46,7 +46,7 @@ export default class MixedContent extends Component {
                       name={item.name}
                       uploaderName={item.uploaderName}
                       rating={item.rating}
-                      key={index}
+                      key={item.id}
                     />
                   );
                 default:

@@ -6,9 +6,10 @@
   display: grid;
   grid-template-columns: max-content auto;
   grid-template-rows: auto max-content;
-  grid-template-areas: "f c" "p p";
+  grid-template-areas: "f" "c" "p";
   min-height: 93vh;
   position: relative;
+  justify-content: center;
 
   .pages {
     grid-area: p;

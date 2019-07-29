@@ -46,13 +46,14 @@ router.get("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
     contentItems = contentItems.map(item => ({
+      id: item._id,
       name: item.name,
       type: item.type,
       uploaderName: item.uploaderName,
       rating: item.rating
     }));
 
-    let { videos, pictures, audios, texts, sortedBy, search, page } = req.query;
+    let { videos, pictures, audios, texts, sortby, search, page } = req.query;
 
     page = +page;
     videos = videos === "true" ? true : false;
@@ -73,12 +74,56 @@ router.get("/all", async (req, res) => {
       contentItems = contentItems.filter(item => item.type !== "text");
     }
 
-    switch (sortedBy) {
+    switch (sortby) {
       case "old":
         // contentItems = contentItems;
         break;
       case "new":
         contentItems = contentItems.reverse();
+        break;
+      case "nameaz":
+        contentItems = contentItems.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case "nameza":
+        contentItems = contentItems.sort((a, b) => {
+          if (a.name < b.name) {
+            return 1;
+          }
+          if (a.name > b.name) {
+            return -1;
+          }
+          return 0;
+        });
+        break;
+      case "uploadernameaz":
+        contentItems = contentItems.sort((a, b) => {
+          if (a.uploaderName < b.uploaderName) {
+            return -1;
+          }
+          if (a.uploaderName > b.uploaderName) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case "uploadernameza":
+        contentItems = contentItems.sort((a, b) => {
+          if (a.uploaderName < b.uploaderName) {
+            return 1;
+          }
+          if (a.uploaderName > b.uploaderName) {
+            return -1;
+          }
+          return 0;
+        });
         break;
     }
 

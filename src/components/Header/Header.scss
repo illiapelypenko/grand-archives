@@ -137,8 +137,12 @@
 @media (max-width: 375px) {
   .header {
     .navbar {
+      .navbar__logo {
+        font-size: 30px;
+      }
       .navbar__menu-icon {
         right: 5px;
+        top: 25px;
       }
 
       .navbar__menu {

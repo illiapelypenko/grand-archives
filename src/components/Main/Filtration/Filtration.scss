@@ -1,23 +1,44 @@
-@import "../../vars";
+@import "../../../vars";
 
 .filtration {
   grid-area: f;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  grid-template-rows: max-content max-content;
+  grid-template-areas: "st vd pc sb" "sr ad tx sb";
   font-size: 20px;
   background: $blue;
   color: $white;
   padding: 15px;
   line-height: 1.5;
-  height: max-content;
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 10px 10px 10px 10px;
+  justify-self: center;
+  margin-bottom: 30px;
+  grid-gap: 10px;
+  align-self: start;
+
+  .sort {
+    grid-area: st;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    outline: none;
+    background: $white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 15px;
+  }
 
   .search {
     display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    margin: 10px 10px;
+    flex-direction: column;
+    grid-area: sr;
 
     input {
       padding: 5px 10px;
@@ -46,6 +67,7 @@
   }
 
   .filtration__item {
+    grid-area: fi;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -63,31 +85,18 @@
 
   #submit {
     @extend %btn;
-    margin-top: 5px;
-    margin-left: 10px;
     font-size: 14px;
     padding: 5px;
-  }
-}
-
-@media (max-width: 900px) {
-  .filtration {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: max-content;
-    border-radius: 10px 10px 10px 10px;
+    align-self: center;
     justify-self: center;
-    margin-bottom: 20px;
-
-    .filtration__item {
-      margin: 0px 10px;
-    }
+    grid-area: sb;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 450px) {
   .filtration {
-    flex-direction: column;
+    grid-template-columns: max-content;
+    grid-template-rows: repeat(7, max-content);
+    grid-template-areas: "st" "sr" "vd" "pc" "ad" "tx" "sb";
   }
 }

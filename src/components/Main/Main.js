@@ -3,7 +3,7 @@ import Uploader from "./Uploader/Uploader";
 import Content from "./Content/Content";
 import Pages from "./Pages";
 import "./Main.scss";
-import Filtration from "./Filtration";
+import Filtration from "./Filtration/Filtration";
 
 export default class Main extends Component {
   render() {

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import FormPart from "../Auth/FormPart";
+import FormPart from "../../Auth/FormPart";
 import "./Filtration.scss";
 import Search from "./Search";
 
 export default class Filtration extends Component {
   state = {
-    searchWord: ""
+    searchWord: "",
+    sortby: "new"
   };
 
   handleChange = e => {
@@ -14,7 +15,7 @@ export default class Filtration extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setFiltration(this.state.searchWord);
+    this.props.setFiltration(this.state.searchWord, this.state.sortby);
   };
 
   handleWordChange = e => {
@@ -22,12 +23,32 @@ export default class Filtration extends Component {
     this.setState({ searchWord: value });
   };
 
+  handleSortingChange = e => {
+    const { value } = e.target;
+    this.setState({ sortby: value });
+  };
+
   render() {
     const { videos, pictures, audios, texts } = this.props.filters;
 
     return (
       <form className='filtration' onSubmit={this.handleSubmit}>
-        <div className='filtration__item'>
+        <div className='sort'>
+          <label htmlFor='sort'>Sort by:</label>
+          <select
+            id='sort'
+            onChange={this.handleSortingChange}
+            value={this.state.sortby}
+          >
+            <option value='new'>New</option>
+            <option value='old'>Old</option>
+            <option value='nameaz'>Name a-z</option>
+            <option value='nameza'>Name z-a</option>
+            <option value='uploadernameaz'>Uploader name a-z</option>
+            <option value='uploadernameza'>Uploader name z-a</option>
+          </select>
+        </div>
+        <div className='filtration__item' style={{ gridArea: "vd" }}>
           <input
             type='checkbox'
             name='videos'
@@ -37,7 +58,7 @@ export default class Filtration extends Component {
           />
           <label htmlFor='videos'>Videos</label>
         </div>
-        <div className='filtration__item'>
+        <div className='filtration__item' style={{ gridArea: "pc" }}>
           <input
             type='checkbox'
             name='pictures'
@@ -47,7 +68,14 @@ export default class Filtration extends Component {
           />
           <label htmlFor='pictures'>Pictures</label>
         </div>
-        <div className='filtration__item'>
+        <input type='submit' value='Submit' id='submit' />
+
+        <Search
+          onWordChange={this.handleWordChange}
+          word={this.state.searchWord}
+        />
+
+        <div className='filtration__item' style={{ gridArea: "ad" }}>
           <input
             type='checkbox'
             name='audios'
@@ -57,7 +85,7 @@ export default class Filtration extends Component {
           />
           <label htmlFor='audios'>Audios</label>
         </div>
-        <div className='filtration__item'>
+        <div className='filtration__item' style={{ gridArea: "tx" }}>
           <input
             type='checkbox'
             name='texts'
@@ -67,11 +95,6 @@ export default class Filtration extends Component {
           />
           <label htmlFor='texts'>Texts</label>
         </div>
-        <Search
-          onWordChange={this.handleWordChange}
-          word={this.state.searchWord}
-        />
-        <input type='submit' value='Submit' id='submit' />
       </form>
     );
   }
