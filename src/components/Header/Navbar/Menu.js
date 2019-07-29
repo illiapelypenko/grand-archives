@@ -4,7 +4,8 @@ import Signout from "./SignoutPic";
 
 export default class Menu extends Component {
   state = {
-    showLogout: false
+    showLogout: false,
+    showSubmenues: false
   };
 
   logout = () => {
@@ -22,21 +23,73 @@ export default class Menu extends Component {
     }));
   };
 
+  handleMouseEnterOnContent = () => {
+    this.setState(state => ({ showSubmenues: !state.showSubmenues }));
+  };
+
+  handleMouseLeaveOnContent = () => {
+    this.setState(state => ({ showSubmenues: !state.showSubmenues }));
+  };
+
+  handleSubmenuClick = name => {
+    this.props.onSubmenuClick(name);
+  };
+
   render() {
     const { isAuth, name, width } = this.props;
     return (
       <div className='navbar__menu'>
-        {/* <Search />
-        <div className='navbar__menu-item-divider' /> */}
-        <NavLink className='navbar__menu-item' exact to='/content'>
+        {/* <NavLink className='navbar__menu-item' exact to='/content'>
           Content
-        </NavLink>
+        </NavLink> */}
+        <div
+          className='navbar__menu-item submenus-container'
+          onMouseEnter={this.handleMouseEnterOnContent}
+          onMouseLeave={this.handleMouseLeaveOnContent}
+        >
+          Content
+          {this.state.showSubmenues ? (
+            <div className='submenus'>
+              <p
+                className='submenu'
+                onClick={() => {
+                  this.handleSubmenuClick("videos");
+                }}
+              >
+                Videos
+              </p>
+              <p
+                className='submenu'
+                onClick={() => {
+                  this.handleSubmenuClick("pictures");
+                }}
+              >
+                Pictures
+              </p>
+              <p
+                className='submenu'
+                onClick={() => {
+                  this.handleSubmenuClick("audios");
+                }}
+              >
+                Audios
+              </p>
+              <p
+                className='submenu'
+                onClick={() => {
+                  this.handleSubmenuClick("texts");
+                }}
+              >
+                Texts
+              </p>
+            </div>
+          ) : null}
+        </div>
         <div className='navbar__menu-item-divider' />
         <NavLink className='navbar__menu-item' exact to='/contacts'>
           Contacts
         </NavLink>
         <div className='navbar__menu-item-divider' />
-
         {isAuth ? (
           <div className='navbar__user-item'>
             <div className='navbar__user-icon' onClick={this.handleShowLogout}>

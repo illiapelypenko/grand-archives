@@ -44,8 +44,8 @@ export default class Filtration extends Component {
             <option value='old'>Old</option>
             <option value='nameaz'>Name a-z</option>
             <option value='nameza'>Name z-a</option>
-            <option value='uploadernameaz'>Uploader name a-z</option>
-            <option value='uploadernameza'>Uploader name z-a</option>
+            <option value='uploadernameaz'>Uploader's name a-z</option>
+            <option value='uploadernameza'>Uploader's name z-a</option>
           </select>
         </div>
         <div className='filtration__item' style={{ gridArea: "vd" }}>

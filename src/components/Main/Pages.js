@@ -25,6 +25,7 @@ export default class Pages extends Component {
           <div
             className={`page ${+this.state.page === i ? "current-page" : ""}`}
             onClick={this.handleOnclick(i)}
+            key={i}
           >
             {i + 1}
           </div>

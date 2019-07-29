@@ -71,6 +71,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    align-self: end;
 
     label {
       @extend %unchooseable;
@@ -86,10 +87,11 @@
   #submit {
     @extend %btn;
     font-size: 14px;
-    padding: 5px;
-    align-self: center;
+    padding: 10px;
+    align-self: end;
     justify-self: center;
     grid-area: sb;
+    border-radius: 15px;
   }
 }
 

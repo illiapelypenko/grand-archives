@@ -36,7 +36,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuth, slider, name, menuOpened } = this.props;
+    const { isAuth, slider, name, menuOpened, onSubmenuClick } = this.props;
     const { showSlider } = this.state;
     return (
       <div className='header'>
@@ -46,6 +46,7 @@ class Header extends Component {
           logout={this.props.logout}
           name={name}
           switchMenu={this.props.switchMenu}
+          onSubmenuClick={onSubmenuClick}
         />
         <Eye
           menuOpened={menuOpened}

@@ -44,9 +44,26 @@ export default class App extends Component {
     this.fetchContent();
   }
 
+  handleSubmenuClick = async name => {
+    await this.setState(state => ({
+      contentProps: {
+        page: 0,
+        sortby: "new",
+        filters: {
+          videos: false,
+          pictures: false,
+          audios: false,
+          texts: false,
+          [name]: true
+        },
+        search: ""
+      }
+    }));
+    this.fetchContent();
+  };
+
   handleChangeFilters = e => {
     const { name } = e.target;
-    console.log(name);
 
     this.setState(state => ({
       contentProps: {
@@ -160,6 +177,7 @@ export default class App extends Component {
             name={name}
             switchMenu={this.switchMenu}
             menuOpened={menuOpened}
+            onSubmenuClick={this.handleSubmenuClick}
           />
           <Switch>
             <Route
