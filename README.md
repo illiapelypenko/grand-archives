@@ -1,6 +1,6 @@
-#GRAND ARCHIVER
+#GRAND ARCHIVE
 
-- a content library web-application
+a content library web-application
 
 ## Available Scripts
 
