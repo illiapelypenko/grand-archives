@@ -76,7 +76,6 @@ export default class App extends Component {
     }));
   };
 
-  // fetch after
   setFiltration = async (searchWord, sortby) => {
     await this.setState(state => ({
       contentProps: {
@@ -92,7 +91,6 @@ export default class App extends Component {
     this.setState(state => ({ menuOpened: !state.menuOpened }));
   };
 
-  // fetch after
   login = async name => {
     localStorage.setItem("name", name);
     await this.setState({
@@ -102,7 +100,6 @@ export default class App extends Component {
     this.setPage(this.state.contentProps.page);
   };
 
-  // fetch after
   logout = async () => {
     await this.setState({
       isAuth: false
@@ -147,7 +144,6 @@ export default class App extends Component {
     }));
   };
 
-  // fetch after
   setPage = async number => {
     await this.setState(state => ({
       contentProps: {

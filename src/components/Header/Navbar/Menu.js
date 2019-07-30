@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 import Signout from "./SignoutPic";
 
-export default class Menu extends Component {
+class Menu extends Component {
   state = {
     showLogout: false,
     showSubmenues: false
@@ -23,11 +23,7 @@ export default class Menu extends Component {
     }));
   };
 
-  handleMouseEnterOnContent = () => {
-    this.setState(state => ({ showSubmenues: !state.showSubmenues }));
-  };
-
-  handleMouseLeaveOnContent = () => {
+  handleSwitchSubmenu = () => {
     this.setState(state => ({ showSubmenues: !state.showSubmenues }));
   };
 
@@ -36,18 +32,24 @@ export default class Menu extends Component {
   };
 
   render() {
-    const { isAuth, name, width } = this.props;
+    const { isAuth, name, width, location } = this.props;
+    console.log(this.props);
     return (
       <div className='navbar__menu'>
-        {/* <NavLink className='navbar__menu-item' exact to='/content'>
-          Content
-        </NavLink> */}
         <div
           className='navbar__menu-item submenus-container'
-          onMouseEnter={this.handleMouseEnterOnContent}
-          onMouseLeave={this.handleMouseLeaveOnContent}
+          onMouseEnter={this.handleSwitchSubmenu}
+          onMouseLeave={this.handleSwitchSubmenu}
+          onTouchEnter={this.handleSwitchSubmenu}
+          onTouchLeave={this.handleSwitchSubmenu}
         >
-          Content
+          <p
+            className={`content-menu-item ${
+              location.pathname === "/content" ? "active" : ""
+            }`}
+          >
+            <p>Content</p>
+          </p>
           {this.state.showSubmenues ? (
             <div className='submenus'>
               <p
@@ -56,31 +58,36 @@ export default class Menu extends Component {
                   this.handleSubmenuClick("videos");
                 }}
               >
-                Videos
+                <Link to='/content'>Videos</Link>
               </p>
+              <div className='vertical-line' />
               <p
                 className='submenu'
                 onClick={() => {
                   this.handleSubmenuClick("pictures");
                 }}
               >
-                Pictures
+                <Link to='/content'>Pictures</Link>
               </p>
+              <div className='vertical-line' />
+
               <p
                 className='submenu'
                 onClick={() => {
                   this.handleSubmenuClick("audios");
                 }}
               >
-                Audios
+                <Link to='/content'>Audios</Link>
               </p>
+              <div className='vertical-line' />
+
               <p
                 className='submenu'
                 onClick={() => {
                   this.handleSubmenuClick("texts");
                 }}
               >
-                Texts
+                <Link to='/content'>Texts</Link>
               </p>
             </div>
           ) : null}
@@ -117,3 +124,5 @@ export default class Menu extends Component {
     );
   }
 }
+
+export default withRouter(Menu);

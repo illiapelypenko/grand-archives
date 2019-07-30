@@ -4,6 +4,17 @@
   position: relative;
   cursor: pointer;
 
+  /* background-image preloading*/
+  &::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+    content: url(./audioSlide.jpg) url(./pictureSlide.jpg) url(./textSlide.jpg)
+      url(./videoSlide.jpg);
+  }
+
   &__slides {
     .slider__slide {
       width: 100%;
@@ -32,7 +43,7 @@
 
   &__indicators {
     position: absolute;
-    bottom: 10px;
+    bottom: 80px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -50,6 +61,14 @@
       &--disabled {
         background: $white;
       }
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .slider {
+    .slider__indicators {
+      bottom: 100px;
     }
   }
 }

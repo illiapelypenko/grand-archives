@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import serverURL from "../../../../serverURL";
-import ItemInfo from "../Item/ItemInfo";
+import serverURL from "../../../serverURL";
+import ItemInfo from "./Item/ItemInfo";
 
 export default class Audio extends Component {
   state = {

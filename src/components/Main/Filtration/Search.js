@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SearchPic from "./searchPic";
 
 export default class Search extends Component {
   handleChange = e => {
@@ -9,7 +8,7 @@ export default class Search extends Component {
   render() {
     return (
       <form className='search'>
-        <label htmlFor='search'>Search for:</label>
+        <label htmlFor='search'>Search:</label>
         <input
           id='search'
           type='text'
@@ -17,7 +16,6 @@ export default class Search extends Component {
           value={this.props.word}
           placeholder='enter name'
         />
-        {/* <SearchPic onSubmit={this.handleSubmit} /> */}
       </form>
     );
   }

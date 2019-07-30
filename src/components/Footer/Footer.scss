@@ -1,7 +1,6 @@
 @import "../../vars";
 
 .footer {
-  height: 7vh;
   background: $blue;
   color: $white;
   display: grid;
@@ -11,6 +10,8 @@
   font-size: 12px;
   width: 100%;
   min-height: 7vh;
+  position: fixed;
+  bottom: 0px;
 
   p {
     justify-self: center;
@@ -53,6 +54,12 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .footer {
+    min-height: 70px;
+  }
+}
+
 @media (max-width: 700px) {
   .footer {
     grid-template-columns: repeat(2, 1fr);
@@ -74,7 +81,7 @@
   .footer {
     grid-template-areas: "s" "p";
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: max-content max-content;
     grid-gap: 10px;
   }
 }

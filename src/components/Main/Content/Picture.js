@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import serverURL from "../../../../serverURL";
-import ItemInfo from "../Item/ItemInfo";
+import serverURL from "../../../serverURL";
+import ItemInfo from "./Item/ItemInfo";
 
-export default class Video extends Component {
+export default class Picture extends Component {
   state = {
     isHovered: false
   };
@@ -16,22 +16,18 @@ export default class Video extends Component {
   };
 
   render() {
-    const { name, uploaderName } = this.props;
-
+    const { name, uploaderName, rating } = this.props;
     return (
-      <div
-        className='content__video content__item'
+      <a
+        className='content__picture content__item'
+        target='_blank'
+        href={`${serverURL}/api/content/picture/${name}`}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        <video controls>
-          <source
-            src={`${serverURL}/api/content/video/${name}`}
-            type='video/mp4'
-          />
-        </video>
+        <img src={`${serverURL}/api/content/picture/${name}`} alt='pic' />
         {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
-      </div>
+      </a>
     );
   }
 }

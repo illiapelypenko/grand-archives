@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  withRouter
-} from "react-router-dom";
+import { Route, Switch, Link, withRouter } from "react-router-dom";
 import "./Auth.scss";
 import Login from "./Login";
 import Registration from "./Registration";

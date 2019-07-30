@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import FormPart from "../../Auth/FormPart";
 import "./Filtration.scss";
 import Search from "./Search";
 
