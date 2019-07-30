@@ -1,5 +1,6 @@
 #GRAND ARCHIVER
-A content library web-application
+
+- a content library web-application
 
 ## Available Scripts
 
@@ -9,17 +10,23 @@ In the project directory run:
 
 to start a database
 
+---
+
 In the project/server directory run:
 
 ### `nodemon server.js`
 
 to start a server
 
+---
+
 In the project directory run:
 
 ### `npm start`
 
 to start a client
+
+---
 
 In the project directory run:
 
