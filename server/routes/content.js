@@ -293,8 +293,7 @@ router.post("/upload", async (req, res) => {
           name,
           type,
           birthtimeMs,
-          uploaderName,
-          rating: 0
+          uploaderName
         });
 
         await newContentItem.save();

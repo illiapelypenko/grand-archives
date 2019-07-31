@@ -20,9 +20,6 @@ const ContentItemSchema = mongoose.Schema({
   uploaderName: {
     type: String,
     required: true
-  },
-  rating: {
-    type: Number
   }
 });
 

@@ -21,7 +21,6 @@ class Content extends Component {
                       <Picture
                         name={item.name}
                         uploaderName={item.uploaderName}
-                        rating={item.rating}
                         key={item.id}
                         id={item.id}
                         token={this.props.token}

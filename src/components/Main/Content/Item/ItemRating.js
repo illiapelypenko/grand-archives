@@ -69,7 +69,6 @@ export default class ItemRating extends Component {
         {this.props.token ? (
           <div className='rating--personal'>{stars}</div>
         ) : null}
-        <div className='rating--general'>{this.props.rating}</div>
       </div>
     );
   }
