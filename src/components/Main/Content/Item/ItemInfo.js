@@ -10,7 +10,7 @@ export default function ItemInfo(props) {
         <p>{`By: ${uploaderName}`}</p>
         <ItemRating
           rating={rating}
-          personalRating={2}
+          personalRating={props.personalRating}
           token={props.token}
           id={props.id}
           display={props.display}

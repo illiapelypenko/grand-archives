@@ -16,7 +16,7 @@ export default class Picture extends Component {
   };
 
   render() {
-    const { name, id } = this.props;
+    const { name, id, personalRating } = this.props;
     return (
       <a
         className={`content__picture content__item ${
@@ -33,6 +33,7 @@ export default class Picture extends Component {
           token={this.props.token}
           id={id}
           display={this.state.isHovered ? true : false}
+          personalRating={personalRating}
         />
       </a>
     );

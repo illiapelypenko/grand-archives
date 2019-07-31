@@ -35,9 +35,9 @@ export default class App extends Component {
     }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.setState(state => ({
+      await this.setState(state => ({
         isAuth: true,
         name: localStorage.getItem("name"),
         token: localStorage.getItem("token")
@@ -123,7 +123,14 @@ export default class App extends Component {
     let res = await fetch(
       encodeURI(
         `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortby=${sortby}&search=${search}&page=${page}`
-      )
+      ),
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: this.state.token })
+      }
     );
     let data = await res.json();
     let pagesAmount = Math.ceil(data.contentLength / 9);
@@ -133,12 +140,20 @@ export default class App extends Component {
       res = await fetch(
         encodeURI(
           `${serverURL}/api/content/all?videos=${videos}&pictures=${pictures}&audios=${audios}&texts=${texts}&sortby=${sortby}&search=${search}&page=${number}`
-        )
+        ),
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ token: this.state.token })
+        }
       );
       data = await res.json();
     } else {
       number = +page;
     }
+
     this.setState(state => ({
       content: data.contentItems,
       pagesAmount,

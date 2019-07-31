@@ -38,10 +38,10 @@ export default class ItemRating extends Component {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       let className = "disabled";
-      if (this.state.isHovered && i <= this.state.hoveredItem) {
+      if (!this.state.isHovered && i <= this.state.personalRating) {
         className = "enabled";
       }
-      if (!this.state.isHovered && i <= this.state.personalRating) {
+      if (this.state.isHovered && i <= this.state.hoveredItem) {
         className = "enabled";
       }
       stars.push(

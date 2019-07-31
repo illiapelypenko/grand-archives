@@ -25,6 +25,7 @@ class Content extends Component {
                         key={item.id}
                         id={item.id}
                         token={this.props.token}
+                        personalRating={item.personalRating}
                       />
                     );
                   case "video":

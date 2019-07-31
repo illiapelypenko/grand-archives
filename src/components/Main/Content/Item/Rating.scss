@@ -5,18 +5,18 @@
   .rating--personal {
     display: flex;
 
-    .star {
+    p {
       font-size: 16px;
       padding: 0px 2px;
       transition: all 0.2s;
       cursor: pointer;
     }
 
-    .star.enabled {
+    p.enabled {
       color: gold;
     }
 
-    .star.disabled {
+    p.disabled {
       color: white;
     }
   }

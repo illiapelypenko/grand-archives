@@ -38,10 +38,9 @@ router.post("/evaluate", async (req, res) => {
   }
 });
 
-router.get("/all", async (req, res) => {
+router.put("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
-    // My code here
     contentItems = contentItems.map(item => ({
       id: item._id,
       name: item.name,
@@ -128,6 +127,19 @@ router.get("/all", async (req, res) => {
 
     const contentLength = contentItems.length;
     contentItems = contentItems.slice(page * 9, page * 9 + 9);
+
+    const token = req.body.token;
+    const validUser = await jwt.verify(token, secretKey);
+    const uploader = await User.findById(validUser._id);
+    const ratedContent = uploader.ratedContent;
+    for (let ratedItem of ratedContent) {
+      contentItems = contentItems.map(item => {
+        if (JSON.stringify(item.id) === JSON.stringify(ratedItem.itemId)) {
+          item.personalRating = ratedItem.rating;
+        }
+        return item;
+      });
+    }
 
     res.json({ contentItems, contentLength });
   } catch (e) {
