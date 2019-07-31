@@ -36,6 +36,7 @@ class Content extends Component {
                         key={item.id}
                         id={item.id}
                         token={this.props.token}
+                        personalRating={item.personalRating}
                       />
                     );
                   case "audio":
@@ -47,6 +48,7 @@ class Content extends Component {
                         key={item.id}
                         id={item.id}
                         token={this.props.token}
+                        personalRating={item.personalRating}
                       />
                     );
                   case "text":
@@ -58,6 +60,7 @@ class Content extends Component {
                         key={item.id}
                         id={item.id}
                         token={this.props.token}
+                        personalRating={item.personalRating}
                       />
                     );
                   default:

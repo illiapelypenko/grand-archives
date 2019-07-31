@@ -5,6 +5,7 @@ import TelegramIcon from "./TelegramIcon";
 
 export default function Socials() {
   const url = encodeURI("https://wet-kangaroo-58.localtunnel.me");
+
   return (
     <div className='socials'>
       <p>Share us on:</p>

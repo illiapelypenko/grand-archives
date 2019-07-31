@@ -22,7 +22,7 @@ export default class ItemRating extends Component {
   handleClick = async (e, i) => {
     e.preventDefault();
     this.setState({ personalRating: i, set: true });
-    const res = await fetch(`${serverURL}/api/content/evaluate`, {
+    await fetch(`${serverURL}/api/content/evaluate`, {
       method: "POST",
       body: JSON.stringify({
         token: this.props.token,
@@ -44,12 +44,14 @@ export default class ItemRating extends Component {
 
   render() {
     const stars = [];
+    const { personalRating, hoveredItem, isHovered } = this.state;
+
     for (let i = 0; i < 5; i++) {
       let className = "disabled";
-      if (!this.state.isHovered && i <= this.state.personalRating) {
+      if (!isHovered && i <= personalRating) {
         className = "enabled";
       }
-      if (this.state.isHovered && i <= this.state.hoveredItem) {
+      if (isHovered && i <= hoveredItem) {
         className = "enabled";
       }
       stars.push(

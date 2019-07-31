@@ -29,16 +29,13 @@ export default class Filtration extends Component {
 
   render() {
     const { videos, pictures, audios, texts } = this.props.filters;
+    const { sortby, searchWord } = this.state;
 
     return (
       <form className='filtration' onSubmit={this.handleSubmit}>
         <div className='sort'>
           <label htmlFor='sort'>Sort by:</label>
-          <select
-            id='sort'
-            onChange={this.handleSortingChange}
-            value={this.state.sortby}
-          >
+          <select id='sort' onChange={this.handleSortingChange} value={sortby}>
             <option value='new'>New</option>
             <option value='old'>Old</option>
             <option value='nameaz'>Name a-z</option>
@@ -69,10 +66,7 @@ export default class Filtration extends Component {
         </div>
         <input type='submit' value='Submit' id='submit' />
 
-        <Search
-          onWordChange={this.handleWordChange}
-          word={this.state.searchWord}
-        />
+        <Search onWordChange={this.handleWordChange} word={searchWord} />
 
         <div className='filtration__item' style={{ gridArea: "ad" }}>
           <input

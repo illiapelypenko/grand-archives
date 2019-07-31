@@ -52,9 +52,11 @@ export default class Uploader extends Component {
   };
 
   render() {
+    const { showForm, key } = this.state;
+
     return (
       <div className='uploader'>
-        {this.state.showForm ? (
+        {showForm ? (
           <form onSubmit={this.handleSubmit}>
             <input
               type='file'
@@ -62,13 +64,13 @@ export default class Uploader extends Component {
               accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
               multiple
               onChange={this.handleChange}
-              key={this.state.key} // to reset files
+              key={key} // to reset files
             />
             <input type='submit' value='upload' />
           </form>
         ) : null}
         <div className='uploader__showBtn' onClick={this.handleUploaderClick}>
-          {this.state.showForm ? <ArrowPic /> : <UploaderPic />}
+          {showForm ? <ArrowPic /> : <UploaderPic />}
         </div>
       </div>
     );

@@ -16,11 +16,13 @@ export default class Picture extends Component {
   };
 
   render() {
-    const { name, id, personalRating } = this.props;
+    const { name, id, personalRating, token } = this.props;
+    const { isHovered } = this.state;
+
     return (
       <a
         className={`content__picture content__item ${
-          !this.state.isHovered ? "not-display" : ""
+          !isHovered ? "not-display" : ""
         }`}
         target='_blank'
         href={`${serverURL}/api/content/picture/${name}`}
@@ -30,9 +32,9 @@ export default class Picture extends Component {
         <img src={`${serverURL}/api/content/picture/${name}`} alt='pic' />
         <ItemInfo
           info={this.props}
-          token={this.props.token}
+          token={token}
           id={id}
-          display={this.state.isHovered ? true : false}
+          display={isHovered ? true : false}
           personalRating={personalRating}
         />
       </a>

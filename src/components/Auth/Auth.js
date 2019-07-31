@@ -6,13 +6,16 @@ import Registration from "./Registration";
 
 class Auth extends Component {
   render() {
+    const { pathname } = this.props.location;
+    const { login } = this.props;
+
     return (
       <div className='auth'>
         <div className='auth__container'>
           <div className='auth__nav'>
             <Link
               className={`auth__nav-item ${
-                /\/login$/.test(this.props.location.pathname) ? "active" : ""
+                /\/login$/.test(pathname) ? "active" : ""
               }`}
               to='/auth/login'
             >
@@ -20,9 +23,7 @@ class Auth extends Component {
             </Link>
             <Link
               className={`auth__nav-item ${
-                /\/registration$/.test(this.props.location.pathname)
-                  ? "active"
-                  : ""
+                /\/registration$/.test(pathname) ? "active" : ""
               }`}
               to='/auth/registration'
             >
@@ -33,11 +34,11 @@ class Auth extends Component {
             <div className='auth__forms'>
               <Route
                 path='/auth/login'
-                render={() => <Login login={this.props.login} />}
+                render={() => <Login login={login} />}
               />
               <Route
                 path='/auth/registration'
-                render={() => <Registration login={this.props.login} />}
+                render={() => <Registration login={login} />}
               />
             </div>
           </Switch>

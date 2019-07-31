@@ -16,13 +16,14 @@ export default class Main extends Component {
       filters,
       onChangeFilters,
       pagesAmount,
-      setPage
+      setPage,
+      token
     } = this.props;
 
     return (
       <div className={`main ${menuOpened ? "pdtop" : null}`}>
         {isAuth ? <Uploader onUpload={onUpload} /> : null}
-        <Content content={content} token={this.props.token} />
+        <Content content={content} token={token} />
         <Filtration
           setFiltration={setFiltration}
           filters={filters}

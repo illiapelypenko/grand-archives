@@ -1,18 +1,19 @@
 import React from "react";
 import ItemRating from "./ItemRating";
 
-export default function ItemInfo(props) {
-  const { name, uploaderName } = props.info;
+export default function ItemInfo({ personalRating, token, id, display, info }) {
+  const { name, uploaderName } = info;
+
   return (
     <>
       <div className='content__item--hovered--up'>{name}</div>
       <div className='content__item--hovered--down'>
         <p>{`By: ${uploaderName}`}</p>
         <ItemRating
-          personalRating={props.personalRating}
-          token={props.token}
-          id={props.id}
-          display={props.display}
+          personalRating={personalRating}
+          token={token}
+          id={id}
+          display={display}
         />
       </div>
     </>

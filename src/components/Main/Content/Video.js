@@ -16,11 +16,14 @@ export default class Video extends Component {
   };
 
   render() {
-    const { name, id } = this.props;
+    const { name, id, personalRating, token } = this.props;
+    const { isHovered } = this.state;
 
     return (
       <div
-        className='content__video content__item'
+        className={`content__picture content__item ${
+          !isHovered ? "not-display" : ""
+        }`}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -30,9 +33,13 @@ export default class Video extends Component {
             type='video/mp4'
           />
         </video>
-        {this.state.isHovered ? (
-          <ItemInfo info={this.props} token={this.props.token} id={id} />
-        ) : null}
+        <ItemInfo
+          info={this.props}
+          token={token}
+          id={id}
+          display={isHovered ? true : false}
+          personalRating={personalRating}
+        />
       </div>
     );
   }

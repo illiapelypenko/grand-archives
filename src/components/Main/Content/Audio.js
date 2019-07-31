@@ -15,10 +15,14 @@ export default class Audio extends Component {
     this.setState({ isHovered: false });
   };
   render() {
-    const { name, id } = this.props;
+    const { name, id, personalRating, token } = this.props;
+    const { isHovered } = this.state;
+
     return (
       <div
-        className='content__audio content__item'
+        className={`content__picture content__item ${
+          !isHovered ? "not-display" : ""
+        }`}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -29,9 +33,13 @@ export default class Audio extends Component {
           />
         </audio>
         <p className='content__item-name'>{name}</p>
-        {this.state.isHovered ? (
-          <ItemInfo info={this.props} token={this.props.token} id={id} />
-        ) : null}
+        <ItemInfo
+          info={this.props}
+          token={token}
+          id={id}
+          display={isHovered ? true : false}
+          personalRating={personalRating}
+        />
       </div>
     );
   }

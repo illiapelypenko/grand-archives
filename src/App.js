@@ -37,17 +37,17 @@ export default class App extends Component {
 
   async componentDidMount() {
     if (localStorage.getItem("token")) {
-      await this.setState(state => ({
+      await this.setState({
         isAuth: true,
         name: localStorage.getItem("name"),
         token: localStorage.getItem("token")
-      }));
+      });
     }
     this.fetchContent();
   }
 
   handleSubmenuClick = async name => {
-    await this.setState(state => ({
+    await this.setState({
       contentProps: {
         page: 0,
         sortby: "new",
@@ -60,7 +60,7 @@ export default class App extends Component {
         },
         search: ""
       }
-    }));
+    });
     this.fetchContent();
   };
 
@@ -110,10 +110,6 @@ export default class App extends Component {
       token: ""
     });
     this.setPage(this.state.contentProps.page);
-  };
-
-  updateData = () => {
-    this.fetchContent();
   };
 
   fetchContent = async () => {
@@ -171,7 +167,7 @@ export default class App extends Component {
         page: number
       }
     }));
-    this.updateData();
+    this.fetchContent();
   };
 
   render() {
@@ -202,7 +198,7 @@ export default class App extends Component {
               render={route => (
                 <Main
                   route={route}
-                  onUpload={this.updateData}
+                  onUpload={this.fetchContent}
                   content={content}
                   isAuth={isAuth}
                   menuOpened={menuOpened}

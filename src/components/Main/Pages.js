@@ -6,7 +6,7 @@ export default class Pages extends Component {
   };
 
   handleOnclick = number => {
-    return e => {
+    return () => {
       this.setState({ page: number });
       this.props.setPage(number);
     };

@@ -32,7 +32,8 @@ class Menu extends Component {
   };
 
   render() {
-    const { isAuth, name, width, location } = this.props;
+    const { isAuth, name, location } = this.props;
+    const { showLogout, showSubmenues } = this.state;
     return (
       <div className='navbar__menu'>
         <div
@@ -47,7 +48,7 @@ class Menu extends Component {
           >
             Content
           </p>
-          {this.state.showSubmenues ? (
+          {showSubmenues ? (
             <div className='submenus'>
               <p
                 className='submenu'
@@ -99,7 +100,7 @@ class Menu extends Component {
             <div className='navbar__user-icon' onClick={this.handleShowLogout}>
               {name[0]}
             </div>
-            {this.state.showLogout ? (
+            {showLogout ? (
               <div className='navbar__user-menu-item'>
                 <div className='navbar__logout-icon' onClick={this.logout}>
                   <Signout />
