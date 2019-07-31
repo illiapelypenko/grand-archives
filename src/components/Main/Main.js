@@ -22,7 +22,7 @@ export default class Main extends Component {
     return (
       <div className={`main ${menuOpened ? "pdtop" : null}`}>
         {isAuth ? <Uploader onUpload={onUpload} /> : null}
-        <Content content={content} />
+        <Content content={content} token={this.props.token} />
         <Filtration
           setFiltration={setFiltration}
           filters={filters}

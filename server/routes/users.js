@@ -4,7 +4,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
-const mongoose = require("mongoose");
 
 router.post("/register", async (req, res) => {
   try {

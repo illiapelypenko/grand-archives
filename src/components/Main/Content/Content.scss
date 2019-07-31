@@ -23,27 +23,6 @@
       align-items: center;
       position: relative;
 
-      .content__item-rating {
-        display: flex;
-        align-items: center;
-
-        .rating--personal {
-          svg.content__item-rating-star {
-            width: 15px;
-            height: 15px;
-            margin-left: 5px;
-
-            path {
-              fill: gold;
-            }
-          }
-        }
-
-        .rating--general {
-          margin-left: 20px;
-        }
-      }
-
       &--hovered--up {
         position: absolute;
         top: 0px;
@@ -100,6 +79,13 @@
       .content__pic {
         width: 50px;
         height: 50px;
+      }
+    }
+
+    .content__item.not-display {
+      .content__item--hovered--up,
+      .content__item--hovered--down {
+        display: none;
       }
     }
   }

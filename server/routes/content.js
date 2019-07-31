@@ -6,45 +6,42 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
 const ContentItem = require("../models/ContentItem");
+const User = require("../models/User");
 
-// router.get("/all", (req, res) => {
-//   try {
-//     const content = fs
-//       .readdirSync(`${contentURL}`)
-//       .filter(file => file !== ".DS_Store"); //get folders' names
-
-//     let data = [];
-//     for (dir of content) {
-//       const files = fs
-//         .readdirSync(`${contentURL}/${dir}/`)
-//         .filter(file => file !== ".DS_Store");
-//       for (file of files) {
-//         data.push({
-//           type: dir.slice(0, -1), //removes 's' from dir's name
-//           content: file
-//         });
-//       }
-//     }
-//     data = data
-//       .sort(
-//         (file1, file2) =>
-//           fs.statSync(`${contentURL}/${file2.type}s/${file2.content}`)
-//             .birthtimeMs -
-//           fs.statSync(`${contentURL}/${file1.type}s/${file1.content}`)
-//             .birthtimeMs
-//       )
-//       .slice(0, 9);
-
-//     res.send(JSON.stringify(data));
-//   } catch (e) {
-//     res.status(500).send("server error");
-//     console.log(e);
-//   }
-// });
+router.post("/evaluate", async (req, res) => {
+  const { token, rating, itemId } = req.body;
+  let verified;
+  try {
+    verified = await jwt.verify(token, secretKey);
+  } catch (e) {
+    res.status(400).send("invalid token");
+    console.log(e);
+  }
+  try {
+    if (verified) {
+      const uploader = await User.findById(verified._id);
+      let index = uploader.ratedContent.findIndex(
+        item => item.itemId === itemId
+      );
+      let ratedContent = uploader.ratedContent.slice();
+      if (index > -1) {
+        ratedContent[index].rating = rating;
+      } else {
+        ratedContent.push({ itemId, rating });
+      }
+      await uploader.updateOne({ ratedContent });
+      res.send();
+    }
+  } catch (e) {
+    res.status(500).send("server error");
+    console.log(e);
+  }
+});
 
 router.get("/all", async (req, res) => {
   try {
     let contentItems = await ContentItem.find(); // oldest
+    // My code here
     contentItems = contentItems.map(item => ({
       id: item._id,
       name: item.name,
@@ -292,7 +289,7 @@ router.post("/upload", async (req, res) => {
       res.status(200).send();
     }
   } catch (e) {
-    res.status(500).send("server error");
+    res.status(400).send("server error");
     console.log(e);
   }
 });

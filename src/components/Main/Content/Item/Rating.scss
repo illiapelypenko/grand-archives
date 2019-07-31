@@ -1,0 +1,27 @@
+.content__item-rating {
+  display: flex;
+  align-items: center;
+
+  .rating--personal {
+    display: flex;
+
+    .star {
+      font-size: 16px;
+      padding: 0px 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .star.enabled {
+      color: gold;
+    }
+
+    .star.disabled {
+      color: white;
+    }
+  }
+
+  .rating--general {
+    margin-left: 20px;
+  }
+}

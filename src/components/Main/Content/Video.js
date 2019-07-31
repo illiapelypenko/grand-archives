@@ -16,7 +16,7 @@ export default class Video extends Component {
   };
 
   render() {
-    const { name, uploaderName } = this.props;
+    const { name, id } = this.props;
 
     return (
       <div
@@ -30,7 +30,9 @@ export default class Video extends Component {
             type='video/mp4'
           />
         </video>
-        {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
+        {this.state.isHovered ? (
+          <ItemInfo info={this.props} token={this.props.token} id={id} />
+        ) : null}
       </div>
     );
   }

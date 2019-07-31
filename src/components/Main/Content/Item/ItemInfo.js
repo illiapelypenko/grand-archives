@@ -8,7 +8,13 @@ export default function ItemInfo(props) {
       <div className='content__item--hovered--up'>{name}</div>
       <div className='content__item--hovered--down'>
         <p>{`By: ${uploaderName}`}</p>
-        {/* <ItemRating rating={rating} /> */}
+        <ItemRating
+          rating={rating}
+          personalRating={2}
+          token={props.token}
+          id={props.id}
+          display={props.display}
+        />
       </div>
     </>
   );

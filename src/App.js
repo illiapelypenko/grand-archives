@@ -17,6 +17,7 @@ export default class App extends Component {
   state = {
     content: [],
     isAuth: false,
+    token: "",
     slider: true,
     name: "",
     menuOpened: false,
@@ -38,7 +39,8 @@ export default class App extends Component {
     if (localStorage.getItem("token")) {
       this.setState(state => ({
         isAuth: true,
-        name: localStorage.getItem("name")
+        name: localStorage.getItem("name"),
+        token: localStorage.getItem("token")
       }));
     }
     this.fetchContent();
@@ -93,16 +95,19 @@ export default class App extends Component {
 
   login = async name => {
     localStorage.setItem("name", name);
+    const token = localStorage.getItem("token");
     await this.setState({
       isAuth: true,
-      name
+      name,
+      token
     });
     this.setPage(this.state.contentProps.page);
   };
 
   logout = async () => {
     await this.setState({
-      isAuth: false
+      isAuth: false,
+      token: ""
     });
     this.setPage(this.state.contentProps.page);
   };
@@ -161,7 +166,8 @@ export default class App extends Component {
       slider,
       name,
       menuOpened,
-      pagesAmount
+      pagesAmount,
+      token
     } = this.state;
     return (
       <Router>
@@ -190,6 +196,7 @@ export default class App extends Component {
                   onChangeFilters={this.handleChangeFilters}
                   pagesAmount={pagesAmount}
                   setPage={this.setPage}
+                  token={token}
                 />
               )}
             />

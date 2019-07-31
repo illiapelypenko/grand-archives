@@ -1,21 +1,66 @@
 import React, { Component } from "react";
-import StarStroked from "./StarStroked";
+import serverURL from "../../../../serverURL";
+import "./Rating.scss";
 
 export default class ItemRating extends Component {
-  handleMouseEnter = index => {
-    console.log(index);
+  state = {
+    personalRating: this.props.personalRating || null,
+    hoveredItem: null,
+    isHovered: false,
+    className: "disabled"
+  };
+
+  handleMouseEnter = (e, i) => {
+    this.setState({ hoveredItem: i, isHovered: true });
+  };
+
+  handleMouseLeave = (e, i) => {
+    this.setState({ hoveredItem: null, isHovered: false });
+  };
+
+  handleClick = async (e, i) => {
+    e.preventDefault();
+    this.setState({ personalRating: i });
+    const res = await fetch(`${serverURL}/api/content/evaluate`, {
+      method: "POST",
+      body: JSON.stringify({
+        token: this.props.token,
+        rating: i,
+        itemId: this.props.id
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
   };
 
   render() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
+      let className = "disabled";
+      if (this.state.isHovered && i <= this.state.hoveredItem) {
+        className = "enabled";
+      }
+      if (!this.state.isHovered && i <= this.state.personalRating) {
+        className = "enabled";
+      }
       stars.push(
-        <StarStroked key={i} onMouseEnter={this.handleMouseEnter} index={i} />
+        <p
+          onClick={e => this.handleClick(e, i)}
+          onMouseEnter={e => this.handleMouseEnter(e, i)}
+          onMouseLeave={e => this.handleMouseLeave(e, i)}
+          className={className}
+        >
+          ★
+        </p>
       );
     }
+
     return (
-      <div className='content__item-rating'>
-        <div className='rating--personal'>{stars}</div>
+      <div className={`content__item-rating`}>
+        {this.props.token ? (
+          <div className='rating--personal'>{stars}</div>
+        ) : null}
         <div className='rating--general'>{this.props.rating}</div>
       </div>
     );

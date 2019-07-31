@@ -15,7 +15,7 @@ export default class Audio extends Component {
     this.setState({ isHovered: false });
   };
   render() {
-    const { name } = this.props;
+    const { name, id } = this.props;
     return (
       <div
         className='content__audio content__item'
@@ -29,7 +29,9 @@ export default class Audio extends Component {
           />
         </audio>
         <p className='content__item-name'>{name}</p>
-        {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
+        {this.state.isHovered ? (
+          <ItemInfo info={this.props} token={this.props.token} id={id} />
+        ) : null}
       </div>
     );
   }

@@ -33,22 +33,19 @@ class Menu extends Component {
 
   render() {
     const { isAuth, name, width, location } = this.props;
-    console.log(this.props);
     return (
       <div className='navbar__menu'>
         <div
           className='navbar__menu-item submenus-container'
           onMouseEnter={this.handleSwitchSubmenu}
           onMouseLeave={this.handleSwitchSubmenu}
-          onTouchEnter={this.handleSwitchSubmenu}
-          onTouchLeave={this.handleSwitchSubmenu}
         >
           <p
             className={`content-menu-item ${
               location.pathname === "/content" ? "active" : ""
             }`}
           >
-            <p>Content</p>
+            Content
           </p>
           {this.state.showSubmenues ? (
             <div className='submenus'>

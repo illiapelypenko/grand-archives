@@ -16,7 +16,7 @@ export default class Text extends Component {
     this.setState({ isHovered: false });
   };
   render() {
-    const { name, uploaderName } = this.props;
+    const { name, id } = this.props;
     return (
       <div
         className='content__text content__item'
@@ -32,7 +32,9 @@ export default class Text extends Component {
           <FileDownloadPic />
           <p className='content__item-name'>{name}</p>
         </a>
-        {this.state.isHovered ? <ItemInfo info={this.props} /> : null}
+        {this.state.isHovered ? (
+          <ItemInfo info={this.props} token={this.props.token} id={id} />
+        ) : null}
       </div>
     );
   }

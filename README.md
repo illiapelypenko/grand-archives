@@ -30,7 +30,7 @@ to start a client
 
 In the project directory run:
 
-### `lt --port 8000`
+### `lt --port 3000`
 
 to assign a unique publicly accessible url that will proxy all requests to locally running webserver,
 needed for sharing

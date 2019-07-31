@@ -23,6 +23,8 @@ class Content extends Component {
                         uploaderName={item.uploaderName}
                         rating={item.rating}
                         key={item.id}
+                        id={item.id}
+                        token={this.props.token}
                       />
                     );
                   case "video":
@@ -32,6 +34,8 @@ class Content extends Component {
                         uploaderName={item.uploaderName}
                         rating={item.rating}
                         key={item.id}
+                        id={item.id}
+                        token={this.props.token}
                       />
                     );
                   case "audio":
@@ -41,6 +45,8 @@ class Content extends Component {
                         uploaderName={item.uploaderName}
                         rating={item.rating}
                         key={item.id}
+                        id={item.id}
+                        token={this.props.token}
                       />
                     );
                   case "text":
@@ -50,6 +56,8 @@ class Content extends Component {
                         uploaderName={item.uploaderName}
                         rating={item.rating}
                         key={item.id}
+                        id={item.id}
+                        token={this.props.token}
                       />
                     );
                   default:
