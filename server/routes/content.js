@@ -135,7 +135,9 @@ router.put("/all", async (req, res) => {
     }
 
     // filtering based on search-word
-    contentItems = contentItems.filter(item => item.name.indexOf(search) > -1);
+    contentItems = contentItems.filter(
+      item => item.uploaderName.indexOf(search) > -1
+    );
 
     // 9 per page
     const contentLength = contentItems.length;

@@ -14,7 +14,7 @@ export default class Search extends Component {
           type='text'
           onChange={this.handleChange}
           value={this.props.word}
-          placeholder='enter name'
+          placeholder='enter uploader'
         />
       </form>
     );
