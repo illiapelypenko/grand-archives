@@ -62,12 +62,22 @@
 
         .content-menu-item {
           &.active {
-            color: red;
+            color: $red;
           }
         }
 
-        &:hover p {
-          color: $white;
+        p.content-menu-item {
+          @extend %unchooseable;
+
+          &.active {
+            color: $red;
+          }
+        }
+
+        &:hover p.content-menu-item {
+          &.active {
+            color: $white;
+          }
         }
 
         .submenus {
