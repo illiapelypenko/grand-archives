@@ -7,7 +7,8 @@ export default class ItemRating extends Component {
     personalRating: this.props.personalRating || null,
     hoveredItem: null,
     isHovered: false,
-    className: "disabled"
+    className: "disabled",
+    set: false
   };
 
   handleMouseEnter = (e, i) => {
@@ -20,7 +21,7 @@ export default class ItemRating extends Component {
 
   handleClick = async (e, i) => {
     e.preventDefault();
-    this.setState({ personalRating: i });
+    this.setState({ personalRating: i, set: true });
     const res = await fetch(`${serverURL}/api/content/evaluate`, {
       method: "POST",
       body: JSON.stringify({
@@ -33,6 +34,13 @@ export default class ItemRating extends Component {
       }
     });
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.personalRating !== props.personalRating && !state.set) {
+      return { personalRating: props.personalRating };
+    }
+    return null;
+  }
 
   render() {
     const stars = [];
