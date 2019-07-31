@@ -12,6 +12,7 @@ router.post("/evaluate", async (req, res) => {
   const { token, rating, itemId } = req.body;
   let verified;
   try {
+    // checking if user's token is valid
     verified = await jwt.verify(token, secretKey);
   } catch (e) {
     res.status(400).send("invalid token");
@@ -19,17 +20,28 @@ router.post("/evaluate", async (req, res) => {
   }
   try {
     if (verified) {
+      // finding uploader by his id(from token)
       const uploader = await User.findById(verified._id);
+
+      // checking if uploader has already rated this content-item
       let index = uploader.ratedContent.findIndex(
+        // first itemId from database
+        // second from request
         item => item.itemId === itemId
       );
+
       let ratedContent = uploader.ratedContent.slice();
+
+      //if uploader has already rated this content-item -> rating changes
+      //else pushes new information about rated content and it's rating
       if (index > -1) {
         ratedContent[index].rating = rating;
       } else {
         ratedContent.push({ itemId, rating });
       }
+
       await uploader.updateOne({ ratedContent });
+
       res.send();
     }
   } catch (e) {
@@ -40,7 +52,7 @@ router.post("/evaluate", async (req, res) => {
 
 router.put("/all", async (req, res) => {
   try {
-    let contentItems = await ContentItem.find(); // oldest
+    let contentItems = await ContentItem.find();
     contentItems = contentItems.map(item => ({
       id: item._id,
       name: item.name,
@@ -51,6 +63,7 @@ router.put("/all", async (req, res) => {
 
     let { videos, pictures, audios, texts, sortby, search, page } = req.query;
 
+    // from string to valid type
     page = +page;
     videos = videos === "true" ? true : false;
     pictures = pictures === "true" ? true : false;
@@ -70,10 +83,8 @@ router.put("/all", async (req, res) => {
       contentItems = contentItems.filter(item => item.type !== "text");
     }
 
+    // sorted by old by default
     switch (sortby) {
-      case "old":
-        // contentItems = contentItems;
-        break;
       case "new":
         contentItems = contentItems.reverse();
         break;
@@ -123,12 +134,15 @@ router.put("/all", async (req, res) => {
         break;
     }
 
+    // filtering based on search-word
     contentItems = contentItems.filter(item => item.name.indexOf(search) > -1);
 
+    // 9 per page
     const contentLength = contentItems.length;
     contentItems = contentItems.slice(page * 9, page * 9 + 9);
 
     try {
+      // adding personal rating to the content-item, if current user's token is verified
       const token = req.body.token;
       const validUser = await jwt.verify(token, secretKey);
       const uploader = await User.findById(validUser._id);
@@ -241,6 +255,7 @@ router.get(`/audio/:id`, (req, res) => {
 });
 
 router.post("/upload", async (req, res) => {
+  // checking if user is verified
   let isVerified;
   try {
     isVerified = await jwt.verify(req.body.token, secretKey);
@@ -282,12 +297,14 @@ router.post("/upload", async (req, res) => {
             break;
         }
 
+        //saving files to the local server, path bases on type
         const path = `${contentURL}/${type}s/${file.name}`;
         await file.mv(path); // wait while saving a file
         const name = file.name;
         const uploaderName = req.body.uploaderName;
         const birthtimeMs = await fs.statSync(path).birthtimeMs;
 
+        // adding information about files to the db
         let newContentItem = new ContentItem({
           path,
           name,

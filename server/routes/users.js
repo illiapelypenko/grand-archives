@@ -10,14 +10,19 @@ router.post("/register", async (req, res) => {
     let { name, email, password } = req.body;
     const userEmail = await User.findOne({ email });
     const userName = await User.findOne({ name });
+
+    // checking if email or name already exists
     if (userEmail) {
       return res.status(400).json({ error: "email" });
     }
     if (userName) {
       return res.status(400).json({ error: "name" });
     }
+
+    // hashing password
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
+
     const newUser = new User({
       name,
       email,
@@ -26,6 +31,7 @@ router.post("/register", async (req, res) => {
     });
     const doc = await newUser.save();
     const token = jwt.sign({ _id: doc._id }, secretKey);
+
     res.json({ token, name: doc.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });
@@ -37,14 +43,19 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+
+    // checking if email is valid
     if (!user) {
       return res.status(400).json({ error: "email" });
     }
+
+    // checking if password is valid
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(400).json({ error: "password" });
     }
     const token = jwt.sign({ _id: user._id }, secretKey);
+
     res.json({ token, name: user.name });
   } catch (e) {
     res.status(500).json({ error: "SERVER ERROR" });
