@@ -32,26 +32,30 @@
     align-self: center;
     margin: 0px 25px;
     z-index: 1;
+    position: relative;
 
     iframe {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
       height: 100%;
       width: 100%;
     }
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 767px) {
   .contacts {
     grid-template-columns: 1fr;
-    grid-template-rows: max-content auto;
+    grid-template-rows: max-content 500px;
     color: $white;
     min-height: 93vh;
-    padding-top: 100px;
+    padding-top: 75px;
 
     .contacts__info {
       display: flex;
       flex-direction: column;
-      margin: 30px 0px;
+      margin: 0px 30px;
 
       .contacts__info-item {
         margin: 15px;

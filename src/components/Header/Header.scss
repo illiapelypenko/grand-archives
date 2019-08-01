@@ -9,10 +9,6 @@
     z-index: 1;
   }
 
-  &__slider-state-btn.pdtop {
-    // top: 150px;
-  }
-
   .navbar {
     position: fixed;
     z-index: 4;
@@ -29,7 +25,7 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
-      top: 30px;
+      top: 20px;
       right: 30px;
 
       &:hover {
@@ -175,15 +171,15 @@
 
 @media (max-width: 700px) {
   .header {
-    &__slider-state-btn.pdtop {
-      top: 150px;
+    &__slider-state-btn {
+      top: 70px;
     }
     .navbar {
       display: grid;
       grid-template-columns: 100%;
       grid-template-rows: max-content max-content;
       justify-items: center;
-      grid-gap: 10px;
+      padding: 5px;
     }
   }
 }
@@ -196,7 +192,7 @@
       }
       .navbar__menu-icon {
         right: 5px;
-        top: 25px;
+        top: 15px;
       }
 
       .navbar__menu {

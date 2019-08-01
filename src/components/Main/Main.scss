@@ -1,7 +1,7 @@
 @import "../../vars";
 
 .main {
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 100px;
   background: #fff;
   display: grid;
@@ -43,9 +43,9 @@
   }
 }
 
-.main.pdtop {
-  padding-top: 150px;
-}
+// .main.pdtop {
+//   padding-top: 150px;
+// }
 
 @media (max-width: 1200px) {
   .main {

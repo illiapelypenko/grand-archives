@@ -21,7 +21,7 @@ export default class Main extends Component {
     } = this.props;
 
     return (
-      <div className={`main ${menuOpened ? "pdtop" : null}`}>
+      <div className={`main`}>
         {isAuth ? <Uploader onUpload={onUpload} /> : null}
         <Content content={content} token={token} />
         <Filtration

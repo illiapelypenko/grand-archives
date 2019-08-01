@@ -31,3 +31,23 @@ a:visited {
 .small-pic {
   @extend %secondary-icon;
 }
+
+@media (max-width: 700px) {
+  .app.menuopened {
+    .header__slider-state-btn {
+      top: 120px;
+    }
+
+    .main {
+      padding-top: 150px;
+    }
+
+    .contacts {
+      padding-top: 150px;
+    }
+
+    .auth {
+      padding-top: 150px;
+    }
+  }
+}

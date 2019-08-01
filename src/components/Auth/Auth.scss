@@ -1,7 +1,7 @@
 @import "../../vars";
 
 .auth {
-  height: 100vh;
+  min-height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,6 +44,7 @@
           input {
             padding: 5px 10px;
             font-size: 18px;
+            margin: 0px 5px;
           }
 
           .auth__error-msg {

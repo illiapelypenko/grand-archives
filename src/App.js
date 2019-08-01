@@ -182,7 +182,7 @@ export default class App extends Component {
     } = this.state;
     return (
       <Router>
-        <div className='app'>
+        <div className={`app ${menuOpened ? "menuopened" : ""}`}>
           <Header
             isAuth={isAuth}
             slider={slider}
@@ -201,7 +201,6 @@ export default class App extends Component {
                   onUpload={this.fetchContent}
                   content={content}
                   isAuth={isAuth}
-                  menuOpened={menuOpened}
                   setFiltration={this.setFiltration}
                   filters={this.state.contentProps.filters}
                   onChangeFilters={this.handleChangeFilters}

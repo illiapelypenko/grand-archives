@@ -57,7 +57,6 @@ class Header extends Component {
           onSubmenuClick={onSubmenuClick}
         />
         <Eye
-          menuOpened={menuOpened}
           showSlider={showSlider}
           onClick={this.hadleShowSliderStatusChange}
         />

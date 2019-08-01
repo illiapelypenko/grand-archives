@@ -9,6 +9,7 @@ export default function Map() {
         src='https://maps.google.com/maps?q=Khreschatyk%20St%2C%202%2C%20Kyiv%2C%2002000&t=&z=13&ie=UTF8&iwloc=&output=embed'
         frameBorder='0'
         scrolling='no'
+        wmode='transparent'
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import Signout from "./SignoutPic";
+import { EEXIST } from "constants";
 
 class Menu extends Component {
   state = {
@@ -23,7 +24,8 @@ class Menu extends Component {
     }));
   };
 
-  handleSwitchSubmenu = () => {
+  handleSwitchSubmenu = e => {
+    console.log(e.target);
     this.setState(state => ({ showSubmenues: !state.showSubmenues }));
   };
 
