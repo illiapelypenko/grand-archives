@@ -1,6 +1,7 @@
 @import "./vars";
 
 * {
+  outline: none;
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -30,6 +31,10 @@ a:visited {
 
 .small-pic {
   @extend %secondary-icon;
+}
+
+.app {
+  position: relative;
 }
 
 @media (max-width: 700px) {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Logo from "./Logo";
-import Menu from "./Menu";
+// import Menu from "./Menu";
+import NewMenu from "./NewMenu";
 import ArrowDownIcon from "./ArrowDownIcon";
 import ArrowUpIcon from "./ArrowUpIcon";
 
@@ -42,14 +43,13 @@ export default class Navbar extends Component {
             <ArrowDownIcon onClick={this.handleClick} />
           )
         ) : null}
-        {width > 700 || showMenu ? (
-          <Menu
-            isAuth={isAuth}
-            logout={logout}
-            name={name}
-            onSubmenuClick={onSubmenuClick}
-          />
-        ) : null}
+        <NewMenu
+          isAuth={isAuth}
+          logout={logout}
+          name={name}
+          onSubmenuClick={onSubmenuClick}
+          showSelf={width > 700 || showMenu ? true : false}
+        />
       </div>
     );
   }
