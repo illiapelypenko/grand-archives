@@ -30,7 +30,7 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { isAuth, logout, name, onSubmenuClick } = this.props;
+    const { isAuth, logout, name, onSubmenuClick, showLogout } = this.props;
     const { width, showMenu } = this.state;
 
     return (
@@ -44,6 +44,7 @@ export default class Navbar extends Component {
           )
         ) : null}
         <NewMenu
+          showLogout={showLogout}
           isAuth={isAuth}
           logout={logout}
           name={name}

@@ -22,14 +22,18 @@ class NewMenu extends Component {
   };
 
   handleShowLogout = () => {
+    this.props.showLogout();
     this.setState(state => ({
       showLogout: !state.showLogout
     }));
   };
 
-  handleSubmenuClick = e => {
+  handleSubmenuClick = (e, name) => {
     e.stopPropagation();
-    this.props.onSubmenuClick(e, "pictures");
+    this.setState(state => ({
+      showSubmenu: false
+    }));
+    this.props.onSubmenuClick(name);
   };
 
   showSubmenu = e => {
@@ -46,13 +50,15 @@ class NewMenu extends Component {
   };
 
   render() {
-    const { isAuth, name, location, onSubmenuClick, showSelf } = this.props;
+    const { isAuth, name, location, showSelf } = this.props;
     const { showLogout, showSubmenu } = this.state;
 
     return (
       <div className={`menu ${showSelf ? "" : "hidden"}`}>
         <div
-          className='menu__item'
+          className={`menu__item ${
+            location.pathname === "/content" ? "active" : ""
+          }`}
           onTouchStart={this.showSubmenu}
           onMouseEnter={this.showSubmenu}
           onMouseLeave={this.hideSubmenu}
@@ -61,19 +67,62 @@ class NewMenu extends Component {
           <div className={`submenu ${showSubmenu ? "" : "hidden"}`}>
             <Link
               className='submenu__item'
-              onClick={this.handleSubmenuClick}
+              onClick={e => this.handleSubmenuClick(e, "videos")}
+              to='/content'
+            >
+              Videos
+            </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "pictures")}
               to='/content'
             >
               Pictures
             </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "audios")}
+              to='/content'
+            >
+              Audios
+            </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "texts")}
+              to='/content'
+            >
+              Text
+            </Link>
           </div>
         </div>
+        <div className='menu__item-divider' />
+
         <NavLink className='menu__item' exact to='/contacts'>
           Contacts
         </NavLink>
-        <NavLink className='menu__item' exact to='/auth'>
-          Log in
-        </NavLink>
+        <div className='menu__item-divider' />
+
+        {isAuth ? (
+          <div className='menu__user'>
+            <div className='menu__user-icon' onClick={this.handleShowLogout}>
+              {name[0]}
+            </div>
+            {showLogout ? (
+              <div className='menu__user-menu'>
+                <div className='menu__logout-icon' onClick={this.logout}>
+                  <Signout />
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ) : (
+          <NavLink className='menu__item' exact to='/auth'>
+            Log in
+          </NavLink>
+        )}
       </div>
     );
   }

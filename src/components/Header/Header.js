@@ -7,7 +7,8 @@ import { withRouter } from "react-router-dom";
 
 class Header extends Component {
   state = {
-    showSlider: true
+    showSlider: true,
+    showLogout: false
   };
 
   componentDidMount() {
@@ -18,6 +19,10 @@ class Header extends Component {
       this.setState({ showSlider: JSON.parse(showSlider) });
     }
   }
+
+  switchShowLogout = () => {
+    this.setState(state => ({ showLogout: !state.showLogout }));
+  };
 
   hadleShowSliderStatusChange = () => {
     if (!/^\/auth/.test(this.props.location.pathname)) {
@@ -45,7 +50,7 @@ class Header extends Component {
       logout,
       switchMenu
     } = this.props;
-    const { showSlider } = this.state;
+    const { showSlider, showLogout } = this.state;
     return (
       <div className='header'>
         {showSlider ? <Slider slider={slider} /> : null}
@@ -55,8 +60,10 @@ class Header extends Component {
           name={name}
           switchMenu={switchMenu}
           onSubmenuClick={onSubmenuClick}
+          showLogout={this.switchShowLogout}
         />
         <Eye
+          showLogout={showLogout}
           showSlider={showSlider}
           onClick={this.hadleShowSliderStatusChange}
         />
