@@ -21,7 +21,7 @@ class Header extends Component {
   }
 
   switchShowLogout = () => {
-    this.setState(state => ({ showLogout: !state.showLogout }));
+    this.setState(state => ({ showLogout: true }));
   };
 
   hadleShowSliderStatusChange = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Logo from "./Logo";
 // import Menu from "./Menu";
-import NewMenu from "./NewMenu";
+import Menu from "./Menu";
 import ArrowDownIcon from "./ArrowDownIcon";
 import ArrowUpIcon from "./ArrowUpIcon";
 
@@ -43,7 +43,7 @@ export default class Navbar extends Component {
             <ArrowDownIcon onClick={this.handleClick} />
           )
         ) : null}
-        <NewMenu
+        <Menu
           showLogout={showLogout}
           isAuth={isAuth}
           logout={logout}

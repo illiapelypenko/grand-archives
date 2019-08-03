@@ -6,10 +6,7 @@ export default class Eye extends Component {
   render() {
     const { showSlider, onClick, showLogout } = this.props;
     return (
-      <div
-        className={`header__slider-state-btn ${showLogout ? "islogout" : ""}`}
-        onClick={onClick}
-      >
+      <div className={`header__slider-state-btn`} onClick={onClick}>
         {showSlider ? <EyePic /> : <EyeSlashed />}
       </div>
     );

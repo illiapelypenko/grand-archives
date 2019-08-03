@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import Signout from "./SignoutPic";
 import "./Menu.scss";
-import Submenus from "./Submenus";
+import { Link } from "react-router-dom";
+
+// dropdown menu doesn's work over iframe(map) (no fix)
 
 class Menu extends Component {
   state = {
     showLogout: false,
-    showSubmenus: false
+    showSubmenu: false
   };
 
   logout = () => {
@@ -20,74 +22,104 @@ class Menu extends Component {
   };
 
   handleShowLogout = () => {
+    this.props.showLogout();
     this.setState(state => ({
       showLogout: !state.showLogout
     }));
   };
 
   handleSubmenuClick = (e, name) => {
+    e.stopPropagation();
+    this.setState(state => ({
+      showSubmenu: false
+    }));
     this.props.onSubmenuClick(name);
   };
 
-  handleShowSubmenus = e => {
+  showSubmenu = e => {
+    console.log("!");
     this.setState(state => ({
-      showSubmenus: true
+      showSubmenu: true
     }));
   };
 
-  handleHideSubmenus = e => {
+  hideSubmenu = e => {
     this.setState(state => ({
-      showSubmenus: false
+      showSubmenu: false
     }));
   };
 
   render() {
-    const { isAuth, name, location } = this.props;
-    const { showLogout, showSubmenus } = this.state;
+    const { isAuth, name, location, showSelf } = this.props;
+    const { showLogout, showSubmenu } = this.state;
+
     return (
-      <div className='navbar__menu'>
-        <div className='navbar__menu-item submenus-container'>
-          <p
-            className={`content-menu-item ${
-              location.pathname === "/content" ? "active" : ""
-            }`}
-            onMouseEnter={this.handleShowSubmenus}
-            onMouseLeave={this.handleHideSubmenus}
-          >
-            Content
-          </p>
-          <Submenus
-            onSubmenuClick={this.handleSubmenuClick}
-            showSubmenus={showSubmenus}
-          />
+      <div className={`menu ${showSelf ? "" : "hidden"}`}>
+        <div
+          className={`menu__item ${
+            location.pathname === "/content" ? "active" : ""
+          }`}
+          onTouchStart={this.showSubmenu}
+          onMouseEnter={this.showSubmenu}
+          onMouseLeave={this.hideSubmenu}
+        >
+          <p>Content</p>
+          <div className={`submenu ${showSubmenu ? "" : "hidden"}`}>
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "videos")}
+              to='/content'
+            >
+              Videos
+            </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "pictures")}
+              to='/content'
+            >
+              Pictures
+            </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "audios")}
+              to='/content'
+            >
+              Audios
+            </Link>
+            <div className='submenu__item-divider' />
+            <Link
+              className='submenu__item'
+              onClick={e => this.handleSubmenuClick(e, "texts")}
+              to='/content'
+            >
+              Text
+            </Link>
+          </div>
         </div>
-        <div className='navbar__menu-item-divider' />
-        <NavLink className='navbar__menu-item' exact to='/contacts'>
+        <div className='menu__item-divider' />
+
+        <NavLink className='menu__item' exact to='/contacts'>
           Contacts
         </NavLink>
-        <div className='navbar__menu-item-divider' />
+        <div className='menu__item-divider' />
 
-        {/* Auth */}
         {isAuth ? (
-          <div className='navbar__user-item'>
-            <div className='navbar__user-icon' onClick={this.handleShowLogout}>
+          <div className='menu__user'>
+            <div className='menu__user-icon' onClick={this.handleShowLogout}>
               {name[0]}
             </div>
             {showLogout ? (
-              <div className='navbar__user-menu-item'>
-                <div className='navbar__logout-icon' onClick={this.logout}>
+              <div className='menu__user-menu'>
+                <div className='menu__logout-icon' onClick={this.logout}>
                   <Signout />
                 </div>
               </div>
             ) : null}
           </div>
         ) : (
-          <NavLink
-            activeClassName='active'
-            className='navbar__menu-item'
-            exact
-            to='/auth'
-          >
+          <NavLink className='menu__item' exact to='/auth'>
             Log in
           </NavLink>
         )}

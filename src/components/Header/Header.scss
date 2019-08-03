@@ -9,15 +9,10 @@
   &__slider-state-btn {
     @extend %secondary-icon;
     position: absolute;
-    top: 90px;
-    right: 25px;
-    z-index: 11;
-  }
-
-  &__slider-state-btn.islogout {
     top: 140px;
+    right: 25px;
+    z-index: 2;
   }
-
   .navbar {
     position: fixed;
     z-index: 11;

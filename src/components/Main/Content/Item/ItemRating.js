@@ -67,10 +67,10 @@ export default class ItemRating extends Component {
     }
 
     return (
-      <div className={`content__item-rating`}>
-        {this.props.token ? (
-          <div className='rating--personal'>{stars}</div>
-        ) : null}
+      <div
+        className={`content__item-rating ${this.props.token ? "" : "hidden"}`}
+      >
+        <div className='rating--personal'>{stars}</div>
       </div>
     );
   }

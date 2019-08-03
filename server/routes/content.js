@@ -295,8 +295,7 @@ router.post("/upload", async (req, res) => {
             type = "text";
             break;
           default:
-            type = "other";
-            break;
+            throw Error("unknown type");
         }
 
         //saving files to the local server, path bases on type

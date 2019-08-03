@@ -4,7 +4,7 @@ import FacebookIcon from "./FacebookIcon";
 import TelegramIcon from "./TelegramIcon";
 
 export default function Socials() {
-  const url = encodeURI("https://wet-kangaroo-58.localtunnel.me");
+  const url = "https://angry-grasshopper-81.localtunnel.me";
 
   return (
     <div className='socials'>

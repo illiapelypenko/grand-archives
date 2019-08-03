@@ -5,6 +5,22 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
 
+router.put("/isuser", async (req, res) => {
+  const token = req.body.token;
+  try {
+    const isVerified = await jwt.verify(token, secretKey);
+    const user = await User.findById(isVerified._id);
+    if (user) {
+      res.json({ status: "ok" });
+    } else {
+      res.status(500).send("invalid");
+    }
+  } catch (e) {
+    res.status(500).send("invalid");
+    console.log(e);
+  }
+});
+
 router.post("/register", async (req, res) => {
   try {
     let { name, email, password } = req.body;

@@ -1,56 +1,65 @@
 @import "../../../vars";
 
-.navbar__menu {
+.menu {
+  @extend %unchooseable;
   font-size: 20px;
   color: $white;
   font-weight: bold;
   display: flex;
   align-items: center;
+  z-index: 12;
 
-  .submenus-container {
+  &.hidden {
+    display: none;
+  }
+
+  .menu__item-divider {
+    width: 1px;
+    height: 30px;
+    background: $white;
+  }
+
+  .menu__item {
+    cursor: pointer;
+    display: block;
+    padding: 10px 20px;
+    margin: 5px 10px;
+    width: max-content;
     position: relative;
 
-    .content-menu-item {
-      &.active {
-        color: $red;
-      }
+    &.active {
+      color: $red;
     }
 
-    p.content-menu-item {
-      @extend %unchooseable;
-
-      &.active {
-        color: $red;
-      }
-    }
-
-    &:hover p.content-menu-item {
-      &.active {
-        color: $white;
-      }
-    }
-
-    .submenus {
+    &:hover {
       background: $red;
-      padding: 10px 0px 0px 0px;
+      color: $white;
+    }
+
+    .submenu {
+      background: $red;
       position: absolute;
       top: 100%;
       left: 0px;
-      min-width: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      z-index: 40;
+      z-index: 13;
 
-      .vertical-line {
+      &.hidden {
+        display: none;
+      }
+
+      .submenu__item-divider {
         width: 60%;
         height: 1px;
         background: $white;
         margin: auto;
       }
 
-      .submenu {
-        cursor: pointer;
-        padding: 15px;
+      .submenu__item {
+        padding: 10px 0px;
+        margin: 5px 0px;
         text-align: center;
 
         &:hover {
@@ -58,27 +67,23 @@
         }
       }
     }
-
-    .submenus.hidden {
-      display: none;
-    }
   }
 
-  .navbar__user-item {
+  .menu__user {
     position: relative;
     cursor: pointer;
 
-    .navbar__user-icon {
+    .menu__user-icon {
       @extend %main-icon;
       margin-left: 30px;
     }
 
-    .navbar__user-menu-item {
+    .menu__user-menu {
       position: absolute;
       right: 0;
       bottom: -65px;
 
-      .navbar__logout-icon {
+      .menu__logout-icon {
         @extend %main-icon;
       }
 
@@ -92,53 +97,41 @@
       }
     }
   }
-
-  &-item-divider {
-    width: 1px;
-    height: 30px;
-    background: $white;
-  }
-
-  &-item {
-    cursor: pointer;
-    display: block;
-    padding: 10px 20px;
-    margin: 5px 10px;
-    width: max-content;
-
-    &.active {
-      color: $red;
-    }
-
-    &:hover {
-      background: $red;
-      color: $white;
-    }
-  }
 }
 
 @media (max-width: 470px) {
-  .navbar__menu {
-    .navbar__menu-item {
+  .menu {
+    .menu__item {
       padding: 5px 10px;
-      margin: 5px 10px;
-    }
+      font-size: 14px;
 
-    .navbar__user-item {
-      .navbar__user-icon {
-        margin-left: 10px;
-        height: 40px;
-        width: 40px;
-        font-size: 20px;
+      .submenu {
+        .submenu__item {
+          padding: 5px 10px;
+        }
       }
     }
 
-    .submenus-container {
-      .submenus {
-        font-size: 14px;
+    .menu__user {
+      .menu__user-icon {
+        margin-left: 10px;
+        height: 30px;
+        width: 30px;
+        font-size: 16px;
+      }
 
-        .submenu {
-          padding: 15px;
+      .menu__user-menu {
+        bottom: -40px;
+
+        .menu__logout-icon {
+          margin-left: 10px;
+          height: 30px;
+          width: 30px;
+          font-size: 16px;
+        }
+        svg {
+          width: 15px;
+          height: 15px;
         }
       }
     }

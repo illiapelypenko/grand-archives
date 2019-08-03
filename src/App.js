@@ -36,12 +36,26 @@ export default class App extends Component {
   };
 
   async componentDidMount() {
-    if (localStorage.getItem("token")) {
-      await this.setState({
-        isAuth: true,
-        name: localStorage.getItem("name"),
-        token: localStorage.getItem("token")
+    const token = localStorage.getItem("token");
+    if (token) {
+      const res = await fetch(`${serverURL}/api/users/isuser`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token })
       });
+      console.log(res.status);
+      if (res.status === 200) {
+        await this.setState({
+          isAuth: true,
+          name: localStorage.getItem("name"),
+          token
+        });
+      } else {
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+      }
     }
     this.fetchContent();
   }

@@ -27,3 +27,10 @@ yarn-error.log*
 /pictures
 /texts
 /audios
+videos/
+pictures/
+texts/
+audios/
+contentStorage
+/contentStorage
+contentStorage/
