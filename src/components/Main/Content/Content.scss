@@ -131,7 +131,7 @@
   .content {
     &__container {
       grid-template-columns: repeat(2, auto);
-      .content__item:last-of-type {
+      .content__item:last-of-type:nth-child(odd) {
         grid-column: 1 / span 2;
         justify-self: center;
       }
@@ -149,7 +149,7 @@
       grid-column-gap: 20px;
       grid-row-gap: 20px;
       justify-content: center;
-      .content__item:last-of-type {
+      .content__item:last-of-type:nth-child(odd) {
         grid-column: 1 / 2;
         justify-self: initial;
       }

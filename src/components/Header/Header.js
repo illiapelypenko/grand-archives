@@ -45,7 +45,6 @@ class Header extends Component {
       isAuth,
       slider,
       name,
-      menuOpened,
       onSubmenuClick,
       logout,
       switchMenu

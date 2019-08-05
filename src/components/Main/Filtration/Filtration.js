@@ -3,33 +3,28 @@ import "./Filtration.scss";
 import Search from "./Search";
 
 export default class Filtration extends Component {
-  state = {
-    searchWord: "",
-    sortby: "new"
-  };
-
   handleChange = e => {
     this.props.onChangeFilters(e);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setFiltration(this.state.searchWord, this.state.sortby);
+    this.props.setFiltration();
   };
 
   handleWordChange = e => {
     const { value } = e.target;
-    this.setState({ searchWord: value });
+    this.props.onSearchWordChange(value);
   };
 
   handleSortingChange = e => {
     const { value } = e.target;
-    this.setState({ sortby: value });
+    this.props.onSortWordChange(value);
   };
 
   render() {
     const { videos, pictures, audios, texts } = this.props.filters;
-    const { sortby, searchWord } = this.state;
+    const { sortby, search } = this.props;
 
     return (
       <form className='filtration' onSubmit={this.handleSubmit}>
@@ -66,7 +61,7 @@ export default class Filtration extends Component {
         </div>
         <input type='submit' value='Submit' id='submit' />
 
-        <Search onWordChange={this.handleWordChange} word={searchWord} />
+        <Search onWordChange={this.handleWordChange} word={search} />
 
         <div className='filtration__item' style={{ gridArea: "ad" }}>
           <input

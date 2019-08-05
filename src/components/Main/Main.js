@@ -17,7 +17,11 @@ export default class Main extends Component {
       pagesAmount,
       setPage,
       token,
-      currentPage
+      currentPage,
+      sortby,
+      search,
+      onSortWordChange,
+      onSearchWordChange
     } = this.props;
 
     return (
@@ -28,6 +32,10 @@ export default class Main extends Component {
           setFiltration={setFiltration}
           filters={filters}
           onChangeFilters={onChangeFilters}
+          sortby={sortby}
+          search={search}
+          onSortWordChange={onSortWordChange}
+          onSearchWordChange={onSearchWordChange}
         />
         <Pages
           pagesAmount={pagesAmount}

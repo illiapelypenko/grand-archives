@@ -31,6 +31,7 @@ export default class Text extends Component {
           href={`
             ${serverURL}/api/content/text/${name}`}
           target='_blank'
+          rel='noopener noreferrer'
           download
         >
           <FileDownloadPic />

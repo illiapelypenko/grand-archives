@@ -4,7 +4,7 @@ import EyeSlashed from "./EyeSlashPic.js";
 
 export default class Eye extends Component {
   render() {
-    const { showSlider, onClick, showLogout } = this.props;
+    const { showSlider, onClick } = this.props;
     return (
       <div className={`header__slider-state-btn`} onClick={onClick}>
         {showSlider ? <EyePic /> : <EyeSlashed />}

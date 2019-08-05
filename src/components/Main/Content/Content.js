@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "./Content.scss";
 import Picture from "./Picture";
 import Video from "./Video";

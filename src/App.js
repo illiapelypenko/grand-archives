@@ -56,6 +56,13 @@ export default class App extends Component {
         localStorage.removeItem("name");
       }
     }
+    const localSettings = localStorage.getItem("settings");
+    if (localSettings) {
+      const settings = JSON.parse(localSettings);
+      await this.setState({
+        contentProps: settings
+      });
+    }
     this.fetchContent();
   }
 
@@ -91,19 +98,19 @@ export default class App extends Component {
     }));
   };
 
-  setFiltration = async (searchWord, sortby) => {
+  setFiltration = async () => {
     await this.setState(state => ({
       contentProps: {
-        ...state.contentProps,
-        search: searchWord,
-        sortby: sortby
+        ...state.contentProps
       }
     }));
     this.setPage(this.state.contentProps.page);
   };
 
   switchMenu = () => {
-    this.setState(state => ({ menuOpened: !state.menuOpened }));
+    this.setState(state => ({
+      menuOpened: !state.menuOpened
+    }));
   };
 
   login = async name => {
@@ -126,6 +133,8 @@ export default class App extends Component {
   };
 
   fetchContent = async () => {
+    localStorage.setItem("settings", JSON.stringify(this.state.contentProps));
+
     let { sortby, search, page } = this.state.contentProps;
     let { videos, pictures, audios, texts } = this.state.contentProps.filters;
 
@@ -138,7 +147,9 @@ export default class App extends Component {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ token: this.state.token })
+        body: JSON.stringify({
+          token: this.state.token
+        })
       }
     );
     let data = await res.json();
@@ -155,7 +166,9 @@ export default class App extends Component {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ token: this.state.token })
+          body: JSON.stringify({
+            token: this.state.token
+          })
         }
       );
       data = await res.json();
@@ -181,6 +194,24 @@ export default class App extends Component {
       }
     }));
     this.fetchContent();
+  };
+
+  handleSortWordChange = name => {
+    this.setState({
+      contentProps: {
+        ...this.state.contentProps,
+        sortby: name
+      }
+    });
+  };
+
+  handleSearchWordChange = name => {
+    this.setState({
+      contentProps: {
+        ...this.state.contentProps,
+        search: name
+      }
+    });
   };
 
   render() {
@@ -221,6 +252,10 @@ export default class App extends Component {
                   setPage={this.setPage}
                   token={token}
                   currentPage={this.state.contentProps.page}
+                  sortby={this.state.contentProps.sortby}
+                  search={this.state.contentProps.search}
+                  onSortWordChange={this.handleSortWordChange}
+                  onSearchWordChange={this.handleSearchWordChange}
                 />
               )}
             />

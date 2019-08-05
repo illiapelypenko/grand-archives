@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 
 export default class Pages extends Component {
-  state = {
-    page: 0
-  };
-
   handleOnclick = number => {
     return () => {
-      this.setState({ page: number });
       this.props.setPage(number);
     };
   };
@@ -36,7 +31,7 @@ export default class Pages extends Component {
             return (
               <div
                 className={`page ${
-                  +this.state.page === i ? "current-page" : ""
+                  +this.props.currentPage === i ? "current-page" : ""
                 }`}
                 onClick={this.handleOnclick(i)}
                 key={i}
