@@ -45,7 +45,6 @@ export default class App extends Component {
         },
         body: JSON.stringify({ token })
       });
-      console.log(res.status);
       if (res.status === 200) {
         await this.setState({
           isAuth: true,
@@ -221,6 +220,7 @@ export default class App extends Component {
                   pagesAmount={pagesAmount}
                   setPage={this.setPage}
                   token={token}
+                  currentPage={this.state.contentProps.page}
                 />
               )}
             />

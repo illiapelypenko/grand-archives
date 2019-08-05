@@ -1,7 +1,9 @@
+/* autoprefixer grid: autoplace */
 @import "../../vars";
 
 .header {
   z-index: 10;
+
   .header * {
     @extend %unchooseable;
   }

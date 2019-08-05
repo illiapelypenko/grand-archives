@@ -8,7 +8,6 @@ import Filtration from "./Filtration/Filtration";
 export default class Main extends Component {
   render() {
     const {
-      menuOpened,
       isAuth,
       onUpload,
       content,
@@ -17,7 +16,8 @@ export default class Main extends Component {
       onChangeFilters,
       pagesAmount,
       setPage,
-      token
+      token,
+      currentPage
     } = this.props;
 
     return (
@@ -29,7 +29,11 @@ export default class Main extends Component {
           filters={filters}
           onChangeFilters={onChangeFilters}
         />
-        <Pages pagesAmount={pagesAmount} setPage={setPage} />
+        <Pages
+          pagesAmount={pagesAmount}
+          setPage={setPage}
+          currentPage={currentPage}
+        />
       </div>
     );
   }

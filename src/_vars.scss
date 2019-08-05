@@ -24,9 +24,10 @@ $grey: lightgray;
   border: none;
   background: $red;
   color: $white;
+  font-size: 14px;
   padding: 5px 10px;
-  font-size: 20px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 %main-icon {

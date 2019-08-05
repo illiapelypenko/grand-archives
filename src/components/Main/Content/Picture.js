@@ -20,12 +20,12 @@ export default class Picture extends Component {
     const { isHovered } = this.state;
 
     return (
-      <a
+      <div
         className={`content__picture content__item ${
           !isHovered ? "not-display" : ""
         }`}
-        target='_blank'
-        href={`${serverURL}/api/content/picture/${name}`}
+        // target='_blank'
+        // href={`${serverURL}/api/content/picture/${name}`}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -37,7 +37,7 @@ export default class Picture extends Component {
           display={isHovered ? true : false}
           personalRating={personalRating}
         />
-      </a>
+      </div>
     );
   }
 }

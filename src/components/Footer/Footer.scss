@@ -83,3 +83,13 @@
     grid-gap: 10px;
   }
 }
+
+@media screen and (-ms-high-contrast: active),
+  screen and (-ms-high-contrast: none) {
+  /* IE10+ specific styles go here */
+  .footer {
+    display: flex;
+    padding: 20px;
+    height: 50px;
+  }
+}

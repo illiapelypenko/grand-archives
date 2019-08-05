@@ -56,6 +56,7 @@ export default class ItemRating extends Component {
       }
       stars.push(
         <p
+          key={i}
           onClick={e => this.handleClick(e, i)}
           onMouseEnter={e => this.handleMouseEnter(e, i)}
           onMouseLeave={e => this.handleMouseLeave(e, i)}
