@@ -52,12 +52,6 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .footer {
-    // min-height: 70px;
-  }
-}
-
 @media (max-width: 700px) {
   .footer {
     grid-template-columns: repeat(2, 1fr);

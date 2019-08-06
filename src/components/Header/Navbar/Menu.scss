@@ -37,6 +37,11 @@
       color: $white;
     }
 
+    &.hovered {
+      background: $red;
+      color: $white;
+    }
+
     .submenu {
       background: $red;
       position: absolute;

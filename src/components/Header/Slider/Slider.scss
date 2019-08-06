@@ -67,14 +67,6 @@
   }
 }
 
-@media (max-width: 490px) {
-  .slider {
-    .slider__indicators {
-      // bottom: 100px;
-    }
-  }
-}
-
 @media (max-width: 400px) {
   .slider {
     &__slides {
@@ -83,9 +75,6 @@
           font-size: 70px;
         }
       }
-    }
-
-    &__indicators {
     }
   }
 }

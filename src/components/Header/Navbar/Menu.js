@@ -58,7 +58,7 @@ class Menu extends Component {
         <div
           className={`menu__item ${
             location.pathname === "/content" ? "active" : ""
-          }`}
+          } ${showSubmenu ? "hovered" : ""}`}
           onTouchStart={this.showSubmenu}
           onMouseEnter={this.showSubmenu}
           onMouseLeave={this.hideSubmenu}
