@@ -6,7 +6,7 @@ export default function ItemInfo({ personalRating, token, id, display, info }) {
 
   return (
     <>
-      <div className='content__item--hovered--up'>{name.slice(0, 30)}</div>
+      <div className='content__item--hovered--up'>{name}</div>
       <div className='content__item--hovered--down'>
         <p>{`By: ${uploaderName}`}</p>
         <ItemRating

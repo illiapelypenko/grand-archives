@@ -7,7 +7,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <form className='search'>
+      <div className='search'>
         <label htmlFor='search'>Search:</label>
         <input
           id='search'
@@ -16,7 +16,7 @@ export default class Search extends Component {
           value={this.props.word}
           placeholder='enter uploader'
         />
-      </form>
+      </div>
     );
   }
 }
