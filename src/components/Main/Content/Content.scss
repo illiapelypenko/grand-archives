@@ -150,6 +150,11 @@
       grid-column-gap: 20px;
       grid-row-gap: 20px;
       justify-content: center;
+
+      .content__item {
+        width: 310px;
+      }
+
       .content__item:last-of-type:nth-child(odd) {
         grid-column: 1 / 2;
         justify-self: initial;

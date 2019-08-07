@@ -4,7 +4,7 @@ import FacebookIcon from "./FacebookIcon";
 import TelegramIcon from "./TelegramIcon";
 
 export default function Socials() {
-  const url = "https://ugly-lionfish-25.localtunnel.me";
+  const url = "https://strong-deer-30.localtunnel.me";
 
   return (
     <div className='socials'>

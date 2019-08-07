@@ -37,7 +37,6 @@ class Menu extends Component {
   };
 
   showSubmenu = e => {
-    console.log("!");
     this.setState(state => ({
       showSubmenu: true
     }));
