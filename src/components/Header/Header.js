@@ -1,74 +1,66 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "./Slider/Slider";
 import Navbar from "./Navbar/Navbar";
 import "./Header.scss";
 import Eye from "./Eye/Eye";
 import { withRouter } from "react-router-dom";
 
-class Header extends Component {
-  state = {
-    showSlider: true,
-    showLogout: false
-  };
+const Header = ({
+  isAuth,
+  slider,
+  name,
+  onSubmenuClick,
+  logout,
+  switchMenu,
+  location
+}) => {
+  const [showSlider, setShowSlider] = useState(true);
+  const [showLogout, setShowLogout] = useState(false);
 
-  componentDidMount() {
-    const showSlider = localStorage.getItem("showSlider");
-    if (showSlider === null) {
-      localStorage.setItem("showSlider", this.state.showSlider);
+  useEffect(() => {
+    const lsShowSlider = localStorage.getItem("showSlider");
+    if (lsShowSlider === null) {
+      localStorage.setItem("showSlider", showSlider);
     } else {
-      this.setState({ showSlider: JSON.parse(showSlider) });
+      setShowSlider(JSON.parse(lsShowSlider));
     }
-  }
+  }, []);
 
-  switchShowLogout = () => {
-    this.setState(state => ({ showLogout: true }));
+  useEffect(() => {
+    if (/^\/auth/.test(location.pathname)) {
+      setShowSlider(false);
+    }
+  }, [location.pathname]);
+
+  const switchShowLogout = () => {
+    setShowLogout(true);
   };
 
-  hadleShowSliderStatusChange = () => {
-    if (!/^\/auth/.test(this.props.location.pathname)) {
-      localStorage.setItem("showSlider", !this.state.showSlider);
-      this.setState(state => ({ showSlider: !state.showSlider }));
+  const hadleShowSliderStatusChange = () => {
+    if (!/^\/auth/.test(location.pathname)) {
+      localStorage.setItem("showSlider", !showSlider);
+      setShowSlider(!showSlider);
     }
   };
 
-  static getDerivedStateFromProps(props, state) {
-    if (/^\/auth/.test(props.location.pathname)) {
-      return {
-        showSlider: false
-      };
-    }
-    return null;
-  }
-
-  render() {
-    const {
-      isAuth,
-      slider,
-      name,
-      onSubmenuClick,
-      logout,
-      switchMenu
-    } = this.props;
-    const { showSlider, showLogout } = this.state;
-    return (
-      <div className='header'>
-        {showSlider ? <Slider slider={slider} /> : null}
-        <Navbar
-          isAuth={isAuth}
-          logout={logout}
-          name={name}
-          switchMenu={switchMenu}
-          onSubmenuClick={onSubmenuClick}
-          showLogout={this.switchShowLogout}
-        />
-        <Eye
-          showLogout={showLogout}
-          showSlider={showSlider}
-          onClick={this.hadleShowSliderStatusChange}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='header'>
+      {showSlider ? <Slider slider={slider} /> : null}
+      <Navbar
+        isAuth={isAuth}
+        logout={logout}
+        name={name}
+        switchMenu={switchMenu}
+        onSubmenuClick={onSubmenuClick}
+        showLogout={switchShowLogout}
+      />
+      <Eye
+        showLogout={showLogout}
+        showSlider={showSlider}
+        onClick={hadleShowSliderStatusChange}
+      />
+    </div>
+  );
+};
 
 export default withRouter(Header);

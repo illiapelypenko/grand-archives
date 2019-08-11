@@ -1,46 +1,41 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import serverURL from "../../../serverURL";
 import ItemInfo from "./Item/ItemInfo";
 
-export default class Audio extends Component {
-  state = {
-    isHovered: false
+const Audio = ({ name, id, personalRating, token, uploaderName }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
-
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
-  };
-  render() {
-    const { name, id, personalRating, token } = this.props;
-    const { isHovered } = this.state;
-
-    return (
-      <div
-        className={`content__picture content__item ${
-          !isHovered ? "not-display" : ""
-        }`}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <audio controls>
-          <source
-            src={`${serverURL}/api/content/audio/${name}`}
-            type='audio/mpeg'
-          />
-        </audio>
-        <p className='content__item-name'>{name}</p>
-        <ItemInfo
-          info={this.props}
-          token={token}
-          id={id}
-          display={isHovered ? true : false}
-          personalRating={personalRating}
+  return (
+    <div
+      className={`content__picture content__item ${
+        !isHovered ? "not-display" : ""
+      }`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <audio controls>
+        <source
+          src={`${serverURL}/api/content/audio/${name}`}
+          type='audio/mpeg'
         />
-      </div>
-    );
-  }
-}
+      </audio>
+
+      <ItemInfo
+        info={{ name, id, personalRating, token, uploaderName }}
+        token={token}
+        id={id}
+        display={isHovered ? true : false}
+        personalRating={personalRating}
+      />
+    </div>
+  );
+};
+
+export default Audio;

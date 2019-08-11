@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ArrowDownIcon(props) {
+const ArrowDownIcon = props => {
   return (
     <svg
       viewBox='0 0 448 512'
@@ -13,4 +13,6 @@ export default function ArrowDownIcon(props) {
       />
     </svg>
   );
-}
+};
+
+export default ArrowDownIcon;

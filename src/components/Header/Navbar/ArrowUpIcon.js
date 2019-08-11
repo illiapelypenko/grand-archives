@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ArrowUpIcon(props) {
+const ArrowUpIcon = props => {
   return (
     <svg
       className='navbar__menu-icon'
@@ -13,4 +13,6 @@ export default function ArrowUpIcon(props) {
       />
     </svg>
   );
-}
+};
+
+export default ArrowUpIcon;

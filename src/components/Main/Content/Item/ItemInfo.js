@@ -1,7 +1,7 @@
 import React from "react";
 import ItemRating from "./ItemRating";
 
-export default function ItemInfo({ personalRating, token, id, display, info }) {
+const ItemInfo = ({ personalRating, token, id, display, info }) => {
   const { name, uploaderName } = info;
 
   return (
@@ -18,4 +18,6 @@ export default function ItemInfo({ personalRating, token, id, display, info }) {
       </div>
     </>
   );
-}
+};
+
+export default ItemInfo;

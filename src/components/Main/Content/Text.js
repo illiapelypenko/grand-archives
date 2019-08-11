@@ -1,50 +1,46 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import serverURL from "../../../serverURL";
-import FileDownloadPic from "./FileDownloadPic";
 import ItemInfo from "./Item/ItemInfo";
+import FileDownloadPic from "./FileDownloadPic";
 
-export default class Text extends Component {
-  state = {
-    isHovered: false
+const Text = ({ name, id, personalRating, token, uploaderName }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
-
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
-  };
-  render() {
-    const { name, id, personalRating, token } = this.props;
-    const { isHovered } = this.state;
-
-    return (
-      <div
-        className={`content__picture content__item ${
-          !isHovered ? "not-display" : ""
-        }`}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <a
-          href={`
+  return (
+    <div
+      className={`content__picture content__item ${
+        !isHovered ? "not-display" : ""
+      }`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <a
+        href={`
             ${serverURL}/api/content/text/${name}`}
-          target='_blank'
-          rel='noopener noreferrer'
-          download
-        >
-          <FileDownloadPic />
-          <p className='content__item-name'>{name}</p>
-        </a>
-        <ItemInfo
-          info={this.props}
-          token={token}
-          id={id}
-          display={isHovered ? true : false}
-          personalRating={personalRating}
-        />
-      </div>
-    );
-  }
-}
+        target='_blank'
+        rel='noopener noreferrer'
+        download
+      >
+        <FileDownloadPic />
+        <p className='content__item-name'>{name}</p>
+      </a>
+
+      <ItemInfo
+        info={{ name, id, personalRating, token, uploaderName }}
+        token={token}
+        id={id}
+        display={isHovered ? true : false}
+        personalRating={personalRating}
+      />
+    </div>
+  );
+};
+
+export default Text;

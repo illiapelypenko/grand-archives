@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function uploadPic() {
+const uploadPic = () => {
   return (
     <svg viewBox='0 0 512 512' className='uploader-pic'>
       <path
@@ -9,4 +9,6 @@ export default function uploadPic() {
       />
     </svg>
   );
-}
+};
+
+export default uploadPic;

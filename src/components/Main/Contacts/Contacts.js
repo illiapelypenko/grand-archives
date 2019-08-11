@@ -3,11 +3,11 @@ import "./Contacts.scss";
 import Map from "./Map.js";
 import Info from "./Info";
 
-export default function Contacts() {
-  return (
-    <div className='contacts'>
-      <Info />
-      <Map />
-    </div>
-  );
-}
+const Contacts = () => (
+  <div className='contacts'>
+    <Info />
+    <Map />
+  </div>
+);
+
+export default Contacts;

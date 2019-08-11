@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function fileDownloadPic() {
+const FileDownloadPic = () => {
   return (
     <svg viewBox='0 0 384 512' className='content__pic'>
       <path
@@ -9,4 +9,6 @@ export default function fileDownloadPic() {
       />
     </svg>
   );
-}
+};
+
+export default FileDownloadPic;

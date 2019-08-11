@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function arrowRightPic() {
+const arrowRightPic = () => {
   return (
     <svg viewBox='0 0 448 512' className='uploader-pic'>
       <path
@@ -9,4 +9,6 @@ export default function arrowRightPic() {
       />
     </svg>
   );
-}
+};
+
+export default arrowRightPic;

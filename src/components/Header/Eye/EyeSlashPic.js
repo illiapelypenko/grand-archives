@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function eyeSlashSolid() {
+const EyeSlashPic = () => {
   return (
     <svg viewBox='0 0 640 512' className='header__show-hide-btn'>
       <path
@@ -9,4 +9,6 @@ export default function eyeSlashSolid() {
       />
     </svg>
   );
-}
+};
+
+export default EyeSlashPic;

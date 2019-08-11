@@ -1,33 +1,33 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import serverURL from "../../../../serverURL";
 import "./Rating.scss";
 
-export default class ItemRating extends Component {
-  state = {
-    personalRating: this.props.personalRating || null,
-    hoveredItem: null,
-    isHovered: false,
-    className: "disabled",
-    set: false
+const ItemRating = ({ token, id, personalRating }) => {
+  const [rating, setRating] = useState(personalRating || null);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [set, setSet] = useState(false);
+
+  const handleMouseEnter = (e, i) => {
+    setHoveredItem(i);
+    setIsHovered(true);
   };
 
-  handleMouseEnter = (e, i) => {
-    this.setState({ hoveredItem: i, isHovered: true });
+  const handleMouseLeave = (e, i) => {
+    setHoveredItem(null);
+    setIsHovered(false);
   };
 
-  handleMouseLeave = (e, i) => {
-    this.setState({ hoveredItem: null, isHovered: false });
-  };
-
-  handleClick = async (e, i) => {
+  const handleClick = async (e, i) => {
     e.preventDefault();
-    this.setState({ personalRating: i, set: true });
+    setRating(i);
+    setSet(true);
     await fetch(`${serverURL}/api/content/evaluate`, {
       method: "POST",
       body: JSON.stringify({
-        token: this.props.token,
+        token: token,
         rating: i,
-        itemId: this.props.id
+        itemId: id
       }),
       headers: {
         "Content-Type": "application/json"
@@ -35,44 +35,40 @@ export default class ItemRating extends Component {
     });
   };
 
-  static getDerivedStateFromProps(props, state) {
-    if (state.personalRating !== props.personalRating && !state.set) {
-      return { personalRating: props.personalRating };
+  useEffect(() => {
+    if (rating !== personalRating && !set) {
+      setRating(personalRating);
     }
-    return null;
-  }
+  });
 
-  render() {
-    const stars = [];
-    const { personalRating, hoveredItem, isHovered } = this.state;
+  const stars = [];
 
-    for (let i = 0; i < 5; i++) {
-      let className = "disabled";
-      if (!isHovered && i <= personalRating) {
-        className = "enabled";
-      }
-      if (isHovered && i <= hoveredItem) {
-        className = "enabled";
-      }
-      stars.push(
-        <p
-          key={i}
-          onClick={e => this.handleClick(e, i)}
-          onMouseEnter={e => this.handleMouseEnter(e, i)}
-          onMouseLeave={e => this.handleMouseLeave(e, i)}
-          className={className}
-        >
-          ★
-        </p>
-      );
+  for (let i = 0; i < 5; i++) {
+    let className = "disabled";
+    if (!isHovered && i <= rating) {
+      className = "enabled";
     }
-
-    return (
-      <div
-        className={`content__item-rating ${this.props.token ? "" : "hidden"}`}
+    if (isHovered && i <= hoveredItem) {
+      className = "enabled";
+    }
+    stars.push(
+      <p
+        key={i}
+        onClick={e => handleClick(e, i)}
+        onMouseEnter={e => handleMouseEnter(e, i)}
+        onMouseLeave={e => handleMouseLeave(e, i)}
+        className={className}
       >
-        <div className='rating--personal'>{stars}</div>
-      </div>
+        ★
+      </p>
     );
   }
-}
+
+  return (
+    <div className={`content__item-rating ${token ? "" : "hidden"}`}>
+      <div className='rating--personal'>{stars}</div>
+    </div>
+  );
+};
+
+export default ItemRating;

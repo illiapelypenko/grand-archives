@@ -1,56 +1,57 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
 import Menu from "./Menu";
 import ArrowDownIcon from "./ArrowDownIcon";
 import ArrowUpIcon from "./ArrowUpIcon";
 
-export default class Navbar extends Component {
-  state = {
-    width: 0,
-    showMenu: false
+const Navbar = ({
+  switchMenu,
+  isAuth,
+  logout,
+  name,
+  onSubmenuClick,
+  showLogout
+}) => {
+  const [width, setWidth] = useState(window.innerWidth);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const updateWindowDimensions = () => {
+    setWidth(window.innerWidth);
   };
 
-  handleClick = async () => {
-    this.props.switchMenu();
-    this.setState(state => ({ showMenu: !state.showMenu }));
+  const handleClick = async () => {
+    switchMenu();
+    setShowMenu(!showMenu);
   };
 
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
-  }
+  useEffect(() => {
+    updateWindowDimensions();
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => {
+      window.removeEventListener("resize", updateWindowDimensions);
+    };
+  });
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  }
+  return (
+    <div className='navbar'>
+      <Logo />
+      {width <= 700 ? (
+        showMenu ? (
+          <ArrowUpIcon onClick={handleClick} />
+        ) : (
+          <ArrowDownIcon onClick={handleClick} />
+        )
+      ) : null}
+      <Menu
+        showLogout={showLogout}
+        isAuth={isAuth}
+        logout={logout}
+        name={name}
+        onSubmenuClick={onSubmenuClick}
+        showSelf={width > 700 || showMenu ? true : false}
+      />
+    </div>
+  );
+};
 
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth });
-  };
-
-  render() {
-    const { isAuth, logout, name, onSubmenuClick, showLogout } = this.props;
-    const { width, showMenu } = this.state;
-
-    return (
-      <div className='navbar'>
-        <Logo />
-        {width <= 700 ? (
-          showMenu ? (
-            <ArrowUpIcon onClick={this.handleClick} />
-          ) : (
-            <ArrowDownIcon onClick={this.handleClick} />
-          )
-        ) : null}
-        <Menu
-          showLogout={showLogout}
-          isAuth={isAuth}
-          logout={logout}
-          name={name}
-          onSubmenuClick={onSubmenuClick}
-          showSelf={width > 700 || showMenu ? true : false}
-        />
-      </div>
-    );
-  }
-}
+export default Navbar;

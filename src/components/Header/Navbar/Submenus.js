@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Submenus(props) {
+const Submenus = props => {
   return (
     <div className={`submenus ${props.showSubmenus ? "" : "hidden"}`}>
       <p className='submenu'>
@@ -51,4 +51,6 @@ export default function Submenus(props) {
       </p>
     </div>
   );
-}
+};
+
+export default Submenus;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FilterIcon() {
+const FilterIcon = () => {
   return (
     <svg viewBox='0 0 512 512'>
       <path
@@ -9,4 +9,6 @@ export default function FilterIcon() {
       />
     </svg>
   );
-}
+};
+
+export default FilterIcon;

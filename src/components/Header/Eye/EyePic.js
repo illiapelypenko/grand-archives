@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EyePic() {
+const EyePic = () => {
   return (
     <svg viewBox='0 0 576 512' className='header__show-hide-btn'>
       <path
@@ -9,4 +9,6 @@ export default function EyePic() {
       />
     </svg>
   );
-}
+};
+
+export default EyePic;

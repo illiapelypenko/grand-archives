@@ -1,20 +1,17 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import serverURL from "../../../serverURL";
 import "./Uploader.scss";
 import UploaderPic from "./UploadPic";
 import ArrowPic from "./ArrowRightPic";
 
-export default class Uploader extends Component {
-  state = {
-    files: [],
-    key: 0,
-    showForm: false
-  };
+const Uploader = ({ onUpload }) => {
+  const [files, setFiles] = useState([]);
+  const [key, setKey] = useState(0);
+  const [showForm, setShowForm] = useState(false);
 
-  handleSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const data = new FormData();
-    const { files } = this.state;
 
     for (let i = 0; i < files.length; i++) {
       data.append(files[i].name, files[i]);
@@ -27,52 +24,45 @@ export default class Uploader extends Component {
         method: "POST",
         body: data
       });
-      this.props.onUpload();
+      onUpload();
       if (!res.ok) {
         throw Error(`server error`);
       }
     } catch (e) {
       console.error(e);
     }
-
-    this.setState(state => ({
-      key: state.key + 1,
-      showForm: false
-    }));
+    setKey(key + 1);
+    setShowForm(false);
   };
 
-  handleChange = e => {
-    this.setState({ files: e.target.files });
+  const handleChange = e => {
+    setFiles(e.target.files);
   };
 
-  handleUploaderClick = e => {
-    this.setState(state => ({
-      showForm: !state.showForm
-    }));
+  const handleUploaderClick = e => {
+    setShowForm(!showForm);
   };
 
-  render() {
-    const { showForm, key } = this.state;
-
-    return (
-      <div className='uploader'>
-        {showForm ? (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type='file'
-              name='file'
-              accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
-              multiple
-              onChange={this.handleChange}
-              key={key} // to reset files
-            />
-            <input type='submit' value='upload' />
-          </form>
-        ) : null}
-        <div className='uploader__showBtn' onClick={this.handleUploaderClick}>
-          {showForm ? <ArrowPic /> : <UploaderPic />}
-        </div>
+  return (
+    <div className='uploader'>
+      {showForm ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type='file'
+            name='file'
+            accept='.txt,.doc,.pdf,.docx,.png,.jpg,.gif,.svg,.mp3,.mp4'
+            multiple
+            onChange={handleChange}
+            key={key} // to reset files
+          />
+          <input type='submit' value='upload' />
+        </form>
+      ) : null}
+      <div className='uploader__showBtn' onClick={handleUploaderClick}>
+        {showForm ? <ArrowPic /> : <UploaderPic />}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Uploader;

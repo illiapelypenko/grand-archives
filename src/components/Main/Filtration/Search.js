@@ -1,22 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Search extends Component {
-  handleChange = e => {
-    this.props.onWordChange(e);
-  };
+const Search = ({ word, onWordChange }) => (
+  <div className='search'>
+    <label htmlFor='search'>Search:</label>
+    <input
+      id='search'
+      type='text'
+      onChange={e => onWordChange(e)}
+      value={word}
+      placeholder='enter uploader'
+    />
+  </div>
+);
 
-  render() {
-    return (
-      <div className='search'>
-        <label htmlFor='search'>Search:</label>
-        <input
-          id='search'
-          type='text'
-          onChange={this.handleChange}
-          value={this.props.word}
-          placeholder='enter uploader'
-        />
-      </div>
-    );
-  }
-}
+export default Search;

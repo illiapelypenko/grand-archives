@@ -3,7 +3,7 @@ import TwitterIcon from "./TwitterIcon";
 import FacebookIcon from "./FacebookIcon";
 import TelegramIcon from "./TelegramIcon";
 
-export default function Socials() {
+const Socials = () => {
   const url = "https://strong-deer-30.localtunnel.me";
 
   return (
@@ -32,4 +32,6 @@ export default function Socials() {
       </a>
     </div>
   );
-}
+};
+
+export default Socials;

@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.scss";
 import Socials from "./Socials";
 
-export default () => {
+const Footer = () => {
   return (
     <div className='footer'>
       <p>&copy; created by Illia Pelypenko</p>
@@ -10,3 +10,5 @@ export default () => {
     </div>
   );
 };
+
+export default Footer;

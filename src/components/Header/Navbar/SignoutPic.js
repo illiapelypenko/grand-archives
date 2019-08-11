@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Signout() {
+const Signout = () => {
   return (
     <svg viewBox='0 0 512 512'>
       <path
@@ -9,4 +9,6 @@ export default function Signout() {
       />
     </svg>
   );
-}
+};
+
+export default Signout;
